@@ -14,4 +14,5 @@ public class Usuario {
     private long id;
 
     private String nombre;
+    private boolean activo;
 }
