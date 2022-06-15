@@ -1,0 +1,6 @@
+http://localhost:8080/generadorcontenidos/agregarGeneradorContenido
+{"contrasenia":"cintfdg","email":"cintia@fgg","nombre":"netflix","ganancia":687}
+
+http://localhost:8080/categoria/agregarCategoria
+{"nombre":"netflix"}
+
