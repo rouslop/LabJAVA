@@ -81,3 +81,24 @@ PUT editar persona http://localhost:8080/personas/editarPersona
 	
 }
 DELETE http://localhost:8080/personas/eliminarPersona/3
+
+SUSCRIPCIONES
+
+POST http://localhost:8080/suscripciones/agregarSuscripcion
+{
+	"fechaVencimiento":"01-01-2023",
+	"monto":349.99,
+	"tipoSuscripcion":"PAYPERVIEW"
+	
+}
+GET listar suscripciones http://localhost:8080/suscripciones/
+PUT http://localhost:8080/suscripciones/editarSuscripcion
+{
+	"id": 1,
+	"fechaVencimiento":"25-06-2023",
+	"monto":349.99,
+	"tipoSuscripcion":"MENSUAL"
+	
+}
+DELETE http://localhost:8080/suscripciones/eliminarSuscripcion/2
+GET buscar suscripcion http://localhost:8080/suscripciones/1
