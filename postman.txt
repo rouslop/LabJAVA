@@ -63,3 +63,21 @@ PUT http://localhost:8080/contenidos/editarContenido
 GET buscar contenido http://localhost:8080/contenidos/1
 GET listar contenidos http://localhost:8080/contenidos/
 DELETE http://localhost:8080/contenidos/eliminarContenido/1
+
+PERSONAS
+POST http://localhost:8080/personas/agregarPersona
+{
+	"nombre":"Jesica sirio",
+		"tipoElenco":"ACTRIZ"
+	
+}
+GET buscar persona http://localhost:8080/personas/1
+GET listar personas http://localhost:8080/personas/
+PUT editar persona http://localhost:8080/personas/editarPersona
+{
+	"id": 1,
+	"nombre":"Leonardo Dicaprio",
+	"tipoElenco":"ACTOR"
+	
+}
+DELETE http://localhost:8080/personas/eliminarPersona/3
