@@ -4,3 +4,62 @@ http://localhost:8080/generadorcontenidos/agregarGeneradorContenido
 http://localhost:8080/categoria/agregarCategoria
 {"nombre":"netflix"}
 
+USUARIOS
+
+POST http://localhost:8080/usuarios/agregarUsuario
+{
+	"nombre":"Homero",
+	"email":"home@gmail.com",
+	"activo":1,
+	"contrasenia":"homepass",
+	"tipoUsuario":"CLIENTE"
+	
+}
+
+GET buscarUsuario http://localhost:8080/usuarios/1
+
+GET listarUsuarios http://localhost:8080/usuarios/
+
+PUT editarUsuario http://localhost:8080/usuarios/editarUsuario
+{
+    "id": 1,
+    "nombre":"Homero",
+	"email":"home@gmail.com",
+	"activo":1,
+	"contrasenia":"homepass",
+		"tipoUsuario":"CLIENTE"
+   
+}
+
+DELETE eliminarusuairo http://localhost:8080/usuarios/eliminarUsuario/1
+
+CONTENIDOS
+
+POST http://localhost:8080/contenidos/agregarContenido
+{
+	"tipoContenido":"PELICULA",
+	"descripcion":"Harry po",
+	"ranking":4,
+	"fotoPortada":"urlalapic",
+	"precio":2.3,
+	"duracion": "02:40:00",
+	"destacado": 1
+	
+}
+
+PUT http://localhost:8080/contenidos/editarContenido
+{
+	"id": 2,
+	"tipoContenido":"PELICULA",
+	"descripcion":"Harry Potter",
+	"ranking":4,
+	"fotoPortada":"urlalapic",
+	"precio":2.3,
+	"duracion": "02:40:00",
+	"destacado": 1
+	
+}
+
+GET buscar contenido http://localhost:8080/contenidos/1
+GET listar contenidos http://localhost:8080/contenidos/
+DELETE http://localhost:8080/contenidos/eliminarContenido/1

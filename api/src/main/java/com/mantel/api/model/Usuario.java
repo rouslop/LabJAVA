@@ -14,5 +14,10 @@ public class Usuario {
     private long id;
 
     private String nombre;
+    private String email;
     private boolean activo;
+    private String contrasenia;
+
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
 }
