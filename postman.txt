@@ -1,3 +1,13 @@
+VISUALIZACION
+
+http://localhost:8080/visualizacion/agregarVisualizacion
+
+{
+	"estado":1,
+	"time":13
+}
+
+
 
 GENERADORCONTENIDO
 
