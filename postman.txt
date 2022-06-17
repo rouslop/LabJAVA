@@ -1,8 +1,29 @@
-http://localhost:8080/generadorcontenidos/agregarGeneradorContenido
-{"contrasenia":"cintfdg","email":"cintia@fgg","nombre":"netflix","ganancia":687}
 
+GENERADORCONTENIDO
+
+http://localhost:8080/generadorcontenidos/agregarGeneradorContenido
+
+{
+	"contrasenia":"1234q",
+	"email":"cintia@fgg",
+	"nombre":"netflix",
+	"ganancia":687
+}
+
+CATEGORIA
 http://localhost:8080/categoria/agregarCategoria
-{"nombre":"netflix"}
+
+{
+"nombre":"Comedia"
+}
+
+COMENTARIO
+http://localhost:8080/comentario/agregarComentario
+
+{
+"texto":"Se muere el hombre araña",
+"spiler":1
+}
 
 USUARIOS
 
