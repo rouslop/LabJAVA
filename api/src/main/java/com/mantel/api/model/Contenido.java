@@ -1,6 +1,6 @@
 package com.mantel.api.model;
 
-import com.mantel.api.model.Categoria;
+
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,13 +28,19 @@ public class Contenido {
     private boolean bloqueado;
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private Set<Categoria> orderItems = new HashSet<>();
 
-    /*
-    @OneToMany(mappedBy = "contenidos", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Categoria> cat = new HashSet<>();*/
+    @OneToMany(cascade = CascadeType.ALL)
+    Set<Categoria> categoria = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    Set<Persona> persona = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    Set<Comentario> comentario = new HashSet<>();
+
+    @ManyToOne()
+    @JoinColumn(name="gc_id")
+    private GeneradorContenido generadorContenidoid;
 
 
 }

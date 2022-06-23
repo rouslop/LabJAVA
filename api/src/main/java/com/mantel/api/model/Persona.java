@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "Personas")
+@Table(name = "personas")
 public class Persona {
 
     @Id
@@ -15,6 +15,6 @@ public class Persona {
 
     private String nombre;
 
-    @Enumerated(EnumType.STRING)
+   @Enumerated(EnumType.STRING)
     private TipoElenco tipoElenco;
 }

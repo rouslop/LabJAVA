@@ -4,7 +4,7 @@ import lombok.Data;
 import javax.persistence.*;
 @Data
 @Entity
-@Table(name = "Comentario")
+@Table(name = "comentarios")
 public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,4 +12,5 @@ public class Comentario {
 
     private String texto;
     private boolean spoiler;
+
 }
