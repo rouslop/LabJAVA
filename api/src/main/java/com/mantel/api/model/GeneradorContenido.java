@@ -20,8 +20,8 @@ public class GeneradorContenido {
         private String metodoPago;
 
         @OneToMany(cascade = CascadeType.ALL)
-
         Set<Contenido> contenido= new HashSet<>();
+
 
 }
 

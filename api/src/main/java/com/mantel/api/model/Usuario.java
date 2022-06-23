@@ -3,6 +3,8 @@ package com.mantel.api.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -22,4 +24,7 @@ public class Usuario {
 
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    Set<Contenido> favoritos = new HashSet<>();
 }
