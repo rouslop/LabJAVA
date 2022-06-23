@@ -16,5 +16,9 @@ public class GeneradorContenido {
         private float ganancia;
         private String email;
         private  String contrasenia;
+        private String metodoPago;
+
+
+
 }
 

@@ -38,8 +38,8 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<Usuario> obtenerUsuarios(){
-        return usuarioService.obtenerUsuarios();
+    public ResponseEntity<List<Usuario>> obtenerUsuarios(){
+        return new ResponseEntity<List<Usuario>>(usuarioService.obtenerUsuarios(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

@@ -11,7 +11,11 @@ public class Visualizacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private boolean estado;
-    private float time; //cambiar a tipo time
+    private boolean terminado;
+
+    private float time;//cambiar a tipo time
+
+
+
 
 }

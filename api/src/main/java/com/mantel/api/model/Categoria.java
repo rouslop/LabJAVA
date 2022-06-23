@@ -13,5 +13,8 @@ public class Categoria {
     private long id;
 
     private String nombre;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Contenido contenido;
 }
 

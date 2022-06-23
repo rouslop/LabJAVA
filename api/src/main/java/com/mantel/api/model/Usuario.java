@@ -17,6 +17,8 @@ public class Usuario {
     private String email;
     private boolean activo;
     private String contrasenia;
+    private boolean pago;
+    private boolean bloquedo;
 
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
