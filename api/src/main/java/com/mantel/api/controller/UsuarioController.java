@@ -1,5 +1,6 @@
 package com.mantel.api.controller;
 
+import com.mantel.api.model.TipoUsuario;
 import com.mantel.api.model.Usuario;
 import com.mantel.api.service.UsuarioService;
 import org.springframework.http.HttpStatus;
@@ -19,13 +20,12 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @RequestMapping("/hola")
-    public String index() {
-        return "Congratulations from UsuarioController.java";
-    }
-
     @PostMapping("/agregarUsuario")
     public ResponseEntity<String> agregarUsuario(@RequestBody Usuario usuario){
+        usuario.setActivo(true);
+        usuario.setPago(false);
+        usuario.setBloquedo(false);
+        usuario.setTipoUsuario(TipoUsuario.CLIENTE);
         usuarioService.agregarUsuario(usuario);
         return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
     }

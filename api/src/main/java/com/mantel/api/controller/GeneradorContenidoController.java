@@ -26,7 +26,8 @@ public class GeneradorContenidoController {
 
     @PostMapping("/agregarGeneradorContenido")
     public ResponseEntity<String> agregarGeneradorContenido(@RequestBody GeneradorContenido g){
-       generadorContenidoService.agregarGeneradorContenido(g);
+       g.setGanancia(0);
+        generadorContenidoService.agregarGeneradorContenido(g);
         return new ResponseEntity<String>("Generador de contenido creado", HttpStatus.CREATED);
     }
 }
