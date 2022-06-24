@@ -21,11 +21,12 @@ http://localhost:8080/generadorcontenidos/agregarGeneradorContenido
 }
 
 CATEGORIA
-http://localhost:8080/categoria/agregarCategoria
+POST http://localhost:8080/categoria/agregarCategoria
 
 {
 "nombre":"Comedia"
 }
+GET http://localhost:8080/categoria/
 
 COMENTARIO
 http://localhost:8080/comentario/agregarComentario

@@ -26,4 +26,9 @@ public class CategoriaController {
         return new ResponseEntity<String>("Categoria creada!", HttpStatus.CREATED);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Categoria>> listaCategoria(){
+        return new ResponseEntity<List<Categoria>>(categoriaService.listaCategoria(), HttpStatus.OK);
+    }
+
 }

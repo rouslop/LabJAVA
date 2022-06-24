@@ -22,4 +22,11 @@ public class CategoriaServiceImpl implements CategoriaService {
         em.persist(cat);
     }
 
+    @Override
+    public List<Categoria> listaCategoria() {
+
+        Query query = em.createQuery("SELECT c FROM Categoria c ", Categoria.class);
+        List<Categoria> lista = query.getResultList();
+        return lista;
+    }
 }
