@@ -49,6 +49,12 @@ public class ContenidoController {
         contenidoService.editarContenido(contenido);
         return new ResponseEntity<String>("editado y tranquilo", HttpStatus.OK);
     }
+/*
+    @PostMapping("/agregarCategoria")
+    public ResponseEntity<String> agregarCategoria(@RequestBody long contenidoId, long categoriaId){
+        contenidoService.agregarCategoria(contenidoId,categoriaId);
+        return new ResponseEntity<String>("categoria agregada correctamente", HttpStatus.CREATED);
+    }*/
 
 
 

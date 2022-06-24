@@ -46,5 +46,10 @@ public class ContenidoServiceImpl implements ContenidoService {
         return em.merge(contenido);
     }
 
+    @Override
+    public void agregarCategoria (long idContenido, long idCategoria){
+        Query query = em.createQuery("INSERT INTO contenidos_categoria (contenido_id, categoria_i) VALUES (idContenido, idCategoria)");
+
+    }
 
 }

@@ -19,4 +19,10 @@ public class Suscripcion {
     @Enumerated(EnumType.STRING)
     private TipoSuscripcion tipoSuscripcion;
 
+    @OneToOne()
+    @JoinColumn(name="generadorContenido_id")
+    private GeneradorContenido generadorContenido;
+
+
+
 }

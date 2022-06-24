@@ -1,7 +1,8 @@
 package com.mantel.api.service;
 
 import com.mantel.api.model.Contenido;
-import com.mantel.api.model.Usuario;
+
+import com.mantel.api.model.Categoria;
 
 import java.util.List;
 
@@ -11,5 +12,8 @@ public interface ContenidoService {
     public List<Contenido> obtenerContenidos();
     public Contenido obtenerContenido(long id);
     public Contenido editarContenido(Contenido usuario);
+
+    public void agregarCategoria (long idContenido, long idCategoria);
+
 
 }

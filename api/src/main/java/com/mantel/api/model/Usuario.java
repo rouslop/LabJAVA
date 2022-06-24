@@ -27,4 +27,10 @@ public class Usuario {
 
     @OneToMany(cascade = CascadeType.ALL)
     Set<Contenido> favoritos = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    Set<Suscripcion> suscripciones = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    Set<SuscripcionPerPayView> suscripcionesPerPayView = new HashSet<>();
 }
