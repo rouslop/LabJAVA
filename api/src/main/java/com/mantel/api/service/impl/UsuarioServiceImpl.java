@@ -47,5 +47,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         return em.merge(usuario);
     }
 
+    
 
 }
