@@ -30,6 +30,19 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
         return generadorContenido;
     }
 
+    @Override
+    public GeneradorContenido obtenerGCPorEmail(String email) {
+        GeneradorContenido generadorContenido = new GeneradorContenido();
+        TypedQuery<GeneradorContenido> queryDos = em.createQuery("SELECT g FROM GeneradorContenido g WHERE g.email = :email1", GeneradorContenido.class);
+        try {
+            GeneradorContenido gc = queryDos.setParameter("email1", email).getSingleResult();
+            if (gc != null) generadorContenido=gc;
+        }catch (NoResultException nre){
+            //Ignore this because as per your logic this is ok!
+        }
+        return generadorContenido;
+    }
+
     public boolean existeGCPorEmail(String email){
         boolean existeGC = false;
 

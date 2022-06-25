@@ -67,11 +67,37 @@ public class UsuarioServiceImpl implements UsuarioService {
         return existeUsu;
     }
 
+    public Usuario obtenerUsuarioPorEmail(String email) {
+        Usuario u = null;
+
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class);
+        try {
+            if( (query.setParameter("email", email).getSingleResult()) != null){
+                Usuario usu = query.setParameter("email", email).getSingleResult();
+                u = usu;
+            }else{
+                return null;
+            }
+
+        }catch (NoResultException nre){
+            //Ignore this because as per your logic this is ok!
+        }
+
+        return u;
+    }
     @Override
     public Usuario editarUsuario(Usuario usuario) {
         return em.merge(usuario);
     }
 
+    public boolean checkCredenciales(long id, String email, String contrasenia){
+        boolean credencialesCorrectas = false;
+        Usuario usuario = em.find(Usuario.class, id);
+        if (usuario.getEmail() == email && usuario.getContrasenia() == contrasenia){
+            credencialesCorrectas = true;
+        }
+        return credencialesCorrectas;
+    }
     
 
 }

@@ -2,5 +2,6 @@ package com.mantel.api.model;
 
 public enum TipoUsuario {
     ADMIN,
-    CLIENTE;
+    CLIENTE,
+    GENERADOR_CONTENIDO;
 }

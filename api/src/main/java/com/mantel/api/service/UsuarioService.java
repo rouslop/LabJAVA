@@ -10,6 +10,9 @@ public interface UsuarioService {
     public void eliminarUsuario(long usuarioId);
     public List<Usuario> obtenerUsuarios();
     public Usuario obtenerUsuario(long id);
+    public Usuario obtenerUsuarioPorEmail(String email);
     public boolean existeUsuarioPorEmail(String email);
     public Usuario editarUsuario(Usuario usuario);
+
+    public boolean checkCredenciales(long id, String email, String contrasenia);
 }
