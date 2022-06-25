@@ -2,6 +2,7 @@ package com.mantel.api.controller;
 
 import com.mantel.api.model.GeneradorContenido;
 
+import com.mantel.api.model.Usuario;
 import com.mantel.api.service.GeneradorContenidoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,23 @@ public class GeneradorContenidoController {
 
     @PostMapping("/agregarGeneradorContenido")
     public ResponseEntity<String> agregarGeneradorContenido(@RequestBody GeneradorContenido g){
-       g.setGanancia(0);
-        generadorContenidoService.agregarGeneradorContenido(g);
-        return new ResponseEntity<String>("Generador de contenido creado", HttpStatus.CREATED);
+        boolean existeGC = generadorContenidoService.existeGCPorEmail(g.getEmail());
+        if(existeGC == false) {
+            g.setGanancia(0);
+            generadorContenidoService.agregarGeneradorContenido(g);
+            return new ResponseEntity<String>("Generador de contenido creado", HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<String>("ya existe un generador de contenido con ese email", HttpStatus.NOT_ACCEPTABLE);
+        }
     }
+
+    @GetMapping("/{id}")
+    public GeneradorContenido obtenerGeneradorContenido(@PathVariable("id") long gcId){
+        GeneradorContenido gc = generadorContenidoService.obtenerGeneradorContenido(gcId);
+        if(gc == null) return null;
+
+        return gc;
+    }
+
+
 }

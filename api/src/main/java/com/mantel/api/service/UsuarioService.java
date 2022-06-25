@@ -10,5 +10,6 @@ public interface UsuarioService {
     public void eliminarUsuario(long usuarioId);
     public List<Usuario> obtenerUsuarios();
     public Usuario obtenerUsuario(long id);
+    public boolean existeUsuarioPorEmail(String email);
     public Usuario editarUsuario(Usuario usuario);
 }

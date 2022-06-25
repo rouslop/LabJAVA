@@ -22,12 +22,17 @@ public class UsuarioController {
 
     @PostMapping("/agregarUsuario")
     public ResponseEntity<String> agregarUsuario(@RequestBody Usuario usuario){
-        usuario.setActivo(true);
-        usuario.setPago(false);
-        usuario.setBloquedo(false);
-        usuario.setTipoUsuario(TipoUsuario.CLIENTE);
-        usuarioService.agregarUsuario(usuario);
-        return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
+        boolean existeUsu = usuarioService.existeUsuarioPorEmail(usuario.getEmail());
+        if(existeUsu == false) {
+            usuario.setActivo(true);
+            usuario.setPago(false);
+            usuario.setBloquedo(false);
+            usuario.setTipoUsuario(TipoUsuario.CLIENTE);
+            usuarioService.agregarUsuario(usuario);
+            return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<String>("ya existe un usuario con ese email", HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     @DeleteMapping("/eliminarUsuario/{id}")
