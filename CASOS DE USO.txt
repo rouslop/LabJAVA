@@ -1,0 +1,60 @@
+CASOS DE USO
+
+----------------------------
+
+Usuarios Clientes Finales:
+
+Suscribirse a todos los contenidos y realizar el pago
+
+Suscribirse a un contenido PAY PER VIEW y realizar el pago
+
+Registrarse (usuario final y generador de contenido)
+
+Login (usuario final, generador de contenido y admin plataforma) 
+
+Modificar usuario
+
+Buscar contenidos (searchbar)
+
+Selección de un contenido para visualización.
+
+Usuario Rankea contenido
+
+Usuario comenta contenido
+
+Marcar comentario como spoiler
+
+Agregar contenido a lista de favoritos
+
+-Mostrar contenido recomendado (basado en sus favoritos) y Mostrar contenidos destacados de las empresas (en el inicio del usuari final)
+
+Listar Relacionados a un Contenido (recibe el contenido que se está detallando 
+y en base a sus categorias y elenco, listar contenidos relacionados)
+---------------------------------------------------
+Usuarios Administradores de generadores de contenidos
+
+Alta, modificacion y eliminacion de contenidos por parte del gen de contenidos.
+
+Alta, modificacion y eliminacion de contenidos PAYPERVIEW por parte del gen de contenidos.
+
+Marcar contenido como destacado
+
+Generar reportes para gen de contenidos (puntaje obtenido, etc.)
+
+-----------------------------------------------------
+Usuarios Administradores de la Plataforma
+
+Crear, modificar, eliminar de generadores de contenidos
+
+Bloquear y desbloquear clientes finales
+
+Eliminado logico
+
+Bloquear contenido
+
+CRUD Categorias
+
+Guardar contenido como visualizado cuando entra a uno (seria cuando va al boton VER x ej.)
+
+Recordar tiempo de visualizacion del contenido para retomar 5 seg antes
+
