@@ -20,7 +20,7 @@ public class Usuario {
     private boolean activo;
     private String contrasenia;
     private boolean pago;
-    private boolean bloquedo;
+    private boolean bloqueado;
 
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;

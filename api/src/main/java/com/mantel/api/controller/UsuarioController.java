@@ -27,7 +27,7 @@ public class UsuarioController {
         if(existeUsu == false) {
             usuario.setActivo(true);
             usuario.setPago(false);
-            usuario.setBloquedo(false);
+            usuario.setBloqueado(false);
             usuario.setTipoUsuario(TipoUsuario.CLIENTE);
             usuarioService.agregarUsuario(usuario);
             return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
