@@ -12,4 +12,5 @@ public interface GeneradorContenidoService {
     public boolean existeGCPorEmail(String email);
     public GeneradorContenido obtenerGeneradorContenido(long id);
     public GeneradorContenido obtenerGCPorEmail(String email);
+    public boolean checkCredenciales(long id, String email, String contrasenia);
 }

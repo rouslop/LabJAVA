@@ -8,6 +8,7 @@ import com.mantel.api.model.Usuario;
 import com.mantel.api.service.GeneradorContenidoService;
 import com.mantel.api.service.SistemaService;
 import com.mantel.api.service.UsuarioService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,39 +30,68 @@ public class SistemaController {
 
 
     @PostMapping("/login")
-    public Login login(@RequestBody Login credenciales){
-        Login login = null;
+    public ResponseEntity<Login> login(@RequestBody Login credenciales){
+        Login loginRetorno = null;
 
         Usuario usu = usuarioService.obtenerUsuarioPorEmail(credenciales.getEmail());
 
         if(usu != null){
-            boolean credencialesCorrectas = usuarioService.checkCredenciales(usu.getId(), usu.getEmail(), usu.getContrasenia());
+            
+            boolean credencialesCorrectas = usuarioService.checkCredenciales(usu.getId(),  credenciales.getEmail(), credenciales.getContrasenia());
+            System.out.println("y aca?");
             if(credencialesCorrectas) {
+                System.out.println("chem?");
                 boolean existeLogin = sistemaService.existeLogin(usu.getEmail());
                 if (existeLogin) {
+                    System.out.println("no se decime vos");
                     Login l = sistemaService.obtenerLogin(usu.getEmail());
-                    login = l;
-                    return login;
+                    loginRetorno = l;
+                    return new ResponseEntity<Login>(loginRetorno, HttpStatus.OK);
+
                 }
                 if(!existeLogin){
                     Login nuevoLogin = new Login();
                     nuevoLogin.setEmail(usu.getEmail());
                     nuevoLogin.setContrasenia(usu.getContrasenia());
-                    nuevoLogin.setTipoUsuario(TipoUsuario.CLIENTE);
-                    sistemaService.agregarLogin(nuevoLogin);
-                    return nuevoLogin;
+                    nuevoLogin.setTipoUsuario(usu.getTipoUsuario());
+                    Login log = sistemaService.agregarLogin(nuevoLogin);
+                    loginRetorno =  log;
+
+                    return new ResponseEntity<Login>(loginRetorno, HttpStatus.OK);
                 }
             }
         }
 
+         GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(credenciales.getEmail());
+         if(gc != null){
+            boolean credencialesCorrectas = generadorContenidoService.checkCredenciales(gc.getId(),  credenciales.getEmail(), credenciales.getContrasenia());
+            if(credencialesCorrectas){
+                boolean existeLogin = sistemaService.existeLogin(gc.getEmail());
+                if(existeLogin){
+                    Login l = sistemaService.obtenerLogin(gc.getEmail());
+                    loginRetorno = l;
 
-//        GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(credenciales.getEmail());
-//        if(gc != null){
-//
-//        }
+                    return new ResponseEntity<Login>(loginRetorno, HttpStatus.OK);
+                }
+                if (!existeLogin){
+                    Login nuevoLogin = new Login();
+                    nuevoLogin.setEmail(gc.getEmail());
+                    nuevoLogin.setContrasenia(gc.getContrasenia());
+                    nuevoLogin.setTipoUsuario(TipoUsuario.GENERADOR_CONTENIDO);
+                    Login log = sistemaService.agregarLogin(nuevoLogin);
+                    loginRetorno =  log;
 
+                    return new ResponseEntity<Login>(loginRetorno, HttpStatus.OK);
+                }
+            }
+        }
 
-        return login;
+         // si el login es incorrecto retorno esto
+        return new ResponseEntity<Login>(loginRetorno, HttpStatus.NOT_ACCEPTABLE);
     }
+
+
+
+
 
 }

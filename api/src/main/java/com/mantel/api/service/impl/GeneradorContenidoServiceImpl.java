@@ -32,10 +32,10 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
 
     @Override
     public GeneradorContenido obtenerGCPorEmail(String email) {
-        GeneradorContenido generadorContenido = new GeneradorContenido();
-        TypedQuery<GeneradorContenido> queryDos = em.createQuery("SELECT g FROM GeneradorContenido g WHERE g.email = :email1", GeneradorContenido.class);
+        GeneradorContenido generadorContenido = null;
+        TypedQuery<GeneradorContenido> query = em.createQuery("SELECT g FROM GeneradorContenido g WHERE g.email = :email1", GeneradorContenido.class);
         try {
-            GeneradorContenido gc = queryDos.setParameter("email1", email).getSingleResult();
+            GeneradorContenido gc = query.setParameter("email1", email).getSingleResult();
             if (gc != null) generadorContenido=gc;
         }catch (NoResultException nre){
             //Ignore this because as per your logic this is ok!
@@ -69,7 +69,15 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
         return existeGC;
     }
 
+    public boolean checkCredenciales(long id, String email, String contrasenia){
 
+        GeneradorContenido gc = em.find(GeneradorContenido.class, id);
+        if (gc.getEmail().equals(email)  && gc.getContrasenia().equals(contrasenia) ){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 
 }

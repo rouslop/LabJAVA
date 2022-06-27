@@ -91,12 +91,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     public boolean checkCredenciales(long id, String email, String contrasenia){
-        boolean credencialesCorrectas = false;
         Usuario usuario = em.find(Usuario.class, id);
-        if (usuario.getEmail() == email && usuario.getContrasenia() == contrasenia){
-            credencialesCorrectas = true;
+        if ((usuario.getEmail().equals(email)) && (usuario.getContrasenia().equals(contrasenia))){
+            return true;
+        }else{
+            return false;
         }
-        return credencialesCorrectas;
     }
     
 

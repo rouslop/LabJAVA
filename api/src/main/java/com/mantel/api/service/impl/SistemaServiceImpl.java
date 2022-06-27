@@ -26,28 +26,9 @@ public class SistemaServiceImpl implements SistemaService {
     @PersistenceContext
     private EntityManager em;
 
-    public void agregarLogin(Login login) {
+    public Login agregarLogin(Login login) {
         em.persist(login);
-    }
-
-    public boolean chequearLogin(String email, String contrasenia) {
-        boolean credencialesCorrectas = false;
-
-//        boolean existeLogin = existeLogin(email);
-//        if (existeLogin) {
-//            Login login = em.find(Login.class, email);
-//            if (login.getContrasenia() == contrasenia) {
-//                credencialesCorrectas = true;
-//            }
-//
-//        }
-//        else{
-//            Login l = new Login();
-//            l.setTipoUsuario(TipoUsuario.CLIENTE);
-//            l.setEmail(email);
-//            agregarLogin();
-//        }
-        return credencialesCorrectas;
+        return login;
     }
 
     public boolean existeLogin(String email) {
