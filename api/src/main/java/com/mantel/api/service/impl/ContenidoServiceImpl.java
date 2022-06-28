@@ -29,8 +29,11 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
-    public List<Contenido> obtenerContenidos() {
+    public List<Contenido> obtenerContenidos(int limit, int offset) {
         Query query = em.createQuery("SELECT c FROM Contenido c", Contenido.class);
+        Query q = em.createNativeQuery("SELECT * FROM contenido LIMIT :limit OFFSET :offset");
+        q.setParameter("limit", limit);
+        q.setParameter("offset", offset);
         List<Contenido> lista = query.getResultList();
         return lista;
     }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 @RestController
 @RequestMapping("/contenidos")
 public class ContenidoController {
@@ -33,9 +33,9 @@ public class ContenidoController {
         return new ResponseEntity<String>("eliminado y tranquilo", HttpStatus.OK);
     }
 
-    @GetMapping
-    public List<Contenido> obtenerContenidos(){
-        return contenidoService.obtenerContenidos();
+    @GetMapping("/contenidos/{limit}/{offset}")
+    public List<Contenido> obtenerContenidos(@PathVariable ("limit") int limit, @PathVariable ("offset") int offset){
+        return contenidoService.obtenerContenidos(limit, offset);
     }
 
     @GetMapping("/{id}")
