@@ -1,6 +1,7 @@
 package com.mantel.api.controller;
 
 import com.mantel.api.model.Contenido;
+import com.mantel.api.model.Json;
 import com.mantel.api.model.Usuario;
 import com.mantel.api.service.ContenidoService;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ public class ContenidoController {
     }
 
     @GetMapping("/contenidos/{limit}/{offset}")
-    public List<Contenido> obtenerContenidos(@PathVariable ("limit") int limit, @PathVariable ("offset") int offset){
+    public Json obtenerContenidos(@PathVariable ("limit") int limit, @PathVariable ("offset") int offset){
         return contenidoService.obtenerContenidos(limit, offset);
     }
 

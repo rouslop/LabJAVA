@@ -1,6 +1,7 @@
 package com.mantel.api.service.impl;
 
 import com.mantel.api.model.Contenido;
+import com.mantel.api.model.Json;
 import com.mantel.api.service.ContenidoService;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.Hashtable;
 import java.util.List;
 
 @Service
@@ -29,13 +31,15 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
-    public List<Contenido> obtenerContenidos(int limit, int offset) {
+    public Json obtenerContenidos(int limit, int offset) {
         Query query = em.createQuery("SELECT c FROM Contenido c", Contenido.class);
-        Query q = em.createNativeQuery("SELECT * FROM contenido LIMIT :limit OFFSET :offset");
+        Query q = em.createNativeQuery("SELECT * FROM contenidos LIMIT :limit OFFSET :offset");
         q.setParameter("limit", limit);
         q.setParameter("offset", offset);
-        List<Contenido> lista = query.getResultList();
-        return lista;
+        Hashtable<String,Integer> info = new Hashtable<>();
+        info.put("cantidad",query.getResultList().size());
+        info.put("limit", limit);
+        return new Json(q.getResultList(),info);
     }
 
     @Override
@@ -51,7 +55,7 @@ public class ContenidoServiceImpl implements ContenidoService {
 
     @Override
     public void agregarCategoria (long idContenido, long idCategoria){
-        Query query = em.createQuery("INSERT INTO contenidos_categoria (contenido_id, categoria_i) VALUES (idContenido, idCategoria)");
+        //Query query = em.createQuery("INSERT INTO contenidos_categoria (contenido_id, categoria_i) VALUES (idContenido, idCategoria)");
 
     }
 
