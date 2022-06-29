@@ -1,8 +1,10 @@
 package com.mantel.api.controller;
 
 import com.mantel.api.model.Contenido;
+import com.mantel.api.model.GeneradorContenido;
 import com.mantel.api.model.Usuario;
 import com.mantel.api.service.ContenidoService;
+import com.mantel.api.service.GeneradorContenidoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,20 +17,30 @@ import java.util.List;
 public class ContenidoController {
 
     private ContenidoService contenidoService;
+    private GeneradorContenidoService generadorContenidoService;
 
-    public ContenidoController(ContenidoService contenidoService){
+    public ContenidoController(ContenidoService contenidoService, GeneradorContenidoService generadorContenidoService){
         super();
         this.contenidoService = contenidoService;
+        this.generadorContenidoService = generadorContenidoService;
     }
 
-    @PostMapping("/agregarContenido")
-    public ResponseEntity<String> agregarContenido(@RequestBody Contenido contenido){
+    @PostMapping("/agregarContenido/{id}")
+    public ResponseEntity<String> agregarContenido(@RequestBody Contenido contenido, @PathVariable("id") long gcId){
+
+        GeneradorContenido gc = generadorContenidoService.obtenerGeneradorContenido(gcId);
+        gc.agregarContenido(contenido);
+        contenido.setRanking(0);
+        contenido.setBloqueado(false);
         contenidoService.agregarContenido(contenido);
+        //generadorContenidoService.agregarContenidoAlista(contenido);
         return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
     }
 
     @DeleteMapping("/eliminarContenido/{id}")
     public ResponseEntity<String> eliminarContenido(@PathVariable("id") long id){
+        Contenido c = contenidoService.obtenerContenido(id);
+        generadorContenidoService.eliminarContenidoDeLista(c);
         contenidoService.eliminarContenido(id);
         return new ResponseEntity<String>("eliminado y tranquilo", HttpStatus.OK);
     }
@@ -50,14 +62,6 @@ public class ContenidoController {
         contenidoService.editarContenido(contenido);
         return new ResponseEntity<String>("editado y tranquilo", HttpStatus.OK);
     }
-/*
-    @PostMapping("/agregarCategoria")
-    public ResponseEntity<String> agregarCategoria(@RequestBody long contenidoId, long categoriaId){
-        contenidoService.agregarCategoria(contenidoId,categoriaId);
-        return new ResponseEntity<String>("categoria agregada correctamente", HttpStatus.CREATED);
-    }*/
-
-
 
 
 

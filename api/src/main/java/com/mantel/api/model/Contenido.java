@@ -1,7 +1,9 @@
 package com.mantel.api.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -40,6 +42,7 @@ public class Contenido {
 
     @ManyToOne()
     @JoinColumn(name="gc_id")
+    @JsonBackReference
     private GeneradorContenido generadorContenidoid;
 
 

@@ -1,7 +1,12 @@
 package com.mantel.api.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.*;
@@ -19,9 +24,15 @@ public class GeneradorContenido {
         private  String contrasenia;
         private String metodoPago;
 
+        // @EqualsAndHashCode.Exclude
+        @JsonManagedReference
         @OneToMany(cascade = CascadeType.ALL)
-        Set<Contenido> contenido= new HashSet<>();
+        List<Contenido> contenido= new ArrayList<Contenido>();
 
+        public void agregarContenido(Contenido contenido) {
+                this.contenido.add(contenido);
+                contenido.setGeneradorContenidoid(this);
+        }
 
 }
 
