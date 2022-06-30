@@ -31,7 +31,7 @@ public class SistemaController {
 
     @PostMapping("/login")
     public ResponseEntity<Login> login(@RequestBody Login credenciales){
-        Login loginRetorno = null;
+        Login loginRetorno = new Login();
 
         Usuario usu = usuarioService.obtenerUsuarioPorEmail(credenciales.getEmail());
 
@@ -60,6 +60,7 @@ public class SistemaController {
                     return new ResponseEntity<Login>(loginRetorno, HttpStatus.OK);
                 }
             }
+
         }
 
          GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(credenciales.getEmail());
