@@ -2,6 +2,7 @@ package com.mantel.api.controller;
 
 import com.mantel.api.model.Contenido;
 import com.mantel.api.model.GeneradorContenido;
+import com.mantel.api.model.Json;
 import com.mantel.api.model.Usuario;
 import com.mantel.api.service.ContenidoService;
 import com.mantel.api.service.GeneradorContenidoService;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 @RestController
 @RequestMapping("/contenidos")
 public class ContenidoController {
@@ -45,9 +46,9 @@ public class ContenidoController {
         return new ResponseEntity<String>("eliminado y tranquilo", HttpStatus.OK);
     }
 
-    @GetMapping
-    public List<Contenido> obtenerContenidos(){
-        return contenidoService.obtenerContenidos();
+    @GetMapping("/contenidos/{limit}/{offset}")
+    public Json obtenerContenidos(@PathVariable ("limit") int limit, @PathVariable ("offset") int offset){
+        return contenidoService.obtenerContenidos(limit, offset);
     }
 
     @GetMapping("/{id}")
