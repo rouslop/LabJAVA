@@ -38,12 +38,10 @@ public class SistemaController {
         if(usu != null){
             
             boolean credencialesCorrectas = usuarioService.checkCredenciales(usu.getId(),  credenciales.getEmail(), credenciales.getContrasenia());
-            System.out.println("y aca?");
+
             if(credencialesCorrectas) {
-                System.out.println("chem?");
                 boolean existeLogin = sistemaService.existeLogin(usu.getEmail());
                 if (existeLogin) {
-                    System.out.println("no se decime vos");
                     Login l = sistemaService.obtenerLogin(usu.getEmail());
                     loginRetorno = l;
                     return new ResponseEntity<Login>(loginRetorno, HttpStatus.OK);

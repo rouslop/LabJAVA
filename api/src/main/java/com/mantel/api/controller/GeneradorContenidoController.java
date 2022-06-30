@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @CrossOrigin(origins = "*")
@@ -20,10 +21,6 @@ public class GeneradorContenidoController {
     public GeneradorContenidoController(GeneradorContenidoService generadorContenidoService){
         super();
         this.generadorContenidoService = generadorContenidoService;
-    }
-    @RequestMapping("/hola")
-    public String index() {
-        return "Congratulations from GeneradorContenidoController.java";
     }
 
     @PostMapping("/agregarGeneradorContenido")
@@ -46,5 +43,9 @@ public class GeneradorContenidoController {
         return gc;
     }
 
+    @GetMapping
+    public ResponseEntity<List<GeneradorContenido>> obtenerGeneradores(){
+        return new ResponseEntity<List<GeneradorContenido>>(generadorContenidoService.obtenerGeneradores(), HttpStatus.OK);
+    }
 
 }

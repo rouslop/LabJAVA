@@ -35,8 +35,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         return lista;
     }
 
-
-
     @Override
     public Usuario obtenerUsuario(long id) {
         Usuario usuario = em.find(Usuario.class, id);
