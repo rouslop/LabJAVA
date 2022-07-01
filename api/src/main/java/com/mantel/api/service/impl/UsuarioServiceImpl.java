@@ -88,6 +88,19 @@ public class UsuarioServiceImpl implements UsuarioService {
         return em.merge(usuario);
     }
 
+    @Override
+    public boolean eliminadoLogico(String email) {
+        Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.email =:email");
+        q.setParameter("email",email);
+        Usuario u = (Usuario) q.getSingleResult();
+        if(u!=null){
+            u.setActivo(false);
+            this.em.merge(u);
+            return true;
+        }
+        return false;
+    }
+
     public boolean checkCredenciales(long id, String email, String contrasenia){
         Usuario usuario = em.find(Usuario.class, id);
         if ((usuario.getEmail().equals(email)) && (usuario.getContrasenia().equals(contrasenia))){

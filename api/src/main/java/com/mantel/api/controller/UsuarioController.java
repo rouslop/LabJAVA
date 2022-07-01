@@ -43,6 +43,16 @@ public class UsuarioController {
 
     }
 
+    @DeleteMapping("/eliminadoLogico")
+    public ResponseEntity<String> eliminarUsuarioLogico(@RequestBody String email){
+        if(this.usuarioService.eliminadoLogico(email)){
+            return new ResponseEntity<>("La cuenta ha sido desactivada", HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No se ha podido desactivar la cuenta", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping
     public ResponseEntity<List<Usuario>> obtenerUsuarios(){
         return new ResponseEntity<List<Usuario>>(usuarioService.obtenerUsuarios(), HttpStatus.OK);

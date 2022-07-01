@@ -14,5 +14,7 @@ public interface UsuarioService {
     public boolean existeUsuarioPorEmail(String email);
     public Usuario editarUsuario(Usuario usuario);
 
+    public boolean eliminadoLogico(String email);
+
     public boolean checkCredenciales(long id, String email, String contrasenia);
 }
