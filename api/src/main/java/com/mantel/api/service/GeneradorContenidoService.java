@@ -17,4 +17,6 @@ public interface GeneradorContenidoService {
 
     public GeneradorContenido editarGC(GeneradorContenido gc);
     public List<GeneradorContenido> obtenerGeneradores();
+    public boolean eliminarGenerador(String email);
+    public boolean eliminarContenidoDeLista(Long idC);
 }

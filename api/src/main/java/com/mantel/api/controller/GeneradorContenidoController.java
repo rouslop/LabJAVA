@@ -43,9 +43,39 @@ public class GeneradorContenidoController {
         return gc;
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<GeneradorContenido>> obtenerGeneradores(){
         return new ResponseEntity<List<GeneradorContenido>>(generadorContenidoService.obtenerGeneradores(), HttpStatus.OK);
+    }
+
+    @PutMapping("/editar")
+    public ResponseEntity<String> editarGeneradorContenido(@RequestBody GeneradorContenido gc){
+        if(this.generadorContenidoService.editarGC(gc)!=null){
+            return new ResponseEntity<String>("Actualizado", HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("Error, no se pudo actualizar", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/eliminar/contenido/{id}")
+    public ResponseEntity<String> eliminarContenido(@PathVariable("id") long idContenido){
+        if(this.generadorContenidoService.eliminarContenidoDeLista(idContenido)){
+            return new ResponseEntity<String>("Removido con éxito", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<String>("No se pudo eliminar el contenido", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/eliminar/generador")
+    public ResponseEntity<String> eliminarGenerador(@RequestBody String email){
+        if(this.generadorContenidoService.eliminarGenerador(email)){
+            return new ResponseEntity<String>("Eliminado con éxito", HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No se pude eliminar", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
