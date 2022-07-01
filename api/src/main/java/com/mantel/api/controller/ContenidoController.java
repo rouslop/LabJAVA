@@ -62,6 +62,13 @@ public class ContenidoController {
         return new ResponseEntity<String>("editado y tranquilo", HttpStatus.OK);
     }
 
+    @PostMapping("/marcarContenidoDestacado/{id}")
+    public ResponseEntity<String> marcarContenidoDestacado(@PathVariable("id") long contenidoId){
+        Contenido c = contenidoService.obtenerContenido(contenidoId);
+        c.setDestacado(true);
+        contenidoService.editarContenido(c);
+        return new ResponseEntity<String>("Contenido destacado", HttpStatus.OK);
+    }
 
 
 }

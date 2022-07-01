@@ -118,4 +118,5 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
         List<GeneradorContenido> lista = query.getResultList();
         return lista;
     }
+
 }
