@@ -58,16 +58,6 @@ public class GeneradorContenidoController {
         }
     }
 
-    @DeleteMapping("/eliminar/contenido/{id}")
-    public ResponseEntity<String> eliminarContenido(@PathVariable("id") long idContenido){
-        if(this.generadorContenidoService.eliminarContenidoDeLista(idContenido)){
-            return new ResponseEntity<String>("Removido con éxito", HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<String>("No se pudo eliminar el contenido", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     @DeleteMapping("/eliminar/generador")
     public ResponseEntity<String> eliminarGenerador(@RequestBody String email){
         if(this.generadorContenidoService.eliminarGenerador(email)){
