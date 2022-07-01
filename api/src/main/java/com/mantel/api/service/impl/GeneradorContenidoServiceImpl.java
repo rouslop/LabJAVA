@@ -87,18 +87,18 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
         return em.merge(gc);
     }
 
-    public boolean eliminarContenidoDeLista(Long idC){
-        Contenido c = this.em.find(Contenido.class,idC);
-        GeneradorContenido gc = c.getGeneradorContenidoid();
-        List<Contenido> contenidos = gc.getContenido();
-        contenidos.remove(c);
-        if(editarGC(gc)!=null){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+//    public boolean eliminarContenidoDeLista(Long idC){
+//        Contenido c = this.em.find(Contenido.class,idC);
+//        GeneradorContenido gc = c.getGeneradorContenidoid();
+//        List<Contenido> contenidos = gc.getContenido();
+//        contenidos.remove(c);
+//        if(editarGC(gc)!=null){
+//            return true;
+//        }
+//        else {
+//            return false;
+//        }
+//    }
 
     public boolean eliminarGenerador(String email){
         Query q = this.em.createQuery("SELECT gc FROM GeneradorContenido gc WHERE gc.email=:email");
