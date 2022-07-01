@@ -1,5 +1,6 @@
 package com.mantel.api.service.impl;
 
+import com.mantel.api.model.Contenido;
 import com.mantel.api.model.GeneradorContenido;
 import com.mantel.api.model.Usuario;
 import com.mantel.api.service.UsuarioService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -137,6 +139,22 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public boolean rankearContenido(String email, Long idContenido) {
         return false;
+    }
+
+    @Override
+    public void agregarContenidoAfavoritos(Contenido c, long id) {
+        Usuario usuario = em.find(Usuario.class, id);
+        Set<Contenido> favoritos = usuario.getFavoritos();
+        favoritos.add(c);
+        em.merge(usuario);
+    }
+
+    @Override
+    public void eliminarContenidoDeFavoritos(Contenido c, long id) {
+        Usuario usuario = em.find(Usuario.class, id);
+        Set<Contenido> favoritos = usuario.getFavoritos();
+        favoritos.remove(c);
+        em.merge(usuario);
     }
 
 

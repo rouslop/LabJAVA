@@ -1,5 +1,6 @@
 package com.mantel.api.service;
 
+import com.mantel.api.model.Contenido;
 import com.mantel.api.model.Usuario;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface UsuarioService {
 
     public boolean checkCredenciales(long id, String email, String contrasenia);
     public boolean rankearContenido(String email, Long idContenido);
+
+    public void agregarContenidoAfavoritos(Contenido c , long id);
+    public void eliminarContenidoDeFavoritos(Contenido c, long id);
 }

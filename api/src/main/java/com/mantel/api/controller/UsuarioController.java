@@ -1,7 +1,9 @@
 package com.mantel.api.controller;
 
+import com.mantel.api.model.Contenido;
 import com.mantel.api.model.TipoUsuario;
 import com.mantel.api.model.Usuario;
+import com.mantel.api.service.ContenidoService;
 import com.mantel.api.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +17,12 @@ import java.util.List;
 public class UsuarioController {
 
     private UsuarioService usuarioService;
+    private ContenidoService contenidoService;
 
-    public UsuarioController(UsuarioService usuarioService){
+    public UsuarioController(UsuarioService usuarioService, ContenidoService contenidoService){
         super();
         this.usuarioService = usuarioService;
+        this.contenidoService = contenidoService;
     }
 
     @PostMapping("/agregarUsuario")
@@ -90,6 +94,20 @@ public class UsuarioController {
         else {
             return new ResponseEntity<String>("Error, no se pudo desbloquear el usuario", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/agregarContenidoFavorito/{id}/{idContenido}")
+    public  ResponseEntity<String> agregarContenidoFavorito(@PathVariable("id") long usuarioId, @PathVariable("idContenido") long idContenido){
+        Contenido c = contenidoService.obtenerContenido(idContenido);
+        usuarioService.agregarContenidoAfavoritos(c, usuarioId);
+        return new ResponseEntity<String>("Contenido agregado a favoritos", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminarContenidoDeFavoritos/{id}/{idContenido}")
+    public  ResponseEntity<String> eliminarContenidoDeFavoritos(@PathVariable("id") long usuarioId, @PathVariable("idContenido") long idContenido){
+        Contenido c = contenidoService.obtenerContenido(idContenido);
+        usuarioService.eliminarContenidoDeFavoritos(c, usuarioId);
+        return new ResponseEntity<String>("Contenido eliminado de favoritos", HttpStatus.OK);
     }
 
 }
