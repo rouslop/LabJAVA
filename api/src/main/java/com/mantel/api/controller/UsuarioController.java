@@ -72,6 +72,24 @@ public class UsuarioController {
         return new ResponseEntity<String>("editado y tranquilo", HttpStatus.OK);
     }
 
+    @PostMapping("/bloquear")
+    public ResponseEntity<String> bloquearUsuario(@RequestBody String email){
+        if(this.usuarioService.bloquearUsuario(email)){
+             return new ResponseEntity<String>("Usuario bloqueado", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<String>("Error, no se pudo bloquear el usuario", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    @PostMapping("/desbloquear")
+    public ResponseEntity<String> desbloquearUsuario(@RequestBody String email){
+        if(this.usuarioService.desbloquearUsuario(email)){
+            return new ResponseEntity<String>("Usuario desbloqueado", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<String>("Error, no se pudo desbloquear el usuario", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

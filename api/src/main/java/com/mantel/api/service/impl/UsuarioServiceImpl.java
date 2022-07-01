@@ -89,6 +89,30 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public boolean bloquearUsuario(String email) {
+        Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.email=:email");
+        q.setParameter("email",email);
+        Usuario u = (Usuario) q.getSingleResult();
+        if(u!=null){
+            u.setBloqueado(true);
+            this.em.merge(u);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean desbloquearUsuario(String email) {
+        Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.email=:email");
+        q.setParameter("email",email);
+        Usuario u = (Usuario) q.getSingleResult();
+        if(u!=null){
+            u.setBloqueado(false);
+            this.em.merge(u);
+        }
+        return false;
+    }
+
+    @Override
     public boolean eliminadoLogico(String email) {
         Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.email =:email");
         q.setParameter("email",email);
@@ -109,6 +133,11 @@ public class UsuarioServiceImpl implements UsuarioService {
             return false;
         }
     }
-    
+
+    @Override
+    public boolean rankearContenido(String email, Long idContenido) {
+        return false;
+    }
+
 
 }

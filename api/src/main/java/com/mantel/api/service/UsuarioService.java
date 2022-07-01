@@ -13,8 +13,10 @@ public interface UsuarioService {
     public Usuario obtenerUsuarioPorEmail(String email);
     public boolean existeUsuarioPorEmail(String email);
     public Usuario editarUsuario(Usuario usuario);
-
+    public boolean bloquearUsuario(String email);
+    public boolean desbloquearUsuario(String email);
     public boolean eliminadoLogico(String email);
 
     public boolean checkCredenciales(long id, String email, String contrasenia);
+    public boolean rankearContenido(String email, Long idContenido);
 }
