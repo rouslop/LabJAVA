@@ -70,5 +70,23 @@ public class ContenidoController {
         return new ResponseEntity<String>("Contenido destacado", HttpStatus.OK);
     }
 
+    @PostMapping("/bloqueoContenido/{id}")
+    public ResponseEntity<String> bloqueoContenido(@PathVariable("id") long contenidoId){
+        Contenido c = contenidoService.obtenerContenido(contenidoId);
+        c.setBloqueado(true);
+        contenidoService.editarContenido(c);
+        return new ResponseEntity<String>("Contenido bloqueado", HttpStatus.OK);
+    }
+
+    @PostMapping("/desbloqueoContenido/{id}")
+    public ResponseEntity<String> desbloqueoContenido(@PathVariable("id") long contenidoId){
+        Contenido c = contenidoService.obtenerContenido(contenidoId);
+        c.setBloqueado(false);
+        contenidoService.editarContenido(c);
+        return new ResponseEntity<String>("Contenido desbloqueado", HttpStatus.OK);
+    }
+
+
+
 
 }
