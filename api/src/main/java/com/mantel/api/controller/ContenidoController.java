@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 @RestController
 @RequestMapping("/contenidos")
 public class ContenidoController {
@@ -26,22 +26,20 @@ public class ContenidoController {
         this.generadorContenidoService = generadorContenidoService;
     }
 
-    @PostMapping("/agregarContenido/{id}")
-    public ResponseEntity<String> agregarContenido(@RequestBody Contenido contenido, @PathVariable("id") long gcId){
+    @PostMapping("/agregarContenido/{idgc}")
+    public ResponseEntity<String> agregarContenido(@RequestBody Contenido contenido, @PathVariable("idgc") long gcId){
 
         GeneradorContenido gc = generadorContenidoService.obtenerGeneradorContenido(gcId);
         gc.agregarContenido(contenido);
         contenido.setRanking(0);
         contenido.setBloqueado(false);
         contenidoService.agregarContenido(contenido);
-        //generadorContenidoService.agregarContenidoAlista(contenido);
         return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
     }
 
     @DeleteMapping("/eliminarContenido/{id}")
     public ResponseEntity<String> eliminarContenido(@PathVariable("id") long id){
         Contenido c = contenidoService.obtenerContenido(id);
-        generadorContenidoService.eliminarContenidoDeLista(c);
         contenidoService.eliminarContenido(id);
         return new ResponseEntity<String>("eliminado y tranquilo", HttpStatus.OK);
     }

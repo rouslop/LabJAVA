@@ -28,17 +28,6 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
     public GeneradorContenido obtenerGeneradorContenido(long id) {
         GeneradorContenido generadorContenido = em.find(GeneradorContenido.class, id);
 
-
-//        TypedQuery<Contenido> query = em.createQuery("SELECT c FROM Contenido c WHERE c.generadorContenidoid.id = :idgc", Contenido.class);
-//        try {
-//            List<Contenido> contenidos = query.setParameter("idgc", id).getResultList();
-//            if(contenidos != null){
-//                generadorContenido.setContenido(contenidos);
-//            }
-//        }catch (NoResultException nre){
-//            //Ignore this because as per your logic this is ok!
-//        }
-
         return generadorContenido;
     }
 
@@ -93,14 +82,6 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
             return false;
         }
     }
-
-//    public void agregarContenidoAlista(Contenido contenido){
-//        GeneradorContenido gc = contenido.getGeneradorContenidoid();
-//        List<Contenido> contenidos = gc.getContenido();
-//        contenidos.add(contenido);
-//        editarGC(gc);
-//
-//    }
 
     public GeneradorContenido editarGC(GeneradorContenido gc) {
         return em.merge(gc);
