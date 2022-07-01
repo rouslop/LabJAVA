@@ -26,13 +26,15 @@ public class GeneradorContenido {
 
         // @EqualsAndHashCode.Exclude
         @JsonManagedReference
-        @OneToMany(cascade = CascadeType.ALL)
+        @OneToMany(cascade = CascadeType.ALL,
+                orphanRemoval = true)
         List<Contenido> contenido= new ArrayList<Contenido>();
 
         public void agregarContenido(Contenido contenido) {
                 this.contenido.add(contenido);
                 contenido.setGeneradorContenidoid(this);
         }
+
 
 }
 
