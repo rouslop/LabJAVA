@@ -30,4 +30,15 @@ public class ComentarioController {
         return new ResponseEntity<String>("Comentario Eliminado", HttpStatus.OK);
 
     }
+
+    @PostMapping("/marcarComentarioSpoiler/{id}")
+    public ResponseEntity<String> marcarComentarioSpoiler(@PathVariable("id") long id){
+        Comentario comentario = comentarioService.obtenerComentario(id);
+        comentario.setSpoiler(true);
+        comentarioService.editarComentario(comentario);
+        return new ResponseEntity<String>("Comentario marcado como Spoiler!", HttpStatus.OK);
+    }
+
+
+
 }

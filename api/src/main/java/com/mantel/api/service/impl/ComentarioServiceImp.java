@@ -29,4 +29,14 @@ public class ComentarioServiceImp implements ComentarioService  {
         Comentario comentario = em.find(Comentario.class, id);
         em.remove(comentario);
     }
+
+    public Comentario obtenerComentario(long id){
+        Comentario comentario = em.find(Comentario.class, id);
+        return comentario;
+    }
+
+    public Comentario editarComentario(Comentario comentario){
+        return em.merge(comentario);
+    }
+
 }

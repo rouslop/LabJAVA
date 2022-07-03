@@ -9,4 +9,6 @@ import java.util.List;
 public interface ComentarioService {
     public void agregarComentario(Comentario comentario);
     public void eliminarComentario(long comentarioId);
+    public Comentario obtenerComentario(long id);
+    public Comentario editarComentario(Comentario comentario);
 }
