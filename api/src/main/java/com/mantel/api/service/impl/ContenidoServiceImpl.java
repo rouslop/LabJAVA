@@ -1,5 +1,6 @@
 package com.mantel.api.service.impl;
 
+import com.mantel.api.model.Comentario;
 import com.mantel.api.model.Contenido;
 import com.mantel.api.model.Json;
 import com.mantel.api.service.ContenidoService;
@@ -58,5 +59,13 @@ public class ContenidoServiceImpl implements ContenidoService {
         //Query query = em.createQuery("INSERT INTO contenidos_categoria (contenido_id, categoria_i) VALUES (idContenido, idCategoria)");
 
     }
+
+    public void agregarComentario(Contenido contenido, Comentario comentario){
+        List<Comentario> comentarios = contenido.getComentario();
+        comentarios.add(comentario);
+        this.editarContenido(contenido);
+    }
+
+
 
 }

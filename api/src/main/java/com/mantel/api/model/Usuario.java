@@ -1,14 +1,20 @@
 package com.mantel.api.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @Entity
 @Table(name = "usuarios")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Usuario {
 
     @Id
@@ -33,4 +39,13 @@ public class Usuario {
 
     @OneToMany(cascade = CascadeType.ALL)
     Set<SuscripcionPerPayView> suscripcionesPerPayView = new HashSet<>();
+
+    //@JsonIgnore //para que no se listen cuando obtenemos usuario
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    List<Comentario> comentarios = new ArrayList<Comentario>();
+
+
+
+
 }

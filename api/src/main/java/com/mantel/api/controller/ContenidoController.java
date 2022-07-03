@@ -1,11 +1,11 @@
 package com.mantel.api.controller;
 
-import com.mantel.api.model.Contenido;
-import com.mantel.api.model.GeneradorContenido;
-import com.mantel.api.model.Json;
-import com.mantel.api.model.Usuario;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mantel.api.model.*;
+import com.mantel.api.service.ComentarioService;
 import com.mantel.api.service.ContenidoService;
 import com.mantel.api.service.GeneradorContenidoService;
+import com.mantel.api.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +19,16 @@ public class ContenidoController {
 
     private ContenidoService contenidoService;
     private GeneradorContenidoService generadorContenidoService;
+    private UsuarioService usuarioService;
+    private ComentarioService comentarioService;
 
-    public ContenidoController(ContenidoService contenidoService, GeneradorContenidoService generadorContenidoService){
+
+    public ContenidoController(ContenidoService contenidoService, GeneradorContenidoService generadorContenidoService, UsuarioService usuarioService){
         super();
         this.contenidoService = contenidoService;
         this.generadorContenidoService = generadorContenidoService;
+        this.usuarioService = usuarioService;
+        this.comentarioService = comentarioService;
     }
 
     @PostMapping("/agregarContenido/{idgc}")
@@ -86,7 +91,19 @@ public class ContenidoController {
         return new ResponseEntity<String>("Contenido desbloqueado", HttpStatus.OK);
     }
 
+    @PostMapping("/comentarContenido/{idContenido}/{idUsu}")
+    public ResponseEntity<String> comentarContenido(@PathVariable("idContenido") long idContenido, @PathVariable("idUsu") long idUsu, @RequestBody Comentario comentario){
+        Contenido c = contenidoService.obtenerContenido(idContenido);
+        Usuario u = usuarioService.obtenerUsuario(idUsu);
 
+
+        System.out.println(u);
+        System.out.println(c);
+        comentarioService.agregarComentario(comentario, u, c);
+        contenidoService.agregarComentario(c, comentario);
+
+        return new ResponseEntity<String>("Comentario creado", HttpStatus.CREATED);
+    }
 
 
 }

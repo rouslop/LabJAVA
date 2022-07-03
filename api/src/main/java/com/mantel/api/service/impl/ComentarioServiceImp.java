@@ -3,6 +3,7 @@ package com.mantel.api.service.impl;
 
 import com.mantel.api.model.Comentario;
 
+import com.mantel.api.model.Contenido;
 import com.mantel.api.model.Usuario;
 import com.mantel.api.service.CategoriaService;
 import com.mantel.api.service.ComentarioService;
@@ -20,8 +21,14 @@ public class ComentarioServiceImp implements ComentarioService  {
     @PersistenceContext
     private EntityManager em;
     @Override
-    public void agregarComentario(Comentario comentario){
+    public void agregarComentario(Comentario comentario, Usuario u, Contenido c){
+        comentario.setSpoiler(false);
+        comentario.setUsuario(u);
+        comentario.setContenidoid(c);
+        System.out.println("hasta llega bien o no?");
+        System.out.println(comentario);
         em.persist(comentario);
+        System.out.println("aca capaz que no?");
     }
 
     public void eliminarComentario(long id){

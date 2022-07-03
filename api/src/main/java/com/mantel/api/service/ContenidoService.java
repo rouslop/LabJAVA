@@ -1,5 +1,6 @@
 package com.mantel.api.service;
 
+import com.mantel.api.model.Comentario;
 import com.mantel.api.model.Contenido;
 
 import com.mantel.api.model.Categoria;
@@ -16,5 +17,6 @@ public interface ContenidoService {
 
     public void agregarCategoria (long idContenido, long idCategoria);
 
+    public void agregarComentario(Contenido contenido, Comentario comentario);
 
 }

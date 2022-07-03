@@ -2,16 +2,25 @@ package com.mantel.api.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 @Data
 @Entity
 @Table(name = "contenidos")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Contenido {
 
     @Id
@@ -37,13 +46,14 @@ public class Contenido {
     @OneToMany(cascade = CascadeType.ALL)
     Set<Persona> persona = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    Set<Comentario> comentario = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Comentario> comentario = new ArrayList<Comentario>();
 
     @ManyToOne()
     @JoinColumn(name="gc_id")
-    @JsonBackReference
+    @ToString.Exclude
     private GeneradorContenido generadorContenidoid;
+
 
 
 }
