@@ -33,4 +33,22 @@ public class CategoriaController {
         return new ResponseEntity<List<Categoria>>(categoriaService.listaCategoria(), HttpStatus.OK);
     }
 
+    @PutMapping("/editarCategoria")
+    public ResponseEntity<String> editarCategoria(@RequestBody Categoria cat){
+        categoriaService.editarCategoria(cat);
+        return new ResponseEntity<String>("Categoría editada.", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminarCategoria/{id}")
+    public ResponseEntity<String> eliminarCategoria(@PathVariable("id") long id){
+        categoriaService.eliminarCategoria(id);
+        return new ResponseEntity<String>("Categoría eliminada.", HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Categoria> obtenerCategoria(@PathVariable("id") long id){
+        Categoria c = categoriaService.obtenerCategoria(id);
+        return new ResponseEntity<Categoria>(c, HttpStatus.OK);
+    }
+
 }

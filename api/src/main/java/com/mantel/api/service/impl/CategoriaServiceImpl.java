@@ -29,4 +29,23 @@ public class CategoriaServiceImpl implements CategoriaService {
         List<Categoria> lista = query.getResultList();
         return lista;
     }
+
+    public Categoria editarCategoria(Categoria categoria){
+        return em.merge(categoria);
+    }
+
+    public void eliminarCategoria(long id){
+        Categoria c = em.find(Categoria.class, id);
+        em.remove(c);
+    }
+
+    public Categoria obtenerCategoria(long id){
+        Categoria c = em.find(Categoria.class, id);
+        return c;
+    }
+
+
+
+
+
 }
