@@ -7,6 +7,6 @@ import com.mantel.api.model.Usuario;
 
 import java.util.List;
 public interface ComentarioService {
-    public void agregarComentario(Comentario comentario, Usuario u, Contenido c);
+    public void agregarComentario(Comentario comentario);
     public void eliminarComentario(long comentarioId);
 }

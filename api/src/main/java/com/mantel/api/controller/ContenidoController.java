@@ -23,7 +23,10 @@ public class ContenidoController {
     private ComentarioService comentarioService;
 
 
-    public ContenidoController(ContenidoService contenidoService, GeneradorContenidoService generadorContenidoService, UsuarioService usuarioService){
+    public ContenidoController(ContenidoService contenidoService,
+                               GeneradorContenidoService generadorContenidoService,
+                               UsuarioService usuarioService,
+                               ComentarioService comentarioService){
         super();
         this.contenidoService = contenidoService;
         this.generadorContenidoService = generadorContenidoService;
@@ -93,14 +96,14 @@ public class ContenidoController {
 
     @PostMapping("/comentarContenido/{idContenido}/{idUsu}")
     public ResponseEntity<String> comentarContenido(@PathVariable("idContenido") long idContenido, @PathVariable("idUsu") long idUsu, @RequestBody Comentario comentario){
+        comentario.setSpoiler(false);
         Contenido c = contenidoService.obtenerContenido(idContenido);
         Usuario u = usuarioService.obtenerUsuario(idUsu);
 
+        u.agregarComentario(comentario);
+        c.agregarComentario(comentario);
 
-        System.out.println(u);
-        System.out.println(c);
-        comentarioService.agregarComentario(comentario, u, c);
-        contenidoService.agregarComentario(c, comentario);
+        comentarioService.agregarComentario(comentario);
 
         return new ResponseEntity<String>("Comentario creado", HttpStatus.CREATED);
     }

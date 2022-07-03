@@ -54,6 +54,9 @@ public class Contenido {
     @ToString.Exclude
     private GeneradorContenido generadorContenidoid;
 
-
+    public void agregarComentario(Comentario comentario){
+        this.comentario.add(comentario);
+        comentario.setContenidoid(this);
+    }
 
 }

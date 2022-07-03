@@ -23,11 +23,7 @@ public class ComentarioController {
         this.comentarioService = comentarioService;
 
     }
-//    @PostMapping("/agregarComentario")
-//    public ResponseEntity<String> agregarComentario(@RequestBody Comentario comentario){
-//        comentarioService.agregarComentario(comentario);
-//        return new ResponseEntity<String>("Comentario creada!", HttpStatus.CREATED);
-//    }
+
     @DeleteMapping("/eliminarComentario/{id}")
     public ResponseEntity<String> eliminarComentario(@PathVariable("id") long id){
         comentarioService.eliminarComentario(id);

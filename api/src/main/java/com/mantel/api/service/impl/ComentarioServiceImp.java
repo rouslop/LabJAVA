@@ -21,14 +21,8 @@ public class ComentarioServiceImp implements ComentarioService  {
     @PersistenceContext
     private EntityManager em;
     @Override
-    public void agregarComentario(Comentario comentario, Usuario u, Contenido c){
-        comentario.setSpoiler(false);
-        comentario.setUsuario(u);
-        comentario.setContenidoid(c);
-        System.out.println("hasta llega bien o no?");
-        System.out.println(comentario);
+    public void agregarComentario(Comentario comentario){
         em.persist(comentario);
-        System.out.println("aca capaz que no?");
     }
 
     public void eliminarComentario(long id){

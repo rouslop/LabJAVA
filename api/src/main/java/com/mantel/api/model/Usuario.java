@@ -45,7 +45,10 @@ public class Usuario {
             orphanRemoval = true)
     List<Comentario> comentarios = new ArrayList<Comentario>();
 
-
+    public void agregarComentario(Comentario comentario){
+        this.comentarios.add(comentario);
+        comentario.setUsuario(this);
+    }
 
 
 }

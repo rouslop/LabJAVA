@@ -33,7 +33,6 @@ public class GeneradorContenido {
 
         @OneToMany(cascade = CascadeType.ALL,
                 orphanRemoval = true)
-        @ToString.Exclude
         List<Contenido> contenido= new ArrayList<Contenido>();
 
         public void agregarContenido(Contenido contenido) {
