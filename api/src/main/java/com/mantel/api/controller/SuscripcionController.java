@@ -1,8 +1,7 @@
 package com.mantel.api.controller;
 
-import com.mantel.api.model.Suscripcion;
-import com.mantel.api.model.Usuario;
-import com.mantel.api.service.SuscripcionService;
+import com.mantel.api.model.*;
+import com.mantel.api.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +14,53 @@ import java.util.List;
 public class SuscripcionController {
 
     private SuscripcionService suscripcionService;
+    private GeneradorContenidoService generadorContenidoService;
+    private UsuarioService usuarioService;
+    private ContenidoService contenidoService;
+    private SuscripcionPPVService suscripcionPPVService;
 
-    public SuscripcionController(SuscripcionService suscripcionService){
+    public SuscripcionController(SuscripcionService suscripcionService,
+                                 GeneradorContenidoService generadorContenidoService,
+                                 SuscripcionPPVService suscripcionPPVService,
+                                 ContenidoService contenidoService,
+                                 UsuarioService usuarioService){
         super();
         this.suscripcionService = suscripcionService;
+        this.generadorContenidoService = generadorContenidoService;
+        this.suscripcionPPVService = suscripcionPPVService;
+        this.contenidoService = contenidoService;
+        this.usuarioService = usuarioService;
     }
 
-    @PostMapping("/agregarSuscripcion")
-    public ResponseEntity<String> agregarSuscripcion(@RequestBody Suscripcion suscripcion){
+    @PostMapping("/agregarSuscripcion/{idgc}/{idUsu}")
+    public ResponseEntity<String> agregarSuscripcion(@RequestBody Suscripcion suscripcion, @PathVariable("idgc") long gcId, @PathVariable("idUsu") long idUsu){
+
+        GeneradorContenido gc = generadorContenidoService.obtenerGeneradorContenido(gcId);
+        gc.agregarSuscripcion(suscripcion);
+
+        Usuario usuario = usuarioService.obtenerUsuario(idUsu);
+        usuario.agregarSuscripcion(suscripcion);
+
         suscripcionService.agregarSuscripcion(suscripcion);
-        return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
+        return new ResponseEntity<String>("Nueva suscripción agregada!", HttpStatus.CREATED);
+
     }
+
+    @PostMapping("/agrearSuscripcionPPV/{idContenido}/{idUsu}")
+    public ResponseEntity<String> agrearSuscripcionPPV(@RequestBody SuscripcionPerPayView suscripcionPerPayView, @PathVariable("idContenido") long idContenido,@PathVariable("idUsu") long idUsu) {
+
+        Contenido contenido = contenidoService.obtenerContenido(idContenido);
+        contenido.agregarSuscripcionPPV(suscripcionPerPayView);
+
+        Usuario usuario = usuarioService.obtenerUsuario(idUsu);
+        usuario.agregarSuscripcionPPV(suscripcionPerPayView);
+
+        suscripcionPPVService.agregarSuscripcionPPV(suscripcionPerPayView);
+        return new ResponseEntity<String>("Nueva suscripción PAY PER VIEW agregada!", HttpStatus.CREATED);
+    }
+
+
+
 
     @DeleteMapping("/eliminarSuscripcion/{id}")
     public ResponseEntity<String> eliminarSuscripcion(@PathVariable("id") long id){
@@ -45,6 +80,14 @@ public class SuscripcionController {
 
         return s;
     }
+
+    @GetMapping("/obtenerSuscripcionPPV/{id}")
+    public SuscripcionPerPayView obtenerSuscripcionPPV(@PathVariable("id") long id){
+        SuscripcionPerPayView suscripcionPPV = suscripcionPPVService.obtenerSuscripcionPPV(id);
+        if (suscripcionPPV == null) return null;
+        return suscripcionPPV;
+    }
+
 
     @PutMapping("/editarSuscripcion")
     public ResponseEntity<String> editarSuscripcion(@RequestBody Suscripcion suscripcion){

@@ -34,21 +34,32 @@ public class Usuario {
     @OneToMany(cascade = CascadeType.ALL)
     Set<Contenido> favoritos = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    Set<Suscripcion> suscripciones = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.ALL)
-    Set<SuscripcionPerPayView> suscripcionesPerPayView = new HashSet<>();
-
-    //@JsonIgnore //para que no se listen cuando obtenemos usuario
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true)
     List<Comentario> comentarios = new ArrayList<Comentario>();
+
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    List<Suscripcion> suscripciones= new ArrayList<Suscripcion>();
+
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    List<SuscripcionPerPayView> suscripcionesPPV= new ArrayList<SuscripcionPerPayView>();
+
 
     public void agregarComentario(Comentario comentario){
         this.comentarios.add(comentario);
         comentario.setUsuario(this);
     }
 
+    public void agregarSuscripcion(Suscripcion suscripcion){
+        this.suscripciones.add(suscripcion);
+        suscripcion.setUsuarioId(this);
+    }
+
+    public void agregarSuscripcionPPV(SuscripcionPerPayView suscripcionPPV){
+        this.suscripcionesPPV.add(suscripcionPPV);
+        suscripcionPPV.setUsuarioId(this);
+    }
 
 }

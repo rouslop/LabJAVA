@@ -25,19 +25,28 @@ public class GeneradorContenido {
         private long id;
 
         private String nombre;
-        private float ganancia;
+        private float precio;
         private String email;
         private  String contrasenia;
         private String metodoPago;
-
+        private float ganancia;
 
         @OneToMany(cascade = CascadeType.ALL,
                 orphanRemoval = true)
         List<Contenido> contenido= new ArrayList<Contenido>();
 
+        @OneToMany(cascade = CascadeType.ALL,
+                orphanRemoval = true)
+        List<Suscripcion> suscripciones= new ArrayList<Suscripcion>();
+
         public void agregarContenido(Contenido contenido) {
                 this.contenido.add(contenido);
                 contenido.setGeneradorContenidoid(this);
+        }
+
+        public void agregarSuscripcion(Suscripcion suscripcion){
+                this.suscripciones.add(suscripcion);
+                suscripcion.setGeneradorContenidoid(this);
         }
 
 

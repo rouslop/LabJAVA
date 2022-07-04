@@ -36,11 +36,11 @@ public class ContenidoController {
 
     @PostMapping("/agregarContenido/{idgc}")
     public ResponseEntity<String> agregarContenido(@RequestBody Contenido contenido, @PathVariable("idgc") long gcId){
-
-        GeneradorContenido gc = generadorContenidoService.obtenerGeneradorContenido(gcId);
-        gc.agregarContenido(contenido);
         contenido.setRanking(0);
         contenido.setBloqueado(false);
+        GeneradorContenido gc = generadorContenidoService.obtenerGeneradorContenido(gcId);
+        gc.agregarContenido(contenido);
+
         contenidoService.agregarContenido(contenido);
         return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
     }

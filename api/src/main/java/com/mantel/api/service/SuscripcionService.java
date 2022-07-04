@@ -1,7 +1,6 @@
 package com.mantel.api.service;
 
 import com.mantel.api.model.Suscripcion;
-import com.mantel.api.model.Usuario;
 
 import java.util.List;
 

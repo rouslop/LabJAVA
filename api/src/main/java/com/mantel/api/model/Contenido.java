@@ -51,12 +51,24 @@ public class Contenido {
 
     @ManyToOne()
     @JoinColumn(name="gc_id")
-    @ToString.Exclude
+    //@ToString.Exclude
     private GeneradorContenido generadorContenidoid;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    List<SuscripcionPerPayView> suscripcionesPPV= new ArrayList<SuscripcionPerPayView>();
 
     public void agregarComentario(Comentario comentario){
         this.comentario.add(comentario);
         comentario.setContenidoid(this);
     }
+
+    public void agregarSuscripcionPPV(SuscripcionPerPayView suscripcionPerPayView){
+        this.suscripcionesPPV.add(suscripcionPerPayView);
+        suscripcionPerPayView.setContenidoId(this);
+    }
+
+
+
 
 }

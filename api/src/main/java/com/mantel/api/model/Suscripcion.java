@@ -1,12 +1,18 @@
 package com.mantel.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "suscripciones")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Suscripcion {
 
     @Id
@@ -19,10 +25,12 @@ public class Suscripcion {
     @Enumerated(EnumType.STRING)
     private TipoSuscripcion tipoSuscripcion;
 
-    @OneToOne()
-    @JoinColumn(name="generadorContenido_id")
-    private GeneradorContenido generadorContenido;
+    @ManyToOne()
+    @JoinColumn(name="gc_id")
+    private GeneradorContenido generadorContenidoid;
 
-
+    @ManyToOne()
+    @JoinColumn(name="usuario_id")
+    private Usuario usuarioId;
 
 }
