@@ -58,6 +58,12 @@ public class Contenido {
             orphanRemoval = true)
     List<SuscripcionPerPayView> suscripcionesPPV= new ArrayList<SuscripcionPerPayView>();
 
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    List<Visualizacion> visualizaciones= new ArrayList<Visualizacion>();
+
+
+
     public void agregarComentario(Comentario comentario){
         this.comentario.add(comentario);
         comentario.setContenidoid(this);
@@ -68,7 +74,10 @@ public class Contenido {
         suscripcionPerPayView.setContenidoId(this);
     }
 
-
+    public void agregarVisualizacion(Visualizacion visualizacion){
+        this.visualizaciones.add(visualizacion);
+        visualizacion.setContenidoId(this);
+    }
 
 
 }

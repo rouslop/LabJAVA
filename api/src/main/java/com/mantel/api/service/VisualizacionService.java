@@ -6,6 +6,8 @@ import com.mantel.api.model.Visualizacion;
 
 import java.util.List;
 public interface VisualizacionService {
-    void agregarVisualizacion(Visualizacion v);
+    public void agregarVisualizacion(Visualizacion v);
+    public List<Visualizacion> obtenerVisualizaciones();
+
 
 }

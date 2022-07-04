@@ -33,8 +33,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public List<Usuario> obtenerUsuarios() {
 
         Query query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
-        List<Usuario> lista = query.getResultList();
-        return lista;
+        return (List<Usuario>) query.getResultList();
     }
 
     @Override

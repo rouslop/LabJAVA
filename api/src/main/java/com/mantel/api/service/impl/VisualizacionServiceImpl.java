@@ -20,4 +20,12 @@ public class VisualizacionServiceImpl implements VisualizacionService {
     public void agregarVisualizacion(Visualizacion v){
         em.persist(v);
     }
+
+    @Override
+    public List<Visualizacion> obtenerVisualizaciones() {
+        Query query = em.createQuery("SELECT v FROM Visualizacion  v",Visualizacion.class);
+        return (List<Visualizacion>) query.getResultList();
+    }
+
+
 }
