@@ -1,8 +1,6 @@
 package com.mantel.api.service.impl;
 
-import com.mantel.api.model.Comentario;
-import com.mantel.api.model.Contenido;
-import com.mantel.api.model.Json;
+import com.mantel.api.model.*;
 import com.mantel.api.service.ContenidoService;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -65,6 +65,41 @@ public class ContenidoServiceImpl implements ContenidoService {
         comentarios.add(comentario);
         this.editarContenido(contenido);
     }
+
+    public List<Contenido> listaContenidos(){
+        Query query = em.createQuery("SELECT c FROM Contenido c", Contenido.class);
+        return (List<Contenido>) query.getResultList();
+    }
+
+    public List<Contenido> listarRelacionados(long idContenido){
+        Contenido contenido = this.obtenerContenido(idContenido);
+        List<Categoria> categoriasContenido = contenido.getCategorias();
+        List<Persona> elenco = contenido.getPersona();
+
+        List<Contenido> listaContenidos = this.listaContenidos();
+        List<Contenido> listaResultado = new ArrayList<>();
+
+        for (Categoria categoria : categoriasContenido){
+            for (Contenido con : listaContenidos){
+                if (con.getCategorias().equals(categoria.getNombre()) ){
+                    listaResultado.add(con);
+                }
+            }
+        }
+
+        for(Persona persona : elenco){
+            for (Contenido con : listaContenidos){
+                if (con.getPersona().equals(persona.getNombre())){
+                    listaResultado.add(con);
+                }
+            }
+        }
+
+
+        return listaResultado;
+
+    }
+
 
 
 

@@ -2,6 +2,7 @@ package com.mantel.api.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
@@ -16,9 +17,9 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "generadoresContenidos")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id")
 public class GeneradorContenido {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +32,12 @@ public class GeneradorContenido {
         private String metodoPago;
         private float ganancia;
 
+        @JsonManagedReference
         @OneToMany(cascade = CascadeType.ALL,
                 orphanRemoval = true)
         List<Contenido> contenido= new ArrayList<Contenido>();
 
+        @JsonIgnore
         @OneToMany(cascade = CascadeType.ALL,
                 orphanRemoval = true)
         List<Suscripcion> suscripciones= new ArrayList<Suscripcion>();

@@ -19,4 +19,6 @@ public interface ContenidoService {
 
     public void agregarComentario(Contenido contenido, Comentario comentario);
 
+    public List<Contenido> listarRelacionados(long idContenido);
+    public List<Contenido> listaContenidos();
 }

@@ -34,6 +34,7 @@ public class Usuario {
     @OneToMany(cascade = CascadeType.ALL)
     Set<Contenido> favoritos = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true)
     List<Comentario> comentarios = new ArrayList<Comentario>();
@@ -46,6 +47,7 @@ public class Usuario {
             orphanRemoval = true)
     List<SuscripcionPerPayView> suscripcionesPPV= new ArrayList<SuscripcionPerPayView>();
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true)
     List<Visualizacion> visualizaciones= new ArrayList<Visualizacion>();

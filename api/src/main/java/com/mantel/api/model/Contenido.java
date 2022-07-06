@@ -1,10 +1,7 @@
 package com.mantel.api.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.Cascade;
@@ -18,9 +15,9 @@ import java.util.HashSet;
 @Data
 @Entity
 @Table(name = "contenidos")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id")
 public class Contenido {
 
     @Id
@@ -40,29 +37,38 @@ public class Contenido {
 
 
 
-    @OneToMany(cascade = CascadeType.ALL)
-    Set<Categoria> categoria = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    Set<Persona> persona = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "contenido_categoria",
+    joinColumns = { @JoinColumn(name = "contenido_id")},
+            inverseJoinColumns = { @JoinColumn(name = "categoria_id")}
+    )
+    List<Categoria> categorias = new ArrayList<>();
+
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Persona> persona = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     List<Comentario> comentario = new ArrayList<Comentario>();
 
+    @JsonBackReference
     @ManyToOne()
     @JoinColumn(name="gc_id")
-    //@ToString.Exclude
     private GeneradorContenido generadorContenidoid;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true)
     List<SuscripcionPerPayView> suscripcionesPPV= new ArrayList<SuscripcionPerPayView>();
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true)
     List<Visualizacion> visualizaciones= new ArrayList<Visualizacion>();
 
 
+    //  FUNCIONES AUXILIARES
 
     public void agregarComentario(Comentario comentario){
         this.comentario.add(comentario);
@@ -77,6 +83,10 @@ public class Contenido {
     public void agregarVisualizacion(Visualizacion visualizacion){
         this.visualizaciones.add(visualizacion);
         visualizacion.setContenidoId(this);
+    }
+
+    public void agregarCategoria(Categoria categoria){
+        this.categorias.add(categoria);
     }
 
 
