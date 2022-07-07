@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,6 +38,20 @@ public class ComentarioServiceImp implements ComentarioService  {
 
     public Comentario editarComentario(Comentario comentario){
         return em.merge(comentario);
+    }
+
+    public List<Comentario> listarComentariosContenido(long idContenido){
+        List<Comentario> listaResultado = new ArrayList<>();
+        Query query = em.createQuery("SELECT c FROM Comentario c", Comentario.class);
+        List<Comentario> comentarios = query.getResultList();
+
+        for(Comentario c : comentarios){
+            if(c.getContenidoid().getId() == idContenido){
+                listaResultado.add(c);
+            }
+        }
+
+        return listaResultado;
     }
 
 }

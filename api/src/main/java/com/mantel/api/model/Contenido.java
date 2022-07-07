@@ -30,13 +30,11 @@ public class Contenido {
     private String descripcion;
     private float ranking;
     private String fotoPortada;
+    private String video;
     private float precio;
     private Time duracion;
     private boolean destacado;
     private boolean bloqueado;
-
-
-
 
     @ManyToMany
     @JoinTable(name = "contenido_categoria",
@@ -46,16 +44,17 @@ public class Contenido {
     List<Categoria> categorias = new ArrayList<>();
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Persona> persona = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Comentario> comentario = new ArrayList<Comentario>();
-
-    @JsonBackReference
     @ManyToOne()
     @JoinColumn(name="gc_id")
     private GeneradorContenido generadorContenidoid;
+
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Persona> persona = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Comentario> comentario = new ArrayList<Comentario>();
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,

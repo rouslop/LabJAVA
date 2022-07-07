@@ -59,9 +59,6 @@ public class SuscripcionController {
         return new ResponseEntity<String>("Nueva suscripción PAY PER VIEW agregada!", HttpStatus.CREATED);
     }
 
-
-
-
     @DeleteMapping("/eliminarSuscripcion/{id}")
     public ResponseEntity<String> eliminarSuscripcion(@PathVariable("id") long id){
         suscripcionService.eliminarSuscripcion(id);

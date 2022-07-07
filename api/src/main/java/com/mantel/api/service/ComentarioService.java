@@ -11,4 +11,5 @@ public interface ComentarioService {
     public void eliminarComentario(long comentarioId);
     public Comentario obtenerComentario(long id);
     public Comentario editarComentario(Comentario comentario);
+    public List<Comentario> listarComentariosContenido(long idContenido);
 }

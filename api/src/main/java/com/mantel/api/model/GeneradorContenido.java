@@ -32,7 +32,7 @@ public class GeneradorContenido {
         private String metodoPago;
         private float ganancia;
 
-        @JsonManagedReference
+        @JsonIgnore
         @OneToMany(cascade = CascadeType.ALL,
                 orphanRemoval = true)
         List<Contenido> contenido= new ArrayList<Contenido>();

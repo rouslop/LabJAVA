@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
@@ -37,6 +38,14 @@ public class ComentarioController {
         comentario.setSpoiler(true);
         comentarioService.editarComentario(comentario);
         return new ResponseEntity<String>("Comentario marcado como Spoiler!", HttpStatus.OK);
+    }
+
+    @GetMapping("/listarComentariosContenido/{idContenido}")
+    public ResponseEntity<List<Comentario>> listarComentariosContenido(@PathVariable("idContenido") long idContenido){
+
+        List<Comentario> resultado = comentarioService.listarComentariosContenido(idContenido);
+
+        return new ResponseEntity<List<Comentario>>(resultado, HttpStatus.OK);
     }
 
 
