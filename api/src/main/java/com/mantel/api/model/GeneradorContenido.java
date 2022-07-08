@@ -33,6 +33,7 @@ public class GeneradorContenido {
         private float ganancia;
 
         @JsonIgnore
+        @ToString.Exclude
         @OneToMany(cascade = CascadeType.ALL,
                 orphanRemoval = true)
         List<Contenido> contenido= new ArrayList<Contenido>();

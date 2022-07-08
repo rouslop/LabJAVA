@@ -72,29 +72,43 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     public List<Contenido> listarRelacionados(long idContenido){
-        Contenido contenido = this.obtenerContenido(idContenido);
-        List<Categoria> categoriasContenido = contenido.getCategorias();
-        List<Persona> elenco = contenido.getPersona();
 
         List<Contenido> listaContenidos = this.listaContenidos();
         List<Contenido> listaResultado = new ArrayList<>();
 
-        for (Categoria categoria : categoriasContenido){
-            for (Contenido con : listaContenidos){
-                if (con.getCategorias().equals(categoria.getNombre()) ){
-                    listaResultado.add(con);
+        Contenido contenido = this.obtenerContenido(idContenido);
+        List<Categoria> categoriasContenido = contenido.getCategorias();
+
+        for (Categoria categoria : categoriasContenido){ // Categorias contenido principal
+            for (Contenido con : listaContenidos){  // Todos los contenidos persistidos
+                for(Categoria ca : con.getCategorias()){
+                    if ( ca.getNombre() == categoria.getNombre() ){
+                        if(con.equals(contenido) == false){
+                            listaResultado.add(con); //si no es el contenido del que estoy buscando los relacionados
+                        }
+                    }
                 }
             }
         }
+
+        List<Persona> elenco = contenido.getPersona(); // Elenco contenido principal
+        System.out.println("elenco");
+        System.out.println(elenco);
 
         for(Persona persona : elenco){
             for (Contenido con : listaContenidos){
-                if (con.getPersona().equals(persona.getNombre())){
-                    listaResultado.add(con);
+                for(Persona p : con.getPersona()){
+                    if (p.getNombre() == persona.getNombre()){
+                        System.out.println("son iguales las personas");
+                        listaResultado.add(con);
+
+//                        if(listaResultado.indexOf(con) == -1){
+//                            listaResultado.add(con);
+//                        }
+                    }
                 }
             }
         }
-
 
         return listaResultado;
 

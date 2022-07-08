@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Categoria {
     private String nombre;
 
     @JsonIgnore
+    @ToString.Exclude
     @ManyToMany(mappedBy = "categorias")
     List<Contenido> contenidos = new ArrayList<>();
 

@@ -41,6 +41,7 @@ public class Contenido {
     joinColumns = { @JoinColumn(name = "contenido_id")},
             inverseJoinColumns = { @JoinColumn(name = "categoria_id")}
     )
+    //@ToString.Exclude
     List<Categoria> categorias = new ArrayList<>();
 
 
