@@ -8,10 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @Transactional
@@ -83,9 +80,10 @@ public class ContenidoServiceImpl implements ContenidoService {
             for (Contenido con : listaContenidos){  // Todos los contenidos persistidos
                 for(Categoria ca : con.getCategorias()){
                     if ( ca.getNombre() == categoria.getNombre() ){
-                        if(con.equals(contenido) == false){
-                            listaResultado.add(con); //si no es el contenido del que estoy buscando los relacionados
-                        }
+                        listaResultado.add(con);
+//                        if(con.equals(contenido) == false){
+//                            listaResultado.add(con); //si no es el contenido del que estoy buscando los relacionados
+//                        }
                     }
                 }
             }
@@ -98,8 +96,8 @@ public class ContenidoServiceImpl implements ContenidoService {
         for(Persona persona : elenco){
             for (Contenido con : listaContenidos){
                 for(Persona p : con.getPersona()){
-                    if (p.getNombre() == persona.getNombre()){
-                        System.out.println("son iguales las personas");
+                    if (p.getNombre().equals(persona.getNombre())){
+
                         listaResultado.add(con);
 
 //                        if(listaResultado.indexOf(con) == -1){
@@ -109,6 +107,19 @@ public class ContenidoServiceImpl implements ContenidoService {
                 }
             }
         }
+
+        //remuevo los duplicados
+        Set<Contenido> set = new HashSet<>(listaResultado);
+        listaResultado.clear();
+        listaResultado.addAll(set);
+
+
+//        for (Contenido cc : listaResultado){ // quito el contenido al q estamos buscando sus relacionados
+//            if(cc.equals(contenido)){
+//                listaResultado.remove(contenido);
+//            }
+//        }
+        listaResultado.remove(contenido); // quito el contenido al q estamos buscando sus relacionados
 
         return listaResultado;
 
