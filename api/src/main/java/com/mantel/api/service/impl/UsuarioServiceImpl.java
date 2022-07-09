@@ -1,13 +1,13 @@
 package com.mantel.api.service.impl;
 
-import com.mantel.api.model.Contenido;
-import com.mantel.api.model.GeneradorContenido;
-import com.mantel.api.model.Usuario;
+import com.mantel.api.model.*;
 import com.mantel.api.service.UsuarioService;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -143,7 +143,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void agregarContenidoAfavoritos(Contenido c, long id) {
         Usuario usuario = em.find(Usuario.class, id);
-        Set<Contenido> favoritos = usuario.getFavoritos();
+        List<Contenido> favoritos = usuario.getFavoritos();
         favoritos.add(c);
         em.merge(usuario);
     }
@@ -151,9 +151,72 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void eliminarContenidoDeFavoritos(Contenido c, long id) {
         Usuario usuario = em.find(Usuario.class, id);
-        Set<Contenido> favoritos = usuario.getFavoritos();
+        List<Contenido> favoritos = usuario.getFavoritos();
         favoritos.remove(c);
         em.merge(usuario);
+    }
+
+    @Override
+    public List<Contenido> listarRecomendados(long idUsu) {
+
+        List<Contenido> listaResultado = new ArrayList<>();
+        // basado en sus historicos visualizados
+
+        Query query = em.createQuery("SELECT v FROM Visualizacion v WHERE v.usuarioId.id = :idUsu", Visualizacion.class);
+        try {
+            List<Visualizacion> visualizaciones = query.setParameter("idUsu", idUsu).getResultList();
+            for (Visualizacion v : visualizaciones){
+                listaResultado.add(v.getContenidoId());
+            }
+        } catch (NoResultException nre) {
+            //Ignore this because as per your logic this is ok!
+        }
+
+        // basado en sus favoritos
+
+        Usuario usuario = this.obtenerUsuario(idUsu);
+        List<Contenido> favoritos = usuario.getFavoritos();
+        List<String> nomCategoriasContenido = new ArrayList<>();
+        for (Contenido co : favoritos){
+            List<Categoria> catsContenido = co.getCategorias();
+            for (Categoria cate : catsContenido){
+                nomCategoriasContenido.add(cate.getNombre());
+            }
+        }
+
+        // quito categorias repetidas de nomCategoriasContenido
+        Set<String> set = new HashSet<>(nomCategoriasContenido);
+        nomCategoriasContenido.clear();
+        nomCategoriasContenido.addAll(set);
+
+        Query query2 = em.createQuery("SELECT c FROM Contenido c", Contenido.class);
+        List<Contenido> listaContenidos = (List<Contenido>) query2.getResultList();
+
+        // Recorro todos los contenidos y chequeo que sus categorias coincidan con las de sus favoritos
+        for (Contenido con : listaContenidos){
+            List<Categoria> catsContenido = con.getCategorias();
+            for (Categoria cate : catsContenido){
+                for (String nomCat : nomCategoriasContenido){
+                    if (cate.getNombre().equals(nomCat)){
+                        listaResultado.add(con);
+                    }
+                }
+            }
+        }
+
+        // recorro todos los contenidos para filtrar solo los destacados
+        for (Contenido conte : listaContenidos){
+            if (conte.isDestacado()){
+                listaResultado.add(conte);
+            }
+        }
+
+        // quito contenidos repetidos de la lista resultado
+        Set<Contenido> set2 = new HashSet<>(listaResultado);
+        listaResultado.clear();
+        listaResultado.addAll(set2);
+
+        return listaResultado;
     }
 
 

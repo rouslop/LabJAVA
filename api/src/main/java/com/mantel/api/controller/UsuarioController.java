@@ -110,4 +110,9 @@ public class UsuarioController {
         return new ResponseEntity<String>("Contenido eliminado de favoritos", HttpStatus.OK);
     }
 
+    @GetMapping("/listarRecomendados/{idUsu}")
+    public ResponseEntity<List<Contenido>> listarRecomendados(@PathVariable("idUsu") long idUsu){
+        return new ResponseEntity<List<Contenido>>(usuarioService.listarRecomendados(idUsu), HttpStatus.OK);
+    }
+
 }

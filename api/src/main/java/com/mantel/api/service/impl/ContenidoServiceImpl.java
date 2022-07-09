@@ -81,28 +81,18 @@ public class ContenidoServiceImpl implements ContenidoService {
                 for(Categoria ca : con.getCategorias()){
                     if ( ca.getNombre() == categoria.getNombre() ){
                         listaResultado.add(con);
-//                        if(con.equals(contenido) == false){
-//                            listaResultado.add(con); //si no es el contenido del que estoy buscando los relacionados
-//                        }
                     }
                 }
             }
         }
 
         List<Persona> elenco = contenido.getPersona(); // Elenco contenido principal
-        System.out.println("elenco");
-        System.out.println(elenco);
 
         for(Persona persona : elenco){
             for (Contenido con : listaContenidos){
                 for(Persona p : con.getPersona()){
                     if (p.getNombre().equals(persona.getNombre())){
-
                         listaResultado.add(con);
-
-//                        if(listaResultado.indexOf(con) == -1){
-//                            listaResultado.add(con);
-//                        }
                     }
                 }
             }
@@ -113,12 +103,6 @@ public class ContenidoServiceImpl implements ContenidoService {
         listaResultado.clear();
         listaResultado.addAll(set);
 
-
-//        for (Contenido cc : listaResultado){ // quito el contenido al q estamos buscando sus relacionados
-//            if(cc.equals(contenido)){
-//                listaResultado.remove(contenido);
-//            }
-//        }
         listaResultado.remove(contenido); // quito el contenido al q estamos buscando sus relacionados
 
         return listaResultado;

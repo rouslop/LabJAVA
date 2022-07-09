@@ -32,7 +32,7 @@ public class Usuario {
     private TipoUsuario tipoUsuario;
 
     @OneToMany(cascade = CascadeType.ALL)
-    Set<Contenido> favoritos = new HashSet<>();
+    List<Contenido> favoritos = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,

@@ -23,4 +23,5 @@ public interface UsuarioService {
 
     public void agregarContenidoAfavoritos(Contenido c , long id);
     public void eliminarContenidoDeFavoritos(Contenido c, long id);
+    public List<Contenido> listarRecomendados(long idUsu);
 }

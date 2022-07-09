@@ -18,6 +18,7 @@ public class VisualizacionServiceImpl implements VisualizacionService {
 
     @Override
     public void agregarVisualizacion(Visualizacion v){
+        // falta chequear que no exista un registro ya!!
         em.persist(v);
     }
 
