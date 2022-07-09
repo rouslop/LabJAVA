@@ -34,14 +34,20 @@ public class VisualizacionController {
              @PathVariable("idContenido") long idContenido,@PathVariable("idUsu") long idUsu){
         visualizacion.setTerminado(false);
 
-        Contenido contenido = contenidoService.obtenerContenido(idContenido);
-        contenido.agregarVisualizacion(visualizacion);
+        Visualizacion vi=visualizacionService.obtenerVisualizacion(idUsu, idContenido);
+        if (vi == null){
+            Contenido contenido = contenidoService.obtenerContenido(idContenido);
+            contenido.agregarVisualizacion(visualizacion);
 
-        Usuario usuario = usuarioService.obtenerUsuario(idUsu);
-        usuario.agregarVisualizacion(visualizacion);
+            Usuario usuario = usuarioService.obtenerUsuario(idUsu);
+            usuario.agregarVisualizacion(visualizacion);
 
-        visualizacionService.agregarVisualizacion(visualizacion);
-        return new ResponseEntity<String>("Visualizacion registrada", HttpStatus.CREATED);
+            visualizacionService.agregarVisualizacion(visualizacion);
+            return new ResponseEntity<String>("Visualizacion registrada", HttpStatus.CREATED);
+        }else {
+            return new ResponseEntity<String>("Visualizacion ya existe", HttpStatus.NOT_ACCEPTABLE);
+        }
+
     }
 
     @GetMapping

@@ -8,6 +8,8 @@ import java.util.List;
 public interface VisualizacionService {
     public void agregarVisualizacion(Visualizacion v);
     public List<Visualizacion> obtenerVisualizaciones();
+    public Visualizacion obtenerVisualizacion(long idUsu, long idContenido);
+
 
 
 }
