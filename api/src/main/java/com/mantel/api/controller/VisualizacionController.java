@@ -55,4 +55,11 @@ public class VisualizacionController {
         return new ResponseEntity<List<Visualizacion>>(visualizacionService.obtenerVisualizaciones(), HttpStatus.OK);
     }
 
+    @PostMapping("/agregarTiempoVisualizacion/{idUsu}/{idCon}")
+    public ResponseEntity<String> agregarTiempoVisualizacion(@RequestBody Visualizacion visualizacion, @PathVariable("idUsu") long idUsu, @PathVariable("idCon") long idCon){
+        visualizacionService.agregarTiempoVisualizacion(idUsu,idCon, visualizacion.getTime());
+        return new ResponseEntity<String>("Tiempo de visualizacion actualizado!",HttpStatus.OK );
+    }
+
+
 }

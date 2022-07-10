@@ -1,4 +1,5 @@
 package com.mantel.api.service.impl;
+import com.mantel.api.model.Contenido;
 import com.mantel.api.model.Usuario;
 import com.mantel.api.model.Visualizacion;
 import com.mantel.api.service.UsuarioService;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.sql.Time;
 import java.util.List;
 @Service
 @Transactional
@@ -45,7 +47,15 @@ public class VisualizacionServiceImpl implements VisualizacionService {
         return v;
     }
 
+    public void agregarTiempoVisualizacion(long idUsu, long idContenido,Time tiempoVisualizacion){
 
+        Visualizacion vi = this.obtenerVisualizacion(idUsu,idContenido);
+        vi.setTime(tiempoVisualizacion);
+        em.merge(vi);
+//        Query query = em.createQuery("SELECT c FROM Contenido c WHERE c.id= :idCon", Contenido.class);
+//        Contenido contenido = (Contenido) query.setParameter("idCon", idContenido).getSingleResult();
+
+    }
 
 
 
