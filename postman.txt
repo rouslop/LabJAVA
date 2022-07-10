@@ -20,6 +20,9 @@ http://localhost:8080/generadorcontenidos/agregarGeneradorContenido
 	"ganancia":687
 }
 
+GET
+http://localhost:8080/generadorcontenidos/listar
+
 CATEGORIA
 POST http://localhost:8080/categorias/agregarCategoria
 
