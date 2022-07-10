@@ -1,0 +1,73 @@
+-- DATOS PRUEBA
+-- tuve que borrar a mano las pk de c_c c_g c_ gc
+-- GENERADOR CONTENIDO
+INSERT INTO `generadores_contenidos` (`id`, `contrasenia`, `email`, `ganancia`, `metodo_pago`, `nombre`) VALUES (NULL, '123', 'generadorContenido@gmail.com', '0', 'Tarjeta ', 'generadorContenido1');
+INSERT INTO `generadores_contenidos` (`id`, `contrasenia`, `email`, `ganancia`, `metodo_pago`, `nombre`) VALUES (NULL, '123', 'netflix@gmail.com', '0', 'Tarjeta', 'Netflix');
+-- SELECT * FROM contenidos c JOIN contenidos_categoria cc ON c.id = cc.contenido_id JOIN categorias cat ON cat.id = cc.categoria_id WHERE cat.nombre = "Ciencia Ficción" && c.tipo_contenido="SERIE"
+-- PERSONAS ELENCO
+INSERT INTO `personas` (`id`, `nombre`, `tipo_elenco`) VALUES
+(1, 'Johnny Depp', 'ACTOR'),
+(2, 'Cillian Murphy', 'ACTOR'),
+(3, 'Millie Bobby Brown', 'ACTRIZ'),
+(4, 'Jennifer Lopez', 'ACTRIZ'),
+(5, 'Eduardo Franco', 'ACTOR'),
+(6, 'Sadie Sink', 'ACTRIZ'),
+(7, 'Clint Eastwood', 'DIRECTOR'),
+(8, 'Martin Scorsese', 'DIRECTOR'),
+(9, 'Carlos Rotenberg', 'PRODUCTOR');
+
+-- CATEGORIAS
+INSERT INTO `categorias` (`id`, `nombre`) VALUES
+(NULL, 'Acción'),
+(NULL, 'Aventuras'),
+(NULL, 'Ciencia Ficción'),
+(NULL, 'Comedia'),
+(NULL, 'Drama'),
+(NULL, 'Fantasía'),
+(NULL, 'Terror');
+
+-- CONTENIDOS
+INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL,'COCO', b'0', 'Películas para niños', b'0', '02:19:56', 'https://imagenes.elpais.com/resizer/FlO3Q6Foq8OEJ08hJkTdyzeOUVg=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/BG4MMMWM4JOPRSXMITTKA62MUY.jpg', '0', '0', 'PELICULA', NULL);
+INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL, 'Loca Aventura',b'0', 'Películas para niños', b'1', '02:05:56', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/toy-story-4-1603108954.jpg?crop=1xw:1xh;center,top&resize=480:*', '0', '0', 'PELICULA', NULL);
+INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL, 'Azules', b'0', 'Una película de otro planeta', '', '02:05:56', 'https://i0.wp.com/hipertextual.com/wp-content/uploads/2020/01/hipertextual-arte-conceptual-avatar-2-muestra-nuevos-rincones-pandora-2020623395.jpg?fit=2048%2C1295&ssl=1', '0', '0', 'PELICULA', '1');
+INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL, 'Teemo', b'0', 'La película del año ', '', '02:00:40', 'https://es.web.img2.acsta.net/pictures/19/11/12/12/25/0815514.jpg', '0', '0', 'PELICULA', '1');
+INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL,'Dinosaurios', b'0', 'Dinosaurios', b'0', '02:05:56', 'https://static.cinepolis.com/resources/mx/movies/posters/264x386/39182-772229-20220531044140.jpg', '0', '0', 'PELICULA', '1');
+INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL,'Stranger Things', b'0', 'Stranger Things', b'1', '0', 'https://es.web.img2.acsta.net/c_310_420/pictures/22/05/14/13/26/5638861.jpg', '0', '0', 'SERIE', '2');
+
+
+-- GENERADOR CONTENIDO CONTENIDO
+INSERT INTO `generadores_contenidos_contenido` (`generador_contenido_id`, `contenido_id`) VALUES ('1', '1');
+INSERT INTO `generadores_contenidos_contenido` (`generador_contenido_id`, `contenido_id`) VALUES ('1', '2');
+INSERT INTO `generadores_contenidos_contenido` (`generador_contenido_id`, `contenido_id`) VALUES ('1', '3');
+INSERT INTO `generadores_contenidos_contenido` (`generador_contenido_id`, `contenido_id`) VALUES ('1', '4');
+INSERT INTO `generadores_contenidos_contenido` (`generador_contenido_id`, `contenido_id`) VALUES ('1', '5');
+INSERT INTO `generadores_contenidos_contenido` (`generador_contenido_id`, `contenido_id`) VALUES ('2', '6');
+
+-- CONTENIDO CATEGORIA
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('1', '3');
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('2', '3');
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('2', '6');
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('3', '1');
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('3', '3');
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('3', '6');
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('4', '6');
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('4', '4');
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('5', '3');
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('5', '1');
+INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('6', '3');
+
+-- CONTENIDO PERSONA
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('1', '9');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('1', '8');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('2', '1');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('2', '7');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('3', '7');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('3', '1');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('3', '5');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('4', '5');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('4', '9');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('5', '9');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('5', '1');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('5', '6');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('6', '3');
+INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('6', '9');
