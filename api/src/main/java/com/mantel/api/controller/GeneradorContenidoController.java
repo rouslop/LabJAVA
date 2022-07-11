@@ -1,5 +1,6 @@
 package com.mantel.api.controller;
 
+import com.mantel.api.model.Contenido;
 import com.mantel.api.model.GeneradorContenido;
 
 import com.mantel.api.model.Usuario;
@@ -66,6 +67,11 @@ public class GeneradorContenidoController {
         else{
             return new ResponseEntity<String>("No se pude eliminar", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/listarContenidos")
+    public ResponseEntity<List<Contenido>> listarContenidos(@RequestBody String email){
+        return new ResponseEntity<List<Contenido>>(this.generadorContenidoService.listarContenidos(email),HttpStatus.OK);
     }
 
 }
