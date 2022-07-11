@@ -125,5 +125,10 @@ public class ContenidoController {
         return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorCategoria(i),HttpStatus.OK);
     }
 
+    @GetMapping("/listarContenidosGenerador/{idGC}")
+    public ResponseEntity<List<Contenido>> listarContenidosGenerador(@PathVariable("idGC") long idGC){
+        return new ResponseEntity<List<Contenido>>(contenidoService.listarContenidosGenerador(idGC), HttpStatus.OK);
+    }
+
 
 }
