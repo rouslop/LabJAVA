@@ -27,6 +27,7 @@ public class Contenido {
     @Enumerated(EnumType.STRING)
     private TipoContenido tipoContenido;
 
+    private String nombre;
     private String descripcion;
     private float ranking;
     private String fotoPortada;
@@ -35,6 +36,7 @@ public class Contenido {
     private Time duracion;
     private boolean destacado;
     private boolean bloqueado;
+    private boolean activo;
 
     @ManyToMany
     @JoinTable(name = "contenido_categoria",
