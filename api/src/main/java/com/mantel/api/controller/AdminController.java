@@ -58,8 +58,9 @@ public class AdminController {
     }
 
     @PutMapping("/contenido/aprobar/{id}")
-    public ResponseEntity<String> aprobarContenido(@PathVariable("id") long id){
-        if(this.servicio.aprobarContenido(id)){
+    public ResponseEntity<String> aprobarContenido(@PathVariable("id") Integer id){
+        Long i = Long.parseLong(id.toString());
+        if(this.servicio.aprobarContenido(i)){
             return new ResponseEntity<String>("Aprobado con éxito", HttpStatus.OK);
         }
         else {
