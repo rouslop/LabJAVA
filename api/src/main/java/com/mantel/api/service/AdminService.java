@@ -8,4 +8,7 @@ public interface AdminService {
     public List<Contenido> reportesContenidosActivos();
     public List<Contenido> reportesContenidosDisponibles();
     public List<Contenido> reportesContenidosVistos();
+
+    public boolean aprobarContenido(long id);
+    public List<Contenido> listarContenidosParaAprobar();
 }

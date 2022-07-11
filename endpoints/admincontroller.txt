@@ -1,3 +1,4 @@
 GET http://localhost:8080/admin/reporte/contenido/visto
 GET http://localhost:8080/admin/reporte/contenido/activo
 GET http://localhost:8080/admin/reporte/contenido/disponible
+PUT http://localhost:8080/admin/contenido/aprobar/{id}

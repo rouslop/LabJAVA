@@ -47,4 +47,23 @@ public class AdminController {
         }
         else return null;
     }
+
+    @GetMapping("/contenidosParaAprobar")
+    public ResponseEntity<List<Contenido>> listaContenidosParaAprobar(){
+        List<Contenido> res = this.servicio.listarContenidosParaAprobar();
+        if(!res.isEmpty()){
+            return new ResponseEntity<List<Contenido>>(res, HttpStatus.OK);
+        }
+        else return null;
+    }
+
+    @PutMapping("/contenido/aprobar/{id}")
+    public ResponseEntity<String> aprobarContenido(@PathVariable("id") long id){
+        if(this.servicio.aprobarContenido(id)){
+            return new ResponseEntity<String>("Aprobado con éxito", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<String>("Ha ocurrido un error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
