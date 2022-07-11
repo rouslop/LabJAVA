@@ -67,4 +67,26 @@ public class AdminController {
             return new ResponseEntity<String>("Ha ocurrido un error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/contenido/bloquear/{id}")
+    public ResponseEntity<String> bloquearContenido(@PathVariable("id") Integer id){
+        Long i = Long.parseLong(id.toString());
+        if(this.servicio.bloquearContenido(i)){
+            return new ResponseEntity<String>("Bloqueado con éxito", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<String>("Ha ocurrido un error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/contenido/desbloquear/{id}")
+    public ResponseEntity<String> desbloquearContenido(@PathVariable("id") Integer id){
+        Long i = Long.parseLong(id.toString());
+        if(this.servicio.desbloquearContenido(i)){
+            return new ResponseEntity<String>("Desbloqueado con éxito", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<String>("Ha ocurrido un error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
