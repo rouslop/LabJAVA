@@ -26,7 +26,6 @@ public class Contenido {
 
     @Enumerated(EnumType.STRING)
     private TipoContenido tipoContenido;
-
     private String nombre;
     private String descripcion;
     private float ranking;
