@@ -1,0 +1,15 @@
+GET http://localhost:8080/contenidos/listarPorCategoria/{id} --> el id de la categoria
+GET http://localhost:8080/contenidos  --> lista todos los contenidos
+GET http://localhost:8080/contenidos/listarRelacionados/{idContenido}
+GET http://localhost:8080/contenidos/{id} --> obtener contenido por id
+GET http://localhost:8080/contenidos/{limit}/{offset} --> contenidos paginados
+
+POST http://localhost:8080/contenidos/agregarContenido/{idgc} (Pasarle el contenido en el body)
+POST http://localhost:8080/contenidos/comentarContenido/{idContenido}/{idUsuario}
+POST http://localhost:8080/contenidos/marcarContenidoDestacado/{id}
+
+PUT http://localhost:8080/contenidos/editarContenido (Pasarle el contenido en el body)
+
+DELETE http://localhost:8080/contenidos/eliminarContenido/{id}
+
+

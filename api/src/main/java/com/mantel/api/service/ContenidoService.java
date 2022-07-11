@@ -21,4 +21,5 @@ public interface ContenidoService {
 
     public List<Contenido> listarRelacionados(long idContenido);
     public List<Contenido> listaContenidos();
+    public List<Contenido> listarPorCategoria(long id);
 }

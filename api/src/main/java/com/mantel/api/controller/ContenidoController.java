@@ -95,22 +95,6 @@ public class ContenidoController {
         return new ResponseEntity<String>("Contenido destacado", HttpStatus.OK);
     }
 
-    @PostMapping("/bloqueoContenido/{id}")
-    public ResponseEntity<String> bloqueoContenido(@PathVariable("id") long contenidoId){
-        Contenido c = contenidoService.obtenerContenido(contenidoId);
-        c.setBloqueado(true);
-        contenidoService.editarContenido(c);
-        return new ResponseEntity<String>("Contenido bloqueado", HttpStatus.OK);
-    }
-
-    @PostMapping("/desbloqueoContenido/{id}")
-    public ResponseEntity<String> desbloqueoContenido(@PathVariable("id") long contenidoId){
-        Contenido c = contenidoService.obtenerContenido(contenidoId);
-        c.setBloqueado(false);
-        contenidoService.editarContenido(c);
-        return new ResponseEntity<String>("Contenido desbloqueado", HttpStatus.OK);
-    }
-
     @PostMapping("/comentarContenido/{idContenido}/{idUsu}")
     public ResponseEntity<String> comentarContenido(@PathVariable("idContenido") long idContenido, @PathVariable("idUsu") long idUsu, @RequestBody Comentario comentario){
         comentario.setSpoiler(false);
@@ -135,6 +119,11 @@ public class ContenidoController {
         return new ResponseEntity<List<Contenido>>(contenidoService.listaContenidos(), HttpStatus.OK);
     }
 
+    @GetMapping("/listarPorCategoria/{id}")
+    public ResponseEntity<List<Contenido>> listarPorCategoria(@PathVariable("id") Integer id){
+        Long i = Long.parseLong(id.toString());
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorCategoria(i),HttpStatus.OK);
+    }
 
 
 }

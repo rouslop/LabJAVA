@@ -68,6 +68,27 @@ public class ContenidoServiceImpl implements ContenidoService {
         return (List<Contenido>) query.getResultList();
     }
 
+    @Override
+    public List<Contenido> listarPorCategoria(long id) {
+        Categoria c = this.em.find(Categoria.class,id);
+        if(c==null){ //si la categoria no existe
+            return null;
+        }
+        List<Contenido> contenidos = this.em.createQuery("SELECT c FROM Contenido c").getResultList();
+        List<Contenido> res = new ArrayList<>();
+        if(contenidos.isEmpty()){ //si no hay contenidos
+            return null;
+        }
+        Contenido co;
+        for(int i=0; i< contenidos.size();i++){
+            co = contenidos.get(i);
+            if(co.getCategorias().contains(c)){
+                res.add(co);
+            }
+        }
+        return res;
+    }
+
     public List<Contenido> listarRelacionados(long idContenido){
 
         List<Contenido> listaContenidos = this.listaContenidos();
