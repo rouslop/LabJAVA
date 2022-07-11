@@ -3,6 +3,7 @@ package com.mantel.api.service.impl;
 import com.mantel.api.model.Contenido;
 import com.mantel.api.service.AdminService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,6 +34,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    @Transactional
     public boolean aprobarContenido(long id) {
         Contenido c = this.em.find(Contenido.class,id);
         if(c!=null){
