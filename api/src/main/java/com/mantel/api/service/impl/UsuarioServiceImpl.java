@@ -95,7 +95,7 @@ public class UsuarioServiceImpl implements UsuarioService {
           Query q  = this.em.createQuery("SELECT u FROM Usuario u WHERE u.email =: email");
           q.setParameter("email",email);
           Usuario u = (Usuario) q.getSingleResult();
-          if((u!=null) && (u.getTipoUsuario().toString() == "CLIENTE")){
+          if(u!=null){
               u.setBloqueado(true);
               this.em.merge(u);
           }
@@ -109,7 +109,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public boolean desbloquearUsuario(String email) {
-        Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.email=:email AND u.tipoUsuario='CLIENTE'");
+        Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.email=:email");
         q.setParameter("email",email);
         Usuario u = (Usuario) q.getSingleResult();
         if(u!=null){
