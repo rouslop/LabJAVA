@@ -103,26 +103,26 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
 
     @Override
     public List<Contenido> listarContenidos(String email) {
-        Query q = this.em.createQuery("SELECT gc FROM GeneradorContenido gc WHERE gc.email=:email");
-        q.setParameter("email",email);
-        GeneradorContenido gc = (GeneradorContenido) q.getSingleResult();
-        if(gc!=null){
-            List<Contenido> contenidos = this.em.createQuery("SELECT c FROM Contenido c").getResultList();
-            if(!contenidos.isEmpty()){
-                List<Contenido> res = new ArrayList<>();
-                Contenido c;
-                for(int i=0; i< contenidos.size(); i++){
-                    c = contenidos.get(i);
-                    if(c.getGeneradorContenidoid()==gc){
-                        res.add(c);
-                    }
+        List<Contenido> contenidos = this.em.createQuery("SELECT c FROM Contenido c").getResultList();
+        if(!contenidos.isEmpty()){
+            List<Contenido> res = new ArrayList<>();
+            Contenido c;
+            Query q = this.em.createQuery("SELECT gc FROM GeneradorContenido gc WHERE gc.email=:em");
+            q.setParameter("em",email);
+            GeneradorContenido gc = (GeneradorContenido) q.getResultList().get(0);
+            for(int i=0; i< contenidos.size(); i++){
+                c = contenidos.get(i);
+                if(c.getGeneradorContenidoid()==gc){
+                    res.add(c);
                 }
             }
-            else{
-                return null;
-            }
+            return res;
         }
-        return null;
+        else{
+            return null;
+        }
+
+
     }
 
     public List<GeneradorContenido> obtenerGeneradores(){

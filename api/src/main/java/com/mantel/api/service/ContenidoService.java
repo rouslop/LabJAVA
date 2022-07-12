@@ -1,10 +1,6 @@
 package com.mantel.api.service;
 
-import com.mantel.api.model.Comentario;
-import com.mantel.api.model.Contenido;
-
-import com.mantel.api.model.Categoria;
-import com.mantel.api.model.Json;
+import com.mantel.api.model.*;
 
 import java.util.List;
 
@@ -28,6 +24,8 @@ public interface ContenidoService {
     public List<Contenido> listaContenidos();
 
     public List<Contenido> listarPorCategoria(long id);
+
+    public List<Contenido> listarPorTipo(TipoContenido t);
 
     public List<Contenido> listarContenidosGenerador(long idGC);
 }

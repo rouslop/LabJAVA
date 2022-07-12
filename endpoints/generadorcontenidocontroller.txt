@@ -1,4 +1,4 @@
-GET http://localhost:8080/generadorcontenidos/listarContenidos (Email del gc en el body)
+GET http://localhost:8080/generadorcontenidos/listarContenidos/{email}
 GET http://localhost:8080/generadorcontenidos/listar
 GET http://localhost:8080/generadorcontenidos/{id}
 

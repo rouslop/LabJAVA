@@ -69,8 +69,8 @@ public class GeneradorContenidoController {
         }
     }
 
-    @GetMapping("/listarContenidos")
-    public ResponseEntity<List<Contenido>> listarContenidos(@RequestBody String email){
+    @GetMapping("/listarContenidos/{email}")
+    public ResponseEntity<List<Contenido>> listarContenidos(@PathVariable("email") String email){
         return new ResponseEntity<List<Contenido>>(this.generadorContenidoService.listarContenidos(email),HttpStatus.OK);
     }
 
