@@ -93,6 +93,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public boolean bloquearUsuario(String email) {
         Query q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.email=:email AND u.tipoUsuario='CLIENTE'");
         q.setParameter("email",email);
+
         Usuario u = (Usuario) q.getSingleResult();
         if(u!=null){
             u.setBloqueado(true);

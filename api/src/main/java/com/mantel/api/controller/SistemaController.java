@@ -35,7 +35,7 @@ public class SistemaController {
 
         Usuario usu = usuarioService.obtenerUsuarioPorEmail(credenciales.getEmail());
 
-        if(usu != null){
+        if(usu != null && usu.isActivo() && !(usu.isBloqueado()) ){
             
             boolean credencialesCorrectas = usuarioService.checkCredenciales(usu.getId(),  credenciales.getEmail(), credenciales.getContrasenia());
 
@@ -62,7 +62,7 @@ public class SistemaController {
         }
 
          GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(credenciales.getEmail());
-         if(gc != null){
+         if(gc != null ){
             boolean credencialesCorrectas = generadorContenidoService.checkCredenciales(gc.getId(),  credenciales.getEmail(), credenciales.getContrasenia());
             if(credencialesCorrectas){
                 boolean existeLogin = sistemaService.existeLogin(gc.getEmail());
