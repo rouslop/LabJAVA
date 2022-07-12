@@ -28,4 +28,11 @@ public interface ContenidoService {
     public List<Contenido> listarPorTipo(TipoContenido t);
 
     public List<Contenido> listarContenidosGenerador(long idGC);
+
+    public TipoContenido devolverTipo(long id);
+    public boolean esPayPerView(long id);
+
+    public boolean estaPagoGc(long idCont, long idUser);
+    public boolean estaPagoPV(long idCont, long idUser);
+    public boolean estaPago(long idCont, long idUser);
 }

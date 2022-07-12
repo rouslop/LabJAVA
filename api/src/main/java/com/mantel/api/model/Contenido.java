@@ -33,6 +33,7 @@ public class Contenido {
     private String video;
     private float precio;
     private Time duracion;
+    private Time comienzo;
     private boolean destacado;
     private boolean bloqueado;
     private boolean activo;

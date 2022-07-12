@@ -146,8 +146,72 @@ public class ContenidoServiceImpl implements ContenidoService {
         return listaRET;
     }
 
+    @Override
+    public TipoContenido devolverTipo(long id) {
+        Contenido c = this.em.find(Contenido.class,id);
+        if(c!=null) {
+            return c.getTipoContenido();
+        }
+        else return null;
+    }
 
+    @Override
+    public boolean esPayPerView(long id) {
+        Contenido c = this.em.find(Contenido.class,id);
+        if(c!=null){
+            if((c.getPrecio()>0)&&(c.isActivo())){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
 
+    @Override
+    public boolean estaPagoGc(long idCont, long idUser) {
+        Contenido c = this.em.find(Contenido.class,idCont);
+        Usuario u = this.em.find(Usuario.class,idUser);
+        if((c!=null)&&(u!=null)){
+            GeneradorContenido gc = c.getGeneradorContenidoid();
+            Query q = this.em.createQuery("SELECT s FROM Suscripcion s WHERE s.usuarioId=:user AND s.generadorContenidoid=:gc");
+            q.setParameter("user",u);
+            q.setParameter("gc",gc);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean estaPagoPV(long idCont, long idUser) {
+        Usuario u = this.em.find(Usuario.class,idUser);
+        Contenido c = this.em.find(Contenido.class,idCont);
+        if((u!=null)&&(c!=null)) {
+            Query q = this.em.createQuery("SELECT sp FROM SuscripcionPerPayView sp WHERE sp.contenidoId=:cont AND sp.usuarioId=:user");
+            q.setParameter("user", u);
+            q.setParameter("cont", c);
+            SuscripcionPerPayView sc = (SuscripcionPerPayView) q.getResultList().get(0);
+            if(sc!=null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean estaPago(long idCont, long idUser) {
+        if(this.esPayPerView(idCont)){
+            return this.estaPagoPV(idCont,idUser);
+        }
+        else{
+            return this.estaPagoGc(idCont,idUser);
+        }
+    }
 
 
 }
