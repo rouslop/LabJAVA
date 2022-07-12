@@ -3,6 +3,7 @@ package com.mantel.api.service.impl;
 
 import com.mantel.api.model.Comentario;
 
+import com.mantel.api.model.ComentarioIndividual;
 import com.mantel.api.model.Contenido;
 import com.mantel.api.model.Usuario;
 import com.mantel.api.service.CategoriaService;
@@ -52,6 +53,11 @@ public class ComentarioServiceImp implements ComentarioService  {
         }
 
         return listaResultado;
+    }
+
+    public void agregarComentarioIndividual(ComentarioIndividual ci){
+        em.persist(ci);
+
     }
 
 }

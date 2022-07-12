@@ -61,5 +61,11 @@ public class VisualizacionController {
         return new ResponseEntity<String>("Tiempo de visualizacion actualizado!",HttpStatus.OK );
     }
 
+    @GetMapping("/obtenerVisualizacion/{idUsu}/{idCon}")
+    public ResponseEntity<Visualizacion> obtenerVisualizacion( @PathVariable("idUsu") long idUsu, @PathVariable("idCon") long idCon ){
+        Visualizacion v =visualizacionService.obtenerVisualizacion(idUsu, idCon);
+        return new ResponseEntity<Visualizacion>(v, HttpStatus.OK);
+    }
+
 
 }

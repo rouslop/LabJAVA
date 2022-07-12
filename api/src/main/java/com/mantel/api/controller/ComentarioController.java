@@ -1,12 +1,13 @@
 package com.mantel.api.controller;
 
 
-import com.mantel.api.model.Categoria;
-import com.mantel.api.model.Comentario;
+import com.mantel.api.model.*;
 
 
 import com.mantel.api.service.CategoriaService;
 import com.mantel.api.service.ComentarioService;
+import com.mantel.api.service.ContenidoService;
+import com.mantel.api.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,16 @@ import java.util.List;
 @RequestMapping("/comentarios")
 public class ComentarioController {
     private ComentarioService comentarioService;
+    private UsuarioService usuarioService;
+    private ContenidoService contenidoService;
 
-    public ComentarioController(ComentarioService comentarioService){
+    public ComentarioController(ComentarioService comentarioService,
+                                UsuarioService usuarioService,
+                                ContenidoService contenidoService){
         super();
         this.comentarioService = comentarioService;
+        this.usuarioService = usuarioService;
+        this.contenidoService = contenidoService;
 
     }
 
@@ -48,5 +55,21 @@ public class ComentarioController {
         return new ResponseEntity<List<Comentario>>(resultado, HttpStatus.OK);
     }
 
+    @PostMapping("/agregarComentarioIndividual/{idCon}/{idUsu}")
+    public ResponseEntity<ComentarioIndividual> agregarComentarioIndividual( @PathVariable("idUsu") long idUsu, @PathVariable("idCon") long idCon, @RequestBody String texto ){
+        Contenido contenido = this.contenidoService.obtenerContenido(idCon);
+        Usuario usuario = this.usuarioService.obtenerUsuario(idUsu);
+
+        ComentarioIndividual ci = new ComentarioIndividual();
+        ci.setIdContenido(idCon);
+        ci.setIdUsu(idUsu);
+        ci.setNombreCon(contenido.getNombre());
+        ci.setNombreUsu(usuario.getNombre());
+        ci.setTexto(texto);
+
+        comentarioService.agregarComentarioIndividual(ci);
+        return new ResponseEntity<ComentarioIndividual>(ci,HttpStatus.OK);
+
+    }
 
 }
