@@ -130,5 +130,14 @@ public class ContenidoController {
         return new ResponseEntity<List<Contenido>>(contenidoService.listarContenidosGenerador(idGC), HttpStatus.OK);
     }
 
+    @GetMapping("/estaPago/{idC}/{idU}")
+    public ResponseEntity<String> estaPago(@PathVariable("idC") Integer idC, @PathVariable("idU") Integer idU){
+        if(this.contenidoService.estaPago(idC,idU)){
+            return new ResponseEntity<String>("Está pago",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("Error, no puede ver este contenido",HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

@@ -178,6 +178,13 @@ public class ContenidoServiceImpl implements ContenidoService {
             Query q = this.em.createQuery("SELECT s FROM Suscripcion s WHERE s.usuarioId=:user AND s.generadorContenidoid=:gc");
             q.setParameter("user",u);
             q.setParameter("gc",gc);
+            Suscripcion sc = (Suscripcion) q.getResultList().get(0);
+            if(sc!=null){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         return false;
     }
