@@ -20,15 +20,12 @@ import java.util.List;
 public class ComentarioController {
     private ComentarioService comentarioService;
     private UsuarioService usuarioService;
-    private ContenidoService contenidoService;
 
     public ComentarioController(ComentarioService comentarioService,
-                                UsuarioService usuarioService,
-                                ContenidoService contenidoService){
+                                UsuarioService usuarioService){
         super();
         this.comentarioService = comentarioService;
         this.usuarioService = usuarioService;
-        this.contenidoService = contenidoService;
 
     }
 
@@ -55,17 +52,18 @@ public class ComentarioController {
         return new ResponseEntity<List<Comentario>>(resultado, HttpStatus.OK);
     }
 
-    @PostMapping("/agregarComentarioIndividual/{idCon}/{idUsu}")
-    public ResponseEntity<ComentarioIndividual> agregarComentarioIndividual( @PathVariable("idUsu") long idUsu, @PathVariable("idCon") long idCon, @RequestBody String texto ){
-        Contenido contenido = this.contenidoService.obtenerContenido(idCon);
-        Usuario usuario = this.usuarioService.obtenerUsuario(idUsu);
+    @PostMapping("/agregarComentarioIndividual/{idReceptor}/{idEmisor}")
+    public ResponseEntity<ComentarioIndividual> agregarComentarioIndividual( @PathVariable("idReceptor") long idReceptor, @PathVariable("idEmisor") long idEmisor, @RequestBody ComentarioIndividual ci ){
 
-        ComentarioIndividual ci = new ComentarioIndividual();
-        ci.setIdContenido(idCon);
-        ci.setIdUsu(idUsu);
-        ci.setNombreCon(contenido.getNombre());
-        ci.setNombreUsu(usuario.getNombre());
-        ci.setTexto(texto);
+        Usuario usuarioReceptor = this.usuarioService.obtenerUsuario(idReceptor);
+        Usuario usuarioEmisor = this.usuarioService.obtenerUsuario(idEmisor);
+
+        
+        ci.setIdEmisor(idEmisor);
+        ci.setIdReceptor(idReceptor);
+        ci.setNombreEmisor(usuarioEmisor.getNombre());
+        ci.setNombreReceptor(usuarioReceptor.getNombre());
+        ci.setTexto(ci.getTexto());
 
         comentarioService.agregarComentarioIndividual(ci);
         return new ResponseEntity<ComentarioIndividual>(ci,HttpStatus.OK);

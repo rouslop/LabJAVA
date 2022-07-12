@@ -14,9 +14,9 @@ public class ComentarioIndividual {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long idUsu;
-    private long idContenido;
-    private String nombreUsu;
-    private String nombreCon;
+    private long idReceptor;
+    private long idEmisor;
+    private String nombreReceptor;
+    private String nombreEmisor;
     private String texto;
 }
