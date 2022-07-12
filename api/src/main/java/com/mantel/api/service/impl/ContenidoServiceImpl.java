@@ -89,6 +89,11 @@ public class ContenidoServiceImpl implements ContenidoService {
         return res;
     }
 
+    @Override
+    public List<Contenido> listarPorTipo(TipoContenido t) {
+        return null;
+    }
+
     public List<Contenido> listarRelacionados(long idContenido){
 
         List<Contenido> listaContenidos = this.listaContenidos();
