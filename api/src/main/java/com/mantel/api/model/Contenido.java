@@ -26,7 +26,6 @@ public class Contenido {
 
     @Enumerated(EnumType.STRING)
     private TipoContenido tipoContenido;
-
     private String nombre;
     private String descripcion;
     private float ranking;
@@ -34,6 +33,7 @@ public class Contenido {
     private String video;
     private float precio;
     private Time duracion;
+    private Time comienzo;
     private boolean destacado;
     private boolean bloqueado;
     private boolean activo;

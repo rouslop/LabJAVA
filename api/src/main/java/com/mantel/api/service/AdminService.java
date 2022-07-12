@@ -11,4 +11,8 @@ public interface AdminService {
 
     public boolean aprobarContenido(long id);
     public List<Contenido> listarContenidosParaAprobar();
+
+    public boolean bloquearContenido(long id);
+
+    public boolean desbloquearContenido(long id);
 }

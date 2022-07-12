@@ -1,0 +1,9 @@
+GET http://localhost:8080/generadorcontenidos/listarContenidos/{email}
+GET http://localhost:8080/generadorcontenidos/listar
+GET http://localhost:8080/generadorcontenidos/{id}
+
+POST http://localhost:8080/generadorcontenidos/agregarGeneradorContenido (Gc en el body)
+
+PUT http://localhost:8080/generadorcontenidos/editar (Gc en el body)
+
+DELETE http://localhost:8080/generadorcontenidos/eliminar/generador (Email en el body)

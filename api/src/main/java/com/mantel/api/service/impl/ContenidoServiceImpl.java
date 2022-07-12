@@ -68,6 +68,32 @@ public class ContenidoServiceImpl implements ContenidoService {
         return (List<Contenido>) query.getResultList();
     }
 
+    @Override
+    public List<Contenido> listarPorCategoria(long id) {
+        Categoria c = this.em.find(Categoria.class,id);
+        if(c==null){ //si la categoria no existe
+            return null;
+        }
+        List<Contenido> contenidos = this.em.createQuery("SELECT c FROM Contenido c").getResultList();
+        List<Contenido> res = new ArrayList<>();
+        if(contenidos.isEmpty()){ //si no hay contenidos
+            return null;
+        }
+        Contenido co;
+        for(int i=0; i< contenidos.size();i++){
+            co = contenidos.get(i);
+            if(co.getCategorias().contains(c)){
+                res.add(co);
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public List<Contenido> listarPorTipo(TipoContenido t) {
+        return null;
+    }
+
     public List<Contenido> listarRelacionados(long idContenido){
 
         List<Contenido> listaContenidos = this.listaContenidos();
@@ -109,7 +135,90 @@ public class ContenidoServiceImpl implements ContenidoService {
 
     }
 
+    public List<Contenido> listarContenidosGenerador(long idGC){
+        List<Contenido> listaContenidos = this.listaContenidos();
+        List<Contenido> listaRET = new ArrayList<>();
+        for (Contenido con : listaContenidos){
+         if(con.getGeneradorContenidoid().getId()==idGC){
+             listaRET.add(con);
+         }
+        }
+        return listaRET;
+    }
 
+    @Override
+    public TipoContenido devolverTipo(long id) {
+        Contenido c = this.em.find(Contenido.class,id);
+        if(c!=null) {
+            return c.getTipoContenido();
+        }
+        else return null;
+    }
+
+    @Override
+    public boolean esPayPerView(long id) {
+        Contenido c = this.em.find(Contenido.class,id);
+        if(c!=null){
+            if((c.getPrecio()>0)&&(c.isActivo())){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean estaPagoGc(long idCont, long idUser) {
+        Contenido c = this.em.find(Contenido.class,idCont);
+        Usuario u = this.em.find(Usuario.class,idUser);
+        if((c!=null)&&(u!=null)){
+            GeneradorContenido gc = c.getGeneradorContenidoid();
+            Query q = this.em.createQuery("SELECT s FROM Suscripcion s WHERE s.usuarioId=:user AND s.generadorContenidoid=:gc");
+            q.setParameter("user",u);
+            q.setParameter("gc",gc);
+            Suscripcion sc = (Suscripcion) q.getResultList().get(0);
+            if(sc!=null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean estaPagoPV(long idCont, long idUser) {
+        Usuario u = this.em.find(Usuario.class,idUser);
+        Contenido c = this.em.find(Contenido.class,idCont);
+        if((u!=null)&&(c!=null)) {
+            Query q = this.em.createQuery("SELECT sp FROM SuscripcionPerPayView sp WHERE sp.contenidoId=:cont AND sp.usuarioId=:user");
+            q.setParameter("user", u);
+            q.setParameter("cont", c);
+            SuscripcionPerPayView sc = (SuscripcionPerPayView) q.getResultList().get(0);
+            if(sc!=null){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean estaPago(long idCont, long idUser) {
+        if(this.esPayPerView(idCont)){
+            return this.estaPagoPV(idCont,idUser);
+        }
+        else{
+            return this.estaPagoGc(idCont,idUser);
+        }
+    }
 
 
 }

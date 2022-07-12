@@ -1,8 +1,8 @@
 -- DATOS PRUEBA
 -- tuve que borrar a mano las pk de c_c c_g c_ gc
 -- GENERADOR CONTENIDO
-INSERT INTO `generadores_contenidos` (`id`, `contrasenia`, `email`, `ganancia`, `metodo_pago`, `nombre`) VALUES (NULL, '123', 'generadorContenido@gmail.com', '0', 'Tarjeta ', 'generadorContenido1');
-INSERT INTO `generadores_contenidos` (`id`, `contrasenia`, `email`, `ganancia`, `metodo_pago`, `nombre`) VALUES (NULL, '123', 'netflix@gmail.com', '0', 'Tarjeta', 'Netflix');
+INSERT INTO `generadores_contenidos` (`id`, `contrasenia`, `email`, `ganancia`, `metodo_pago`, `nombre`, `precio`) VALUES (NULL, '123', 'generadorContenido@gmail.com', '0', 'Tarjeta ', 'generadorContenido1', 200);
+INSERT INTO `generadores_contenidos` (`id`, `contrasenia`, `email`, `ganancia`, `metodo_pago`, `nombre`, `precio`) VALUES (NULL, '123', 'netflix@gmail.com', '0', 'Tarjeta', 'Netflix',200);
 -- SELECT * FROM contenidos c JOIN contenidos_categoria cc ON c.id = cc.contenido_id JOIN categorias cat ON cat.id = cc.categoria_id WHERE cat.nombre = "Ciencia Ficción" && c.tipo_contenido="SERIE"
 -- PERSONAS ELENCO
 INSERT INTO `personas` (`id`, `nombre`, `tipo_elenco`) VALUES
@@ -44,17 +44,17 @@ INSERT INTO `generadores_contenidos_contenido` (`generador_contenido_id`, `conte
 INSERT INTO `generadores_contenidos_contenido` (`generador_contenido_id`, `contenido_id`) VALUES ('2', '6');
 
 -- CONTENIDO CATEGORIA
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('1', '3');
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('2', '3');
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('2', '6');
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('3', '1');
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('3', '3');
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('3', '6');
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('4', '6');
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('4', '4');
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('5', '3');
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('5', '1');
-INSERT INTO `contenidos_categoria` (`contenido_id`, `categoria_id`) VALUES ('6', '3');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('1', '3');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('2', '3');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('2', '6');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('3', '1');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('3', '3');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('3', '6');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('4', '6');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('4', '4');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('5', '3');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('5', '1');
+INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('6', '3');
 
 -- CONTENIDO PERSONA
 INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('1', '9');

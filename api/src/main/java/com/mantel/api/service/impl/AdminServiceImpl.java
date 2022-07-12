@@ -3,6 +3,7 @@ package com.mantel.api.service.impl;
 import com.mantel.api.model.Contenido;
 import com.mantel.api.service.AdminService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,6 +34,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    @Transactional
     public boolean aprobarContenido(long id) {
         Contenido c = this.em.find(Contenido.class,id);
         if(c!=null){
@@ -49,5 +51,33 @@ public class AdminServiceImpl implements AdminService {
     public List<Contenido> listarContenidosParaAprobar() {
         Query q = this.em.createQuery("SELECT c FROM Contenido c WHERE c.activo= false");
         return q.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public boolean bloquearContenido(long id) {
+        Contenido c = this.em.find(Contenido.class,id);
+        if(c!=null){
+            c.setBloqueado(true);
+            this.em.merge(c);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    @Transactional
+    public boolean desbloquearContenido(long id) {
+        Contenido c = this.em.find(Contenido.class,id);
+        if(c!=null){
+            c.setBloqueado(false);
+            this.em.merge(c);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
