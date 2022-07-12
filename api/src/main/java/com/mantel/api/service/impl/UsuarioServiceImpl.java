@@ -100,7 +100,7 @@ public class UsuarioServiceImpl implements UsuarioService {
               u.setBloqueado(true);
               this.em.merge(u);
           }
-          return false;
+          return true;
       }
       else{
           return false;

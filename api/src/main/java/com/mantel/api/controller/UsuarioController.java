@@ -77,8 +77,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/bloquear")
-    public ResponseEntity<String> bloquearUsuario(@RequestBody String email){
-        if(this.usuarioService.bloquearUsuario(email)){
+    public ResponseEntity<String> bloquearUsuario(@RequestBody Usuario u){
+
+        if(this.usuarioService.bloquearUsuario(u.getEmail())){
              return new ResponseEntity<String>("Usuario bloqueado", HttpStatus.OK);
         }
         else {

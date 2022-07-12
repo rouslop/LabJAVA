@@ -58,7 +58,7 @@ public class ComentarioController {
         Usuario usuarioReceptor = this.usuarioService.obtenerUsuario(idReceptor);
         Usuario usuarioEmisor = this.usuarioService.obtenerUsuario(idEmisor);
 
-        
+
         ci.setIdEmisor(idEmisor);
         ci.setIdReceptor(idReceptor);
         ci.setNombreEmisor(usuarioEmisor.getNombre());
