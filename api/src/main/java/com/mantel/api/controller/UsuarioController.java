@@ -48,8 +48,8 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/eliminadoLogico")
-    public ResponseEntity<String> eliminarUsuarioLogico(@RequestBody String email){
-        if(this.usuarioService.eliminadoLogico(email)){
+    public ResponseEntity<String> eliminarUsuarioLogico(@RequestBody Usuario u){
+        if(this.usuarioService.eliminadoLogico(u.getEmail())){
             return new ResponseEntity<>("La cuenta ha sido desactivada", HttpStatus.OK);
         }
         else{
@@ -88,8 +88,8 @@ public class UsuarioController {
     }
 
     @PostMapping("/desbloquear")
-    public ResponseEntity<String> desbloquearUsuario(@RequestBody String email){
-        if(this.usuarioService.desbloquearUsuario(email)){
+    public ResponseEntity<String> desbloquearUsuario(@RequestBody Usuario u){
+        if(this.usuarioService.desbloquearUsuario(u.getEmail())){
             return new ResponseEntity<String>("Usuario desbloqueado", HttpStatus.OK);
         }
         else {

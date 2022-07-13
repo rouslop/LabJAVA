@@ -8,7 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
+
+import static java.time.LocalTime.now;
 
 @Service
 @Transactional
@@ -170,7 +177,7 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
-    public boolean estaPagoGc(long idCont, long idUser) {
+    public boolean estaPagoGc(long idCont, long idUser){
         Contenido c = this.em.find(Contenido.class,idCont);
         Usuario u = this.em.find(Usuario.class,idUser);
         if((c!=null)&&(u!=null)){
@@ -179,7 +186,11 @@ public class ContenidoServiceImpl implements ContenidoService {
             q.setParameter("user",u);
             q.setParameter("gc",gc);
             Suscripcion sc = (Suscripcion) q.getResultList().get(0);
-            if(sc!=null){
+            //chequear la fecha
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+            LocalDateTime ahora = LocalDateTime.now();
+            LocalDateTime fecha = LocalDateTime.parse(sc.getFechaVencimiento());
+            if((sc!=null)&&(fecha.isBefore(ahora))){
                 return true;
             }
             else{
