@@ -142,4 +142,8 @@ public class ContenidoController {
         }
     }
 
+    @GetMapping("/listarPorTipo")
+    public ResponseEntity<List<Contenido>> listarPorTipo(@RequestBody String t){
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorTipo(t),HttpStatus.OK);
+    }
 }

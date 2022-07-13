@@ -98,8 +98,17 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
-    public List<Contenido> listarPorTipo(TipoContenido t) {
-        return null;
+    public List<Contenido> listarPorTipo(String t) {
+        List<Contenido> contenidos = this.em.createQuery("SELECT c FROM Contenido c").getResultList();
+        List<Contenido> res = new ArrayList<>();
+        if(!contenidos.isEmpty()) {
+            for (Contenido con : contenidos) {
+                if (con.getTipoContenido().toString().equals(t)) {
+                    res.add(con);
+                }
+            }
+        }
+        return res;
     }
 
     public List<Contenido> listarRelacionados(long idContenido){
