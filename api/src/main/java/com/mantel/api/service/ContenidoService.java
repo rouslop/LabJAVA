@@ -32,7 +32,7 @@ public interface ContenidoService {
     public TipoContenido devolverTipo(long id);
     public boolean esPayPerView(long id);
 
-    public boolean estaPagoGc(long idCont, long idUser);
-    public boolean estaPagoPV(long idCont, long idUser);
+    public Integer estaPagoGc(long idCont, long idUser);
+    public Integer estaPagoPV(long idCont, long idUser);
     public boolean estaPago(long idCont, long idUser);
 }

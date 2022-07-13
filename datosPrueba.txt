@@ -1,5 +1,8 @@
 -- DATOS PRUEBA
 -- tuve que borrar a mano las pk de c_c c_g c_ gc
+-- USUARIOS
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES ('1', b'1', b'0', '123', 'ro@gmail.com', 'romi', b'0', 'CLIENTE');
+
 -- GENERADOR CONTENIDO
 INSERT INTO `generadores_contenidos` (`id`, `contrasenia`, `email`, `ganancia`, `metodo_pago`, `nombre`, `precio`) VALUES (NULL, '123', 'generadorContenido@gmail.com', '0', 'Tarjeta ', 'generadorContenido1', 200);
 INSERT INTO `generadores_contenidos` (`id`, `contrasenia`, `email`, `ganancia`, `metodo_pago`, `nombre`, `precio`) VALUES (NULL, '123', 'netflix@gmail.com', '0', 'Tarjeta', 'Netflix',200);
@@ -27,8 +30,8 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 (NULL, 'Terror');
 
 -- CONTENIDOS
-INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL,'COCO', b'0', 'Películas para niños', b'0', '02:19:56', 'https://imagenes.elpais.com/resizer/FlO3Q6Foq8OEJ08hJkTdyzeOUVg=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/BG4MMMWM4JOPRSXMITTKA62MUY.jpg', '0', '0', 'PELICULA', NULL);
-INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL, 'Loca Aventura',b'0', 'Películas para niños', b'1', '02:05:56', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/toy-story-4-1603108954.jpg?crop=1xw:1xh;center,top&resize=480:*', '0', '0', 'PELICULA', NULL);
+INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL,'COCO', b'0', 'Películas para niños', b'0', '02:19:56', 'https://imagenes.elpais.com/resizer/FlO3Q6Foq8OEJ08hJkTdyzeOUVg=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/BG4MMMWM4JOPRSXMITTKA62MUY.jpg', '0', '0', 'PELICULA', 1);
+INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL, 'Loca Aventura',b'0', 'Películas para niños', b'1', '02:05:56', 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/toy-story-4-1603108954.jpg?crop=1xw:1xh;center,top&resize=480:*', '0', '0', 'PELICULA', 1);
 INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL, 'Azules', b'0', 'Una película de otro planeta', '', '02:05:56', 'https://i0.wp.com/hipertextual.com/wp-content/uploads/2020/01/hipertextual-arte-conceptual-avatar-2-muestra-nuevos-rincones-pandora-2020623395.jpg?fit=2048%2C1295&ssl=1', '0', '0', 'PELICULA', '1');
 INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL, 'Teemo', b'0', 'La película del año ', '', '02:00:40', 'https://es.web.img2.acsta.net/pictures/19/11/12/12/25/0815514.jpg', '0', '0', 'PELICULA', '1');
 INSERT INTO `contenidos` (`id`,`nombre`, `bloqueado`, `descripcion`, `destacado`, `duracion`, `foto_portada`, `precio`, `ranking`, `tipo_contenido`, `gc_id`) VALUES (NULL,'Dinosaurios', b'0', 'Dinosaurios', b'0', '02:05:56', 'https://static.cinepolis.com/resources/mx/movies/posters/264x386/39182-772229-20220531044140.jpg', '0', '0', 'PELICULA', '1');
@@ -55,6 +58,9 @@ INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('4', 
 INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('5', '3');
 INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('5', '1');
 INSERT INTO `contenido_categoria` (`contenido_id`, `categoria_id`) VALUES ('6', '3');
+
+-- SUSCRIPCION
+INSERT INTO `suscripciones` (`id`, `fecha_vencimiento`, `monto`, `tipo_suscripcion`, `gc_id`, `usuario_id`) VALUES ('1', '20/07/2022', '200', 'MENSUAL', '1', '1');
 
 -- CONTENIDO PERSONA
 INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('1', '9');

@@ -36,6 +36,7 @@ public class Contenido {
     private Time comienzo;
     private boolean destacado;
     private boolean bloqueado;
+    @Column(columnDefinition = "boolean default false")
     private boolean activo;
 
     @ManyToMany

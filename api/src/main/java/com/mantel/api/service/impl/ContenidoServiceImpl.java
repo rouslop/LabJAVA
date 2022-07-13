@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static java.time.LocalTime.now;
@@ -177,31 +178,36 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
-    public boolean estaPagoGc(long idCont, long idUser){
+    public Integer estaPagoGc(long idCont, long idUser){
         Contenido c = this.em.find(Contenido.class,idCont);
         Usuario u = this.em.find(Usuario.class,idUser);
         if((c!=null)&&(u!=null)){
-            GeneradorContenido gc = c.getGeneradorContenidoid();
+            if(c.getGeneradorContenidoid()==null){
+                return -1;
+            }
             Query q = this.em.createQuery("SELECT s FROM Suscripcion s WHERE s.usuarioId=:user AND s.generadorContenidoid=:gc");
             q.setParameter("user",u);
-            q.setParameter("gc",gc);
+            q.setParameter("gc",c.getGeneradorContenidoid());
             Suscripcion sc = (Suscripcion) q.getResultList().get(0);
             //chequear la fecha
-            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-            LocalDateTime ahora = LocalDateTime.now();
-            LocalDateTime fecha = LocalDateTime.parse(sc.getFechaVencimiento());
-            if((sc!=null)&&(fecha.isBefore(ahora))){
-                return true;
-            }
-            else{
-                return false;
+            if(sc!=null) {
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+//                LocalDateTime ahora = LocalDateTime.now();
+//                ahora.format(formatter);
+//                LocalDateTime fecha = LocalDateTime.parse(sc.getFechaVencimiento(),formatter);
+//                if ((fecha.isBefore(ahora))) {
+//                    return 1;
+//                } else {
+//                    return 0;
+//                }
+                return 1;
             }
         }
-        return false;
+        return -1;
     }
 
     @Override
-    public boolean estaPagoPV(long idCont, long idUser) {
+    public Integer estaPagoPV(long idCont, long idUser) {
         Usuario u = this.em.find(Usuario.class,idUser);
         Contenido c = this.em.find(Contenido.class,idCont);
         if((u!=null)&&(c!=null)) {
@@ -210,24 +216,35 @@ public class ContenidoServiceImpl implements ContenidoService {
             q.setParameter("cont", c);
             SuscripcionPerPayView sc = (SuscripcionPerPayView) q.getResultList().get(0);
             if(sc!=null){
-                return true;
+                return 1;
             }
             else{
-                return false;
+                return 0;
             }
         }
         else {
-            return false;
+            return -1;
         }
     }
 
     @Override
     public boolean estaPago(long idCont, long idUser) {
         if(this.esPayPerView(idCont)){
-            return this.estaPagoPV(idCont,idUser);
+            if(this.estaPagoPV(idCont,idUser)==1){
+                return true;
+            }
+            else{
+                System.out.println(this.estaPagoPV(idCont,idUser));
+                return false;
+            }
         }
         else{
-            return this.estaPagoGc(idCont,idUser);
+            if(this.estaPagoGc(idCont,idUser)==1){
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     }
 

@@ -132,7 +132,9 @@ public class ContenidoController {
 
     @GetMapping("/estaPago/{idC}/{idU}")
     public ResponseEntity<String> estaPago(@PathVariable("idC") Integer idC, @PathVariable("idU") Integer idU){
-        if(this.contenidoService.estaPago(idC,idU)){
+        long ic = Long.parseLong(idC.toString());
+        long iu = Long.parseLong(idU.toString());
+        if(this.contenidoService.estaPago(ic,iu)){
             return new ResponseEntity<String>("Está pago",HttpStatus.OK);
         }
         else{
