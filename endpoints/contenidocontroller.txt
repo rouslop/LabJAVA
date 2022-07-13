@@ -6,6 +6,7 @@ GET http://localhost:8080/contenidos/{limit}/{offset} --> contenidos paginados
 GET http://localhost:8080/contenidos/listarContenidosGenerador/{idGC}
 GET http://localhost:8080/contenidos/estaPago/{idC}/{idU}
 GET http://localhost:8080/contenidos/listarPorTipo (String con el tipo en el body)
+GET http://localhost:8080/contenidos/listarPorTipoCat/{idCat} (String con el tipo en el body)
 
 POST http://localhost:8080/contenidos/agregarContenido/{idgc} (Pasarle el contenido en el body)
 POST http://localhost:8080/contenidos/comentarContenido/{idContenido}/{idUsuario}

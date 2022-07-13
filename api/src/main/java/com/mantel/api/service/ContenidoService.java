@@ -26,6 +26,7 @@ public interface ContenidoService {
     public List<Contenido> listarPorCategoria(long id);
 
     public List<Contenido> listarPorTipo(String t);
+    public List<Contenido> listarPorTipoCategoria(String t, long idCat);
 
     public List<Contenido> listarContenidosGenerador(long idGC);
 

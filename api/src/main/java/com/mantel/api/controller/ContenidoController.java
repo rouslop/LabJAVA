@@ -146,4 +146,10 @@ public class ContenidoController {
     public ResponseEntity<List<Contenido>> listarPorTipo(@RequestBody String t){
         return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorTipo(t),HttpStatus.OK);
     }
+
+    @GetMapping("/listarPorTipoCat/{idCat}")
+    public ResponseEntity<List<Contenido>> listarPorTipoCat(@RequestBody String t, @PathVariable("idCat") Integer cat){
+        Long id = Long.parseLong(cat.toString());
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorTipoCategoria(t,id),HttpStatus.OK);
+    }
 }

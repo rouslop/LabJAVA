@@ -39,7 +39,7 @@ public class ContenidoServiceImpl implements ContenidoService {
     @Override
     public Json obtenerContenidos(int limit, int offset) {
         Query query = em.createQuery("SELECT c FROM Contenido c", Contenido.class);
-        Query q = em.createNativeQuery("SELECT * FROM contenidos LIMIT :limit OFFSET :offset");
+        Query q = em.createNativeQuery("SELECT * FROM contenidos WHERE activo = true LIMIT :limit OFFSET :offset");
         q.setParameter("limit", limit);
         q.setParameter("offset", offset);
         Hashtable<String,Integer> info = new Hashtable<>();
@@ -72,7 +72,7 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     public List<Contenido> listaContenidos(){
-        Query query = em.createQuery("SELECT c FROM Contenido c", Contenido.class);
+        Query query = em.createQuery("SELECT c FROM Contenido c WHERE c.activo=true", Contenido.class);
         return (List<Contenido>) query.getResultList();
     }
 
@@ -90,7 +90,7 @@ public class ContenidoServiceImpl implements ContenidoService {
         Contenido co;
         for(int i=0; i< contenidos.size();i++){
             co = contenidos.get(i);
-            if(co.getCategorias().contains(c)){
+            if((co.getCategorias().contains(c))&&(co.isActivo())){
                 res.add(co);
             }
         }
@@ -103,7 +103,22 @@ public class ContenidoServiceImpl implements ContenidoService {
         List<Contenido> res = new ArrayList<>();
         if(!contenidos.isEmpty()) {
             for (Contenido con : contenidos) {
-                if (con.getTipoContenido().toString().equals(t)) {
+                if ((con.getTipoContenido().toString().equals(t))&&(con.isActivo())) {
+                    res.add(con);
+                }
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public List<Contenido> listarPorTipoCategoria(String t, long idCat) {
+        List<Contenido> contenidos = this.em.createQuery("SELECT c FROM Contenido c").getResultList();
+        List<Contenido> res = new ArrayList<>();
+        if(!contenidos.isEmpty()){
+            Categoria c = this.em.find(Categoria.class,idCat);
+            for (Contenido con: contenidos) {
+                if((con.isActivo()&&(con.getTipoContenido().toString().equals(t))&&(con.getCategorias().contains(c)))){
                     res.add(con);
                 }
             }
