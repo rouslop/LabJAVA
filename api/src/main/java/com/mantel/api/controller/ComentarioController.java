@@ -52,22 +52,31 @@ public class ComentarioController {
         return new ResponseEntity<List<Comentario>>(resultado, HttpStatus.OK);
     }
 
-    @PostMapping("/agregarComentarioIndividual/{idReceptor}/{idEmisor}")
-    public ResponseEntity<ComentarioIndividual> agregarComentarioIndividual( @PathVariable("idReceptor") long idReceptor, @PathVariable("idEmisor") long idEmisor, @RequestBody ComentarioIndividual ci ){
+    @PostMapping("/agregarComentarioIndividual/{idUsu1}/{idUsu2}")
+    public ResponseEntity<ComentarioIndividual> agregarComentarioIndividual( @PathVariable("idUsu1") long idUsu1, @PathVariable("idUsu2") long idUsu2, @RequestBody ComentarioIndividual ci ){
 
-        Usuario usuarioReceptor = this.usuarioService.obtenerUsuario(idReceptor);
-        Usuario usuarioEmisor = this.usuarioService.obtenerUsuario(idEmisor);
+        Usuario usuario1= this.usuarioService.obtenerUsuario(idUsu1);
+        Usuario usuario2 = this.usuarioService.obtenerUsuario(idUsu2);
 
-
-        ci.setIdEmisor(idEmisor);
-        ci.setIdReceptor(idReceptor);
-        ci.setNombreEmisor(usuarioEmisor.getNombre());
-        ci.setNombreReceptor(usuarioReceptor.getNombre());
+        ci.setIdUsu1(idUsu1);
+        ci.setIdUsu2(idUsu2);
+        ci.setNombreUsu1(usuario1.getNombre());
+        ci.setNombreUsu2(usuario2.getNombre());
         ci.setTexto(ci.getTexto());
 
         comentarioService.agregarComentarioIndividual(ci);
         return new ResponseEntity<ComentarioIndividual>(ci,HttpStatus.OK);
 
     }
+
+    @GetMapping("/listarMensajesEntreUsuarios/{idUsu1}/{idUsu2}")
+    public ResponseEntity<List<ComentarioIndividual>> listarMensajesEntreUsuarios( @PathVariable("idUsu1") long idUsu1, @PathVariable("idUsu2") long idUsu2 ){
+
+        List<ComentarioIndividual> listaMensajes = new ArrayList<>();
+        listaMensajes = comentarioService.listarMensajesEntreUsuarios(idUsu1,idUsu2);
+
+        return new ResponseEntity<List<ComentarioIndividual>>( listaMensajes, HttpStatus.OK);
+    }
+
 
 }

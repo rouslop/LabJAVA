@@ -60,4 +60,13 @@ public class ComentarioServiceImp implements ComentarioService  {
 
     }
 
+    public List<ComentarioIndividual> listarMensajesEntreUsuarios(Long idUsu1, Long idUsu2){
+        List<ComentarioIndividual> mensajes = new ArrayList<>();
+
+        Query q = em.createQuery("SELECT m FROM ComentarioIndividual m WHERE (m.idUsu1 = :idUsu1 OR m.idUsu1 =: idUsu2) AND (m.idUsu2 = :idUsu2 OR m.idUsu2 = :idUsu1) ORDER BY m.id", ComentarioIndividual.class);
+        mensajes = q.setParameter("idUsu1", idUsu1).setParameter("idUsu2", idUsu2).getResultList();
+        return mensajes;
+    }
+
+
 }

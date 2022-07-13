@@ -10,4 +10,7 @@ public interface ComentarioService {
     public Comentario editarComentario(Comentario comentario);
     public List<Comentario> listarComentariosContenido(long idContenido);
     public void agregarComentarioIndividual(ComentarioIndividual ci);
+
+    public List<ComentarioIndividual> listarMensajesEntreUsuarios(Long idUsu1, Long idUsu2);
+
 }
