@@ -39,7 +39,7 @@ public class ContenidoController {
     }
 
     @PostMapping("/agregarContenido/{idgc}")
-    public ResponseEntity<String> agregarContenido(@RequestBody Contenido contenido, @PathVariable("idgc") String gcId){
+    public ResponseEntity<String> agregarContenido(@RequestBody Contenido contenido, @PathVariable("idgc") long gcId){
         contenido.setRanking(0);
         contenido.setBloqueado(false);
 
@@ -55,8 +55,13 @@ public class ContenidoController {
             }
         }
 
-        GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(gcId);
-        gc.agregarContenido(contenido);
+        GeneradorContenido gc = generadorContenidoService.obtenerGeneradorContenido(gcId);
+        if (gc != null){
+            gc.agregarContenido(contenido);
+        }else{
+            System.out.println("gc es null");
+        }
+
 
         contenidoService.agregarContenido(contenido);
         return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
