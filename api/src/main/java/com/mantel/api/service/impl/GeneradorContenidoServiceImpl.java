@@ -41,6 +41,7 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
             if (gc != null){
                 generadorContenido=gc;
             }
+            else{ return null;}
         }catch (NoResultException nre){
             //Ignore this because as per your logic this is ok!
         }

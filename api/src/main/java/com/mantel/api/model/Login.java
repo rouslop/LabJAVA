@@ -10,12 +10,13 @@ import javax.persistence.*;
 public class Login {
 
 
+
+    private long idUsuario;
+
     @Id
     private String email;
 
     private String contrasenia;
-
-    private long idUsuario;
 
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
