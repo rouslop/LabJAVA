@@ -309,4 +309,27 @@ public class ContenidoServiceImpl implements ContenidoService {
 
         }
     }
+
+
+    public List<Contenido> listarmarcados(GeneradorContenido i){
+        List<Contenido> listaContenidos = this.listarContenidosGenerador(i);
+        List<Contenido> listaRET = new ArrayList<>();
+        for (Contenido con : listaContenidos){
+            if(con.isDestacado()){
+                listaRET.add(con);
+            }
+        }
+        return listaRET;
+    }
+
+    public List<Contenido> listarsinmarcar(GeneradorContenido i){
+        List<Contenido> listaContenidos = this.listarContenidosGenerador(i);
+        List<Contenido> listaRET = new ArrayList<>();
+        for (Contenido con : listaContenidos){
+            if(!con.isDestacado()){
+                listaRET.add(con);
+            }
+        }
+        return listaRET;
+    }
 }

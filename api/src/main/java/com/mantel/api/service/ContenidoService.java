@@ -39,4 +39,8 @@ public interface ContenidoService {
     public Integer estaPagoGc(long idCont, long idUser);
     public Integer estaPagoPV(long idCont, long idUser);
     public boolean estaPago(long idCont, long idUser);
+
+    public List<Contenido> listarmarcados(GeneradorContenido i);
+
+    public List<Contenido> listarsinmarcar(GeneradorContenido i);
 }

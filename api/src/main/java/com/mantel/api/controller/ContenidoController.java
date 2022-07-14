@@ -166,4 +166,16 @@ public class ContenidoController {
         Long id = Long.parseLong(cat.toString());
         return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorTipoCategoria(t,id),HttpStatus.OK);
     }
+
+    @GetMapping("/listarmarcados/{idGC}")
+    public ResponseEntity<List<Contenido>> listarmarcados(@PathVariable("idGC") String id){
+        GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(id);
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarmarcados(gc),HttpStatus.OK);
+    }
+    @GetMapping("/listarsinmarcar/{idGC}")
+    public ResponseEntity<List<Contenido>> listarsinmarcar(@PathVariable("idGC") String id){
+        GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(id);
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarsinmarcar(gc),HttpStatus.OK);
+    }
+
 }
