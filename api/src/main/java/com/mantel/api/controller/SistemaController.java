@@ -52,6 +52,7 @@ public class SistemaController {
                     nuevoLogin.setEmail(usu.getEmail());
                     nuevoLogin.setContrasenia(usu.getContrasenia());
                     nuevoLogin.setTipoUsuario(usu.getTipoUsuario());
+                    nuevoLogin.setIdUsuario(usu.getId());
                     Login log = sistemaService.agregarLogin(nuevoLogin);
                     loginRetorno =  log;
 
