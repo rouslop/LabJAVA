@@ -9,7 +9,7 @@ public interface VisualizacionService {
     public void agregarVisualizacion(Visualizacion v);
     public List<Visualizacion> obtenerVisualizaciones();
     public Visualizacion obtenerVisualizacion(long idUsu, long idContenido);
-    public void agregarTiempoVisualizacion(long idUsu, long idContenido, Time tiempoVisualizacion);
+    public void agregarTiempoVisualizacion(long idUsu, long idContenido, float tiempoVisualizacion);
 
 
 

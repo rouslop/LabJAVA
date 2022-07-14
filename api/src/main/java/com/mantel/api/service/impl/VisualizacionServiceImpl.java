@@ -47,7 +47,7 @@ public class VisualizacionServiceImpl implements VisualizacionService {
         return v;
     }
 
-    public void agregarTiempoVisualizacion(long idUsu, long idContenido,Time tiempoVisualizacion){
+    public void agregarTiempoVisualizacion(long idUsu, long idContenido,float tiempoVisualizacion){
 
         Visualizacion vi = this.obtenerVisualizacion(idUsu,idContenido);
         vi.setTime(tiempoVisualizacion);
