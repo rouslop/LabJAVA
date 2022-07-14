@@ -15,7 +15,7 @@ public class Login {
 
     private String contrasenia;
 
-    private Long idUsuario;
+    private long idUsuario;
 
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
