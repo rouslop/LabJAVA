@@ -60,6 +60,32 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
+    public boolean marcarContenido(long i){
+        Contenido c = this.em.find(Contenido.class,i);
+        if(c!=null){
+            c.setDestacado(true);
+            this.em.merge(c);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean DesmarcarContenido(long i){
+        Contenido c = this.em.find(Contenido.class,i);
+        if(c!=null){
+            c.setDestacado(false);
+            this.em.merge(c);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
     public void agregarCategoria (long idContenido, long idCategoria){
         //Query query = em.createQuery("INSERT INTO contenidos_categoria (contenido_id, categoria_i) VALUES (idContenido, idCategoria)");
 
@@ -278,8 +304,7 @@ public class ContenidoServiceImpl implements ContenidoService {
             else {
                 return false;
             }
+
         }
     }
-
-
 }

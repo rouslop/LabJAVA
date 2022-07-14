@@ -87,19 +87,25 @@ public class ContenidoController {
         return new ResponseEntity<String>("editado y tranquilo", HttpStatus.OK);
     }
 
-    @PostMapping("/marcarContenidoDestacado/{id}")
-    public ResponseEntity<String> marcarContenidoDestacado(@PathVariable("id") long contenidoId){
-        Contenido c = contenidoService.obtenerContenido(contenidoId);
-        c.setDestacado(true);
-        contenidoService.editarContenido(c);
-        return new ResponseEntity<String>("Contenido destacado", HttpStatus.OK);
+    @PutMapping("/marcarContenidoDestacado/{id}")
+    public ResponseEntity<String> marcarContenidoDestacado(@PathVariable("id") Integer id){
+        Long i = Long.parseLong(id.toString());
+        if(this.contenidoService.DesmarcarContenido(i)){
+            return new ResponseEntity<String>("Marcado con éxito", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<String>("Ha ocurrido un error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    @PostMapping("/desmarcarContenidoDestacado/{id}")
-    public ResponseEntity<String> desmarcarContenidoDestacado(@PathVariable("id") long contenidoId){
-        Contenido c = contenidoService.obtenerContenido(contenidoId);
-        c.setDestacado(false);
-        contenidoService.editarContenido(c);
-        return new ResponseEntity<String>("Contenido destacado", HttpStatus.OK);
+    @PutMapping("/desmarcarContenidoDestacado/{id}")
+    public ResponseEntity<String> desmarcarContenidoDestacado(@PathVariable("id") Integer id){
+        Long i = Long.parseLong(id.toString());
+        if(this.contenidoService.DesmarcarContenido(i)){
+            return new ResponseEntity<String>("Desmarcado con éxito", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<String>("Ha ocurrido un error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/comentarContenido/{idContenido}/{idUsu}")
