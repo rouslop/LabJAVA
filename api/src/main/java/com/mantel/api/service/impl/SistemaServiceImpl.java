@@ -6,6 +6,7 @@ import com.mantel.api.service.SistemaService;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
