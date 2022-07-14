@@ -16,7 +16,7 @@ public class Visualizacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private boolean terminado;
-    private Time time;
+    private float time;
 
     @ManyToOne()
     @JoinColumn(name="contenido_id")
