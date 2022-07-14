@@ -94,6 +94,13 @@ public class ContenidoController {
         contenidoService.editarContenido(c);
         return new ResponseEntity<String>("Contenido destacado", HttpStatus.OK);
     }
+    @PostMapping("/desmarcarContenidoDestacado/{id}")
+    public ResponseEntity<String> desmarcarContenidoDestacado(@PathVariable("id") long contenidoId){
+        Contenido c = contenidoService.obtenerContenido(contenidoId);
+        c.setDestacado(false);
+        contenidoService.editarContenido(c);
+        return new ResponseEntity<String>("Contenido destacado", HttpStatus.OK);
+    }
 
     @PostMapping("/comentarContenido/{idContenido}/{idUsu}")
     public ResponseEntity<String> comentarContenido(@PathVariable("idContenido") long idContenido, @PathVariable("idUsu") long idUsu, @RequestBody Comentario comentario){
@@ -127,7 +134,8 @@ public class ContenidoController {
 
     @GetMapping("/listarContenidosGenerador/{idGC}")
     public ResponseEntity<List<Contenido>> listarContenidosGenerador(@PathVariable("idGC") String idGC){
-        return new ResponseEntity<List<Contenido>>(contenidoService.listarContenidosGenerador(idGC), HttpStatus.OK);
+        GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(idGC);
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarContenidosGenerador(gc), HttpStatus.OK);
     }
 
     @GetMapping("/estaPago/{idC}/{idU}")

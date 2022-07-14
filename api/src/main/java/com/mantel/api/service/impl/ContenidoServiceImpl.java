@@ -167,11 +167,11 @@ public class ContenidoServiceImpl implements ContenidoService {
 
     }
 
-    public List<Contenido> listarContenidosGenerador(String idGC){
+    public List<Contenido> listarContenidosGenerador(GeneradorContenido idGC){
         List<Contenido> listaContenidos = this.listaContenidos();
         List<Contenido> listaRET = new ArrayList<>();
         for (Contenido con : listaContenidos){
-         if(con.getGeneradorContenidoid().getEmail()==idGC){
+         if(con.getGeneradorContenidoid().getId()==idGC.getId()){
              listaRET.add(con);
          }
         }
