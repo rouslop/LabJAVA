@@ -99,7 +99,7 @@ public class ContenidoController {
         Contenido c = contenidoService.obtenerContenido(contenidoId);
         c.setDestacado(false);
         contenidoService.editarContenido(c);
-        return new ResponseEntity<String>("Contenido destacado", HttpStatus.OK);
+        return new ResponseEntity<String>("Contenido editado", HttpStatus.OK);
     }
 
     @PostMapping("/comentarContenido/{idContenido}/{idUsu}")
@@ -160,4 +160,5 @@ public class ContenidoController {
         Long id = Long.parseLong(cat.toString());
         return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorTipoCategoria(t,id),HttpStatus.OK);
     }
+
 }

@@ -14,7 +14,6 @@ public interface GeneradorContenidoService {
     public GeneradorContenido obtenerGeneradorContenido(long id);
     public GeneradorContenido obtenerGCPorEmail(String email);
     public boolean checkCredenciales(long id, String email, String contrasenia);
-
     public GeneradorContenido editarGC(GeneradorContenido gc);
     public List<GeneradorContenido> obtenerGeneradores();
     public boolean eliminarGenerador(String email);
