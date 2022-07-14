@@ -33,7 +33,14 @@ public interface ContenidoService {
     public TipoContenido devolverTipo(long id);
     public boolean esPayPerView(long id);
 
+    public boolean marcarContenido(long i);
+    public boolean DesmarcarContenido(long i);
+
     public Integer estaPagoGc(long idCont, long idUser);
     public Integer estaPagoPV(long idCont, long idUser);
     public boolean estaPago(long idCont, long idUser);
+
+    public List<Contenido> listarmarcados(GeneradorContenido i);
+
+    public List<Contenido> listarsinmarcar(GeneradorContenido i);
 }

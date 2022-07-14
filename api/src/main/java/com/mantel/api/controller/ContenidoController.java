@@ -87,12 +87,15 @@ public class ContenidoController {
         return new ResponseEntity<String>("editado y tranquilo", HttpStatus.OK);
     }
 
-    @PostMapping("/marcarContenidoDestacado/{id}")
-    public ResponseEntity<String> marcarContenidoDestacado(@PathVariable("id") long contenidoId){
-        Contenido c = contenidoService.obtenerContenido(contenidoId);
-        c.setDestacado(true);
-        contenidoService.editarContenido(c);
-        return new ResponseEntity<String>("Contenido destacado", HttpStatus.OK);
+    @PutMapping("/marcarContenidoDestacado/{id}")
+    public ResponseEntity<String> marcarContenidoDestacado(@PathVariable("id") Integer id){
+        Long i = Long.parseLong(id.toString());
+        if(this.contenidoService.marcarContenido(i)){
+            return new ResponseEntity<String>("Marcado con éxito", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<String>("Ha ocurrido un error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     @PostMapping("/desmarcarContenidoDestacado/{id}")
     public ResponseEntity<String> desmarcarContenidoDestacado(@PathVariable("id") long contenidoId){
@@ -161,4 +164,14 @@ public class ContenidoController {
         return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorTipoCategoria(t,id),HttpStatus.OK);
     }
 
+    @GetMapping("/listarmarcados/{idGC}")
+    public ResponseEntity<List<Contenido>> listarmarcados(@PathVariable("idGC") String id){
+        GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(id);
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarmarcados(gc),HttpStatus.OK);
+    }
+    @GetMapping("/listarsinmarcar/{idGC}")
+    public ResponseEntity<List<Contenido>> listarsinmarcar(@PathVariable("idGC") String id){
+        GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(id);
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarsinmarcar(gc),HttpStatus.OK);
+    }
 }
