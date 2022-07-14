@@ -310,9 +310,6 @@ public class ContenidoServiceImpl implements ContenidoService {
         }
     }
 
-<<<<<<< HEAD
-=======
-
     public List<Contenido> listarmarcados(GeneradorContenido i){
         List<Contenido> listaContenidos = this.listarContenidosGenerador(i);
         List<Contenido> listaRET = new ArrayList<>();
@@ -334,5 +331,4 @@ public class ContenidoServiceImpl implements ContenidoService {
         }
         return listaRET;
     }
->>>>>>> d3168b0bf69d438eb16e3e768d1d848d7a02afa3
 }
