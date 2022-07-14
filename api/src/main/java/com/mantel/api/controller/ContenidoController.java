@@ -90,7 +90,7 @@ public class ContenidoController {
     @PutMapping("/marcarContenidoDestacado/{id}")
     public ResponseEntity<String> marcarContenidoDestacado(@PathVariable("id") Integer id){
         Long i = Long.parseLong(id.toString());
-        if(this.contenidoService.DesmarcarContenido(i)){
+        if(this.contenidoService.marcarContenido(i)){
             return new ResponseEntity<String>("Marcado con éxito", HttpStatus.OK);
         }
         else {

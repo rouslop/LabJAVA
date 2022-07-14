@@ -60,6 +60,7 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
+    @Transactional
     public boolean marcarContenido(long i){
         Contenido c = this.em.find(Contenido.class,i);
         if(c!=null){
@@ -73,6 +74,7 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
+    @Transactional
     public boolean DesmarcarContenido(long i){
         Contenido c = this.em.find(Contenido.class,i);
         if(c!=null){
