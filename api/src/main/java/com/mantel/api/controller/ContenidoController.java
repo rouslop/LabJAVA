@@ -39,7 +39,7 @@ public class ContenidoController {
     }
 
     @PostMapping("/agregarContenido/{idgc}")
-    public ResponseEntity<String> agregarContenido(@RequestBody Contenido contenido, @PathVariable("idgc") long gcId){
+    public ResponseEntity<String> agregarContenido(@RequestBody Contenido contenido, @PathVariable("idgc") String gcId){
         contenido.setRanking(0);
         contenido.setBloqueado(false);
 
@@ -55,7 +55,7 @@ public class ContenidoController {
             }
         }
 
-        GeneradorContenido gc = generadorContenidoService.obtenerGeneradorContenido(gcId);
+        GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(gcId);
         gc.agregarContenido(contenido);
 
         contenidoService.agregarContenido(contenido);
@@ -126,7 +126,7 @@ public class ContenidoController {
     }
 
     @GetMapping("/listarContenidosGenerador/{idGC}")
-    public ResponseEntity<List<Contenido>> listarContenidosGenerador(@PathVariable("idGC") long idGC){
+    public ResponseEntity<List<Contenido>> listarContenidosGenerador(@PathVariable("idGC") String idGC){
         return new ResponseEntity<List<Contenido>>(contenidoService.listarContenidosGenerador(idGC), HttpStatus.OK);
     }
 
