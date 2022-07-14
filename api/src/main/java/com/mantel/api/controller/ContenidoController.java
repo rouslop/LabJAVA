@@ -142,13 +142,13 @@ public class ContenidoController {
         }
     }
 
-    @GetMapping("/listarPorTipo")
-    public ResponseEntity<List<Contenido>> listarPorTipo(@RequestBody String t){
-        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorTipo(t),HttpStatus.OK);
+    @GetMapping("/listarPorTipo/{tipo}")
+    public ResponseEntity<List<Contenido>> listarPorTipo(@PathVariable("tipo") String tipo){
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorTipo(tipo),HttpStatus.OK);
     }
 
-    @GetMapping("/listarPorTipoCat/{idCat}")
-    public ResponseEntity<List<Contenido>> listarPorTipoCat(@RequestBody String t, @PathVariable("idCat") Integer cat){
+    @GetMapping("/listarPorTipoCat/{idCat}/{t}")
+    public ResponseEntity<List<Contenido>> listarPorTipoCat(@PathVariable("t") String t, @PathVariable("idCat") Integer cat){
         Long id = Long.parseLong(cat.toString());
         return new ResponseEntity<List<Contenido>>(this.contenidoService.listarPorTipoCategoria(t,id),HttpStatus.OK);
     }

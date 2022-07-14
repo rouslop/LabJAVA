@@ -212,9 +212,10 @@ public class ContenidoServiceImpl implements ContenidoService {
             Query q = this.em.createQuery("SELECT s FROM Suscripcion s WHERE s.usuarioId=:user AND s.generadorContenidoid=:gc");
             q.setParameter("user",u);
             q.setParameter("gc",c.getGeneradorContenidoid());
-            Suscripcion sc = (Suscripcion) q.getResultList().get(0);
-            //chequear la fecha
-            if(sc!=null) {
+            if(!q.getResultList().isEmpty()) {
+                Suscripcion sc = (Suscripcion) q.getResultList().get(0);
+                //chequear la fecha
+                if (sc != null) {
 //                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 //                LocalDateTime ahora = LocalDateTime.now();
 //                ahora.format(formatter);
@@ -224,7 +225,11 @@ public class ContenidoServiceImpl implements ContenidoService {
 //                } else {
 //                    return 0;
 //                }
-                return 1;
+                    return 1;
+                }
+            }
+            else {
+                return 0;
             }
         }
         return -1;
@@ -238,11 +243,15 @@ public class ContenidoServiceImpl implements ContenidoService {
             Query q = this.em.createQuery("SELECT sp FROM SuscripcionPerPayView sp WHERE sp.contenidoId=:cont AND sp.usuarioId=:user");
             q.setParameter("user", u);
             q.setParameter("cont", c);
-            SuscripcionPerPayView sc = (SuscripcionPerPayView) q.getResultList().get(0);
-            if(sc!=null){
-                return 1;
+            if(!q.getResultList().isEmpty()) {
+                SuscripcionPerPayView sc = (SuscripcionPerPayView) q.getResultList().get(0);
+                if (sc != null) {
+                    return 1;
+                } else {
+                    return 0;
+                }
             }
-            else{
+            else {
                 return 0;
             }
         }
