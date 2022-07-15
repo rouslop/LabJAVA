@@ -231,24 +231,12 @@ public class ContenidoServiceImpl implements ContenidoService {
             if(c.getGeneradorContenidoid()==null){
                 return -1;
             }
-            Query q = this.em.createQuery("SELECT s FROM Suscripcion s WHERE s.usuarioId=:user AND s.generadorContenidoid=:gc");
-            q.setParameter("user",u);
-            q.setParameter("gc",c.getGeneradorContenidoid());
+//            Query q = this.em.createQuery("SELECT s FROM Suscripcion s WHERE s.usuarioId=:user AND s.generadorContenidoid=:gc");
+            Query q = this.em.createNativeQuery("SELECT * FROM `suscripciones` WHERE fecha_vencimiento < NOW() AND gc_id=:gc AND usuario_id=:user");
+            q.setParameter("user",u.getId());
+            q.setParameter("gc",c.getGeneradorContenidoid().getId());
             if(!q.getResultList().isEmpty()) {
-                Suscripcion sc = (Suscripcion) q.getResultList().get(0);
-                //chequear la fecha
-                if (sc != null) {
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-//                LocalDateTime ahora = LocalDateTime.now();
-//                ahora.format(formatter);
-//                LocalDateTime fecha = LocalDateTime.parse(sc.getFechaVencimiento(),formatter);
-//                if ((fecha.isBefore(ahora))) {
-//                    return 1;
-//                } else {
-//                    return 0;
-//                }
-                    return 1;
-                }
+                return 1;
             }
             else {
                 return 0;
