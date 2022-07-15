@@ -1,6 +1,7 @@
 package com.mantel.api.controller;
 
 
+import com.mantel.api.model.Contenido;
 import com.mantel.api.service.ComentarioService;
 import com.mantel.api.service.UsuarioService;
 import com.mantel.api.model.Comentario;
@@ -11,7 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/comentarios")
@@ -75,6 +79,31 @@ public class ComentarioController {
 
         return new ResponseEntity<List<ComentarioIndividual>>( listaMensajes, HttpStatus.OK);
     }
+
+    // lista los usuarios con los que tuve una conversacion
+    @GetMapping("/listaUsuariosConversacion/{idUsu}")
+    public ResponseEntity<List<Usuario>> listaUsuariosConversacion(@PathVariable("idUsu") long idUsu){
+        List<Usuario> listaUsuarios = new ArrayList<>();
+        List<ComentarioIndividual> ci = comentarioService.listarMensajesDeUnUsu(idUsu);
+        for (ComentarioIndividual c : ci){
+            if (c.getIdUsu1() == idUsu){
+                Usuario usu = usuarioService.obtenerUsuario(c.getIdUsu2());
+                listaUsuarios.add(usu);
+            }else{
+                Usuario usu = usuarioService.obtenerUsuario(c.getIdUsu1());
+                listaUsuarios.add(usu);
+            }
+        }
+
+        //remuevo los duplicados
+        Set<Usuario> set = new HashSet<>(listaUsuarios);
+        listaUsuarios.clear();
+        listaUsuarios.addAll(set);
+
+        return new ResponseEntity<List<Usuario>>(listaUsuarios, HttpStatus.OK);
+
+    }
+
 
 
 }
