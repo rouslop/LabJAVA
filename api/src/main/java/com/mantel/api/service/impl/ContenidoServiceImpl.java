@@ -159,7 +159,7 @@ public class ContenidoServiceImpl implements ContenidoService {
         for (Categoria categoria : categoriasContenido){ // Categorias contenido principal
             for (Contenido con : listaContenidos){  // Todos los contenidos persistidos
                 for(Categoria ca : con.getCategorias()){
-                    if ( ca.getNombre() == categoria.getNombre() ){
+                    if ((con.isActivo())&&(ca.getNombre() == categoria.getNombre())){
                         listaResultado.add(con);
                     }
                 }
@@ -171,7 +171,7 @@ public class ContenidoServiceImpl implements ContenidoService {
         for(Persona persona : elenco){
             for (Contenido con : listaContenidos){
                 for(Persona p : con.getPersona()){
-                    if (p.getNombre().equals(persona.getNombre())){
+                    if ((p.getNombre().equals(persona.getNombre()))&&(con.isActivo())){
                         listaResultado.add(con);
                     }
                 }
@@ -193,7 +193,7 @@ public class ContenidoServiceImpl implements ContenidoService {
         List<Contenido> listaContenidos = this.listaContenidos();
         List<Contenido> listaRET = new ArrayList<>();
         for (Contenido con : listaContenidos){
-         if(con.getGeneradorContenidoid().getId()==idGC.getId()){
+         if((con.getGeneradorContenidoid().getId()==idGC.getId())&&(con.isActivo())){
              listaRET.add(con);
          }
         }
@@ -227,7 +227,7 @@ public class ContenidoServiceImpl implements ContenidoService {
     public Integer estaPagoGc(long idCont, long idUser){
         Contenido c = this.em.find(Contenido.class,idCont);
         Usuario u = this.em.find(Usuario.class,idUser);
-        if((c!=null)&&(u!=null)){
+        if((c!=null)&&(u!=null)&&(c.isActivo())){
             if(c.getGeneradorContenidoid()==null){
                 return -1;
             }
@@ -261,7 +261,7 @@ public class ContenidoServiceImpl implements ContenidoService {
     public Integer estaPagoPV(long idCont, long idUser) {
         Usuario u = this.em.find(Usuario.class,idUser);
         Contenido c = this.em.find(Contenido.class,idCont);
-        if((u!=null)&&(c!=null)) {
+        if((u!=null)&&(c!=null)&&(c.isActivo())) {
             Query q = this.em.createQuery("SELECT sp FROM SuscripcionPerPayView sp WHERE sp.contenidoId=:cont AND sp.usuarioId=:user");
             q.setParameter("user", u);
             q.setParameter("cont", c);
@@ -308,7 +308,7 @@ public class ContenidoServiceImpl implements ContenidoService {
         List<Contenido> listaContenidos = this.listarContenidosGenerador(i);
         List<Contenido> listaRET = new ArrayList<>();
         for (Contenido con : listaContenidos){
-            if(con.isDestacado()){
+            if((con.isDestacado())&&(con.isActivo())){
                 listaRET.add(con);
             }
         }
@@ -319,7 +319,7 @@ public class ContenidoServiceImpl implements ContenidoService {
         List<Contenido> listaContenidos = this.listarContenidosGenerador(i);
         List<Contenido> listaRET = new ArrayList<>();
         for (Contenido con : listaContenidos){
-            if(!con.isDestacado()){
+            if((!con.isDestacado())&&(con.isActivo())){
                 listaRET.add(con);
             }
         }
