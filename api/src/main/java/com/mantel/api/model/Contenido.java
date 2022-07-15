@@ -30,6 +30,7 @@ public class Contenido {
     private float precio;
     private Time duracion;
     private Time comienzo;
+    private String fecha_comienzo;
     @Column(columnDefinition = "boolean default false")
     private boolean destacado;
     @Column(columnDefinition = "boolean default false")
