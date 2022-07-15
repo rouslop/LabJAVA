@@ -14,4 +14,6 @@ public interface ComentarioService {
 
     public List<ComentarioIndividual> listarMensajesEntreUsuarios(Long idUsu1, Long idUsu2);
 
+    public List<ComentarioIndividual> listarMensajesDeUnUsu(Long idUsu);
+
 }

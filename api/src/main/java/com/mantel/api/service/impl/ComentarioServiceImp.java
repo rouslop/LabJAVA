@@ -4,6 +4,7 @@ package com.mantel.api.service.impl;
 import com.mantel.api.model.Comentario;
 
 import com.mantel.api.model.ComentarioIndividual;
+import com.mantel.api.model.Usuario;
 import com.mantel.api.service.ComentarioService;
 import org.springframework.stereotype.Service;
 
@@ -63,6 +64,14 @@ public class ComentarioServiceImp implements ComentarioService  {
         Query q = em.createQuery("SELECT m FROM ComentarioIndividual m WHERE (m.idUsu1 = :idUsu1 OR m.idUsu1 =: idUsu2) AND (m.idUsu2 = :idUsu2 OR m.idUsu2 = :idUsu1) ORDER BY m.id", ComentarioIndividual.class);
         mensajes = q.setParameter("idUsu1", idUsu1).setParameter("idUsu2", idUsu2).getResultList();
         return mensajes;
+    }
+
+    // lista los mensajes que tiene un usuario
+    public List<ComentarioIndividual> listarMensajesDeUnUsu(Long idUsu){
+
+        Query q = em.createQuery("SELECT m FROM ComentarioIndividual m WHERE m.idUsu1= :idUsu OR m.idUsu2= :idUsu", ComentarioIndividual.class);
+        List<ComentarioIndividual> resultado = q.setParameter("idUsu", idUsu).getResultList();
+        return resultado;
     }
 
 
