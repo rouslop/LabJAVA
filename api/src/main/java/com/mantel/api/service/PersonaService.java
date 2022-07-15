@@ -1,7 +1,6 @@
 package com.mantel.api.service;
 
 import com.mantel.api.model.Persona;
-import com.mantel.api.model.Usuario;
 
 import java.util.List;
 

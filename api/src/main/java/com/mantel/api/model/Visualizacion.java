@@ -1,9 +1,7 @@
 package com.mantel.api.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
-import java.sql.Time;
+
 import javax.persistence.*;
 @Data
 @Entity

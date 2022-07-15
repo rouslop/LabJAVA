@@ -1,0 +1,16 @@
+POST http://localhost:8080/usuarios/agregarUsuario (Usuario u en el body)
+POST http://localhost:8080/usuarios/bloquear (Usuario u en el body, solo el email)
+POST http://localhost:8080/usuarios/desbloquear (Usuario u en el body, solo el email)
+POST http://localhost:8080/usuarios/agregarContenidoFavorito/{id}/{idContenido}
+POST http://localhost:8080/usuarios/valorarContenido/{idC}/{idU}/{puntaje} (el puntaje es un entero del 1 al 5)
+
+GET http://localhost:8080/usuarios (Devuelve la lista de todos los usuarios)
+GET http://localhost:8080/usuarios/{id} (Obtiene un usuario por su id)
+GET http://localhost:8080/usuarios/listarRecomendados/{idUsu}
+
+
+DELETE http://localhost:8080/usuarios/eliminarUsuario/{id}
+DELETE http://localhost:8080/usuarios/eliminadoLogico (Usuario u en el body, solo el email)
+DELETE http://localhost:8080/usuarios/eliminarContenidoDeFavoritos/{id}/{idContenido}
+
+PUT http://localhost:8080/usuarios/editarUsuario (Usuario u en el body)

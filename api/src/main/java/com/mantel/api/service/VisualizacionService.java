@@ -3,7 +3,6 @@ package com.mantel.api.service;
 import com.mantel.api.model.Visualizacion;
 
 
-import java.sql.Time;
 import java.util.List;
 public interface VisualizacionService {
     public void agregarVisualizacion(Visualizacion v);

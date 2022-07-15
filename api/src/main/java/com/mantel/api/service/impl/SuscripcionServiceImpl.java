@@ -1,7 +1,6 @@
 package com.mantel.api.service.impl;
 
 import com.mantel.api.model.Suscripcion;
-import com.mantel.api.model.Usuario;
 import com.mantel.api.service.SuscripcionService;
 import org.springframework.stereotype.Service;
 

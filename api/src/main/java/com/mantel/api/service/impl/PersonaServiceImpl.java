@@ -1,7 +1,6 @@
 package com.mantel.api.service.impl;
 
 import com.mantel.api.model.Persona;
-import com.mantel.api.model.Usuario;
 import com.mantel.api.service.PersonaService;
 import org.springframework.stereotype.Service;
 

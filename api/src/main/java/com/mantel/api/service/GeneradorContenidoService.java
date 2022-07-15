@@ -3,7 +3,6 @@ package com.mantel.api.service;
 
 import com.mantel.api.model.Contenido;
 import com.mantel.api.model.GeneradorContenido;
-import com.mantel.api.model.Usuario;
 
 
 import java.util.List;

@@ -1,14 +1,10 @@
 package com.mantel.api.service.impl;
-import com.mantel.api.model.Contenido;
-import com.mantel.api.model.Usuario;
 import com.mantel.api.model.Visualizacion;
-import com.mantel.api.service.UsuarioService;
 import com.mantel.api.service.VisualizacionService;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
-import java.sql.Time;
 import java.util.List;
 @Service
 @Transactional

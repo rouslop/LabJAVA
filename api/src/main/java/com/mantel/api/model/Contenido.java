@@ -3,15 +3,12 @@ package com.mantel.api.model;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
-import lombok.ToString;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
+
 @Data
 @Entity
 @Table(name = "contenidos")
@@ -28,7 +25,6 @@ public class Contenido {
     private TipoContenido tipoContenido;
     private String nombre;
     private String descripcion;
-    private float ranking;
     private String fotoPortada;
     private String video;
     private float precio;

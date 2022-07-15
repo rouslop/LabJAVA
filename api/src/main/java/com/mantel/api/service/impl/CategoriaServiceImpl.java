@@ -2,7 +2,6 @@ package com.mantel.api.service.impl;
 
 
 import com.mantel.api.model.Categoria;
-import com.mantel.api.model.Usuario;
 import com.mantel.api.service.CategoriaService;
 import org.springframework.stereotype.Service;
 

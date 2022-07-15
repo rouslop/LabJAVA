@@ -1,13 +1,11 @@
 package com.mantel.api.controller;
 
 
-import com.mantel.api.model.*;
-
-
-import com.mantel.api.service.CategoriaService;
 import com.mantel.api.service.ComentarioService;
-import com.mantel.api.service.ContenidoService;
 import com.mantel.api.service.UsuarioService;
+import com.mantel.api.model.Comentario;
+import com.mantel.api.model.ComentarioIndividual;
+import com.mantel.api.model.Usuario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +51,7 @@ public class ComentarioController {
     }
 
     @PostMapping("/agregarComentarioIndividual/{idUsu1}/{idUsu2}")
-    public ResponseEntity<ComentarioIndividual> agregarComentarioIndividual( @PathVariable("idUsu1") long idUsu1, @PathVariable("idUsu2") long idUsu2, @RequestBody ComentarioIndividual ci ){
+    public ResponseEntity<ComentarioIndividual> agregarComentarioIndividual(@PathVariable("idUsu1") long idUsu1, @PathVariable("idUsu2") long idUsu2, @RequestBody ComentarioIndividual ci ){
 
         Usuario usuario1= this.usuarioService.obtenerUsuario(idUsu1);
         Usuario usuario2 = this.usuarioService.obtenerUsuario(idUsu2);

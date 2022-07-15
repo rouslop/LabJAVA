@@ -7,6 +7,10 @@ GET http://localhost:8080/contenidos/listarContenidosGenerador/{idGC}
 GET http://localhost:8080/contenidos/estaPago/{idC}/{idU}
 GET http://localhost:8080/contenidos/listarPorTipo/{tipo}
 GET http://localhost:8080/contenidos/listarPorTipoCat/{idCat}/{tipo}
+GET http://localhost:8080/contenidos/listarmarcados/{idGC}
+GET http://localhost:8080/contenidos/listarsinmarcar/{idGC}
+GET http://localhost:8080/contenidos/obtenerPuntaje/{idC}
+
 
 POST http://localhost:8080/contenidos/agregarContenido/{idgc} (Pasarle el contenido en el body)
 POST http://localhost:8080/contenidos/comentarContenido/{idContenido}/{idUsuario}

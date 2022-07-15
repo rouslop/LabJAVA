@@ -4,9 +4,6 @@ package com.mantel.api.service.impl;
 import com.mantel.api.model.Comentario;
 
 import com.mantel.api.model.ComentarioIndividual;
-import com.mantel.api.model.Contenido;
-import com.mantel.api.model.Usuario;
-import com.mantel.api.service.CategoriaService;
 import com.mantel.api.service.ComentarioService;
 import org.springframework.stereotype.Service;
 

@@ -1,12 +1,12 @@
 package com.mantel.api.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mantel.api.model.*;
 import com.mantel.api.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +22,16 @@ public class ContenidoController {
     private CategoriaService categoriaService;
     private PersonaService personaService;
 
+    private RankService rankService;
+
 
     public ContenidoController(ContenidoService contenidoService,
                                GeneradorContenidoService generadorContenidoService,
                                UsuarioService usuarioService,
                                ComentarioService comentarioService,
                                CategoriaService categoriaService,
-                               PersonaService personaService){
+                               PersonaService personaService,
+                               RankService rankService){
         super();
         this.contenidoService = contenidoService;
         this.generadorContenidoService = generadorContenidoService;
@@ -36,11 +39,11 @@ public class ContenidoController {
         this.comentarioService = comentarioService;
         this.categoriaService = categoriaService;
         this.personaService=personaService;
+        this.rankService = rankService;
     }
 
     @PostMapping("/agregarContenido/{idgc}")
     public ResponseEntity<String> agregarContenido(@RequestBody Contenido contenido, @PathVariable("idgc") long gcId){
-        contenido.setRanking(0);
         contenido.setBloqueado(false);
 
         List<Categoria> listaAsetearCat = new ArrayList<>(); // sera la lista de cats a setearle en el contenido
@@ -178,5 +181,15 @@ public class ContenidoController {
     public ResponseEntity<List<Contenido>> listarsinmarcar(@PathVariable("idGC") String id){
         GeneradorContenido gc = generadorContenidoService.obtenerGCPorEmail(id);
         return new ResponseEntity<List<Contenido>>(this.contenidoService.listarsinmarcar(gc),HttpStatus.OK);
+    }
+
+    @GetMapping("/obtenerPuntaje/{idC}")
+    public ResponseEntity<DtPuntaje> obtenerPuntaje(@PathVariable("idC") Integer idC){
+        Long iC = Long.parseLong(idC.toString());
+        DtPuntaje res = new DtPuntaje();
+        res.setIdC(iC);
+        double p = this.rankService.obtenerRank(iC);
+        res.setPuntaje(Math.round(p * 100) / 100d);
+        return new ResponseEntity<DtPuntaje>(res,HttpStatus.OK);
     }
 }

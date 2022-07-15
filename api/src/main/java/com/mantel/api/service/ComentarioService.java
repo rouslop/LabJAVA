@@ -1,5 +1,6 @@
 package com.mantel.api.service;
-import com.mantel.api.model.*;
+import com.mantel.api.model.Comentario;
+import com.mantel.api.model.ComentarioIndividual;
 
 
 import java.util.List;

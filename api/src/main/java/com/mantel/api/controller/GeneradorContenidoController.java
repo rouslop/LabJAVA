@@ -3,7 +3,6 @@ package com.mantel.api.controller;
 import com.mantel.api.model.Contenido;
 import com.mantel.api.model.GeneradorContenido;
 
-import com.mantel.api.model.Usuario;
 import com.mantel.api.service.GeneradorContenidoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

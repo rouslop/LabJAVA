@@ -1,5 +1,4 @@
 package com.mantel.api.model;
-import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.*;

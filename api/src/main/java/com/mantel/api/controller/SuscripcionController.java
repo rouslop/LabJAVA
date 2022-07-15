@@ -47,7 +47,7 @@ public class SuscripcionController {
     }
 
     @PostMapping("/agrearSuscripcionPPV/{idContenido}/{idUsu}")
-    public ResponseEntity<String> agrearSuscripcionPPV(@RequestBody SuscripcionPerPayView suscripcionPerPayView, @PathVariable("idContenido") long idContenido,@PathVariable("idUsu") long idUsu) {
+    public ResponseEntity<String> agrearSuscripcionPPV(@RequestBody SuscripcionPerPayView suscripcionPerPayView, @PathVariable("idContenido") long idContenido, @PathVariable("idUsu") long idUsu) {
 
         Contenido contenido = contenidoService.obtenerContenido(idContenido);
         contenido.agregarSuscripcionPPV(suscripcionPerPayView);

@@ -4,6 +4,7 @@ import com.mantel.api.model.Contenido;
 import com.mantel.api.model.TipoUsuario;
 import com.mantel.api.model.Usuario;
 import com.mantel.api.service.ContenidoService;
+import com.mantel.api.service.RankService;
 import com.mantel.api.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,13 @@ public class UsuarioController {
 
     private UsuarioService usuarioService;
     private ContenidoService contenidoService;
+    private RankService rankService;
 
-    public UsuarioController(UsuarioService usuarioService, ContenidoService contenidoService){
+    public UsuarioController(UsuarioService usuarioService, ContenidoService contenidoService, RankService rankService){
         super();
         this.usuarioService = usuarioService;
         this.contenidoService = contenidoService;
+        this.rankService = rankService;
     }
 
     @PostMapping("/agregarUsuario")
@@ -114,6 +117,19 @@ public class UsuarioController {
     @GetMapping("/listarRecomendados/{idUsu}")
     public ResponseEntity<List<Contenido>> listarRecomendados(@PathVariable("idUsu") long idUsu){
         return new ResponseEntity<List<Contenido>>(usuarioService.listarRecomendados(idUsu), HttpStatus.OK);
+    }
+
+    @PostMapping("/valorarContenido/{idC}/{idU}/{puntaje}")
+    public ResponseEntity<String> valorarContenido(@PathVariable("idC") Integer idC, @PathVariable("idU") Integer idU, @PathVariable("puntaje") Integer puntaje){
+        Long iU,iC;
+        iU = Long.parseLong(idU.toString());
+        iC = Long.parseLong(idC.toString());
+        if(this.rankService.valorarContenido(iU,iC,puntaje)){
+            return new ResponseEntity<String>("Valorado con éxito",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("Error, no se ha podido valorar",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
