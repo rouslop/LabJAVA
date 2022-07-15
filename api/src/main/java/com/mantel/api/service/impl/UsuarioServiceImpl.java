@@ -32,7 +32,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public List<Usuario> obtenerUsuarios() {
 
-        Query query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.activo=true", Usuario.class);
         return (List<Usuario>) query.getResultList();
     }
 
@@ -66,10 +66,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         return existeUsu;
     }
 
-    public Usuario obtenerUsuarioPorEmail(String email) {
+    public Usuario obtenerUsuarioPorEmail(String email) {//devuelve los activos solamente
         Usuario u = null;
 
-        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class);
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email AND u.activo=true", Usuario.class);
         try {
             if( (query.setParameter("email", email).getSingleResult()) != null){
                 Usuario usu = query.setParameter("email", email).getSingleResult();
@@ -98,6 +98,7 @@ public class UsuarioServiceImpl implements UsuarioService {
           Usuario u = (Usuario) q.getSingleResult();
           if(u!=null){
               u.setBloqueado(true);
+              u.setActivo(false);
               this.em.merge(u);
           }
           return true;
@@ -116,6 +117,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario u = (Usuario) q.getSingleResult();
         if(u!=null){
             u.setBloqueado(false);
+            u.setActivo(true);
             this.em.merge(u);
         }
         return false;

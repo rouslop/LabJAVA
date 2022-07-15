@@ -30,7 +30,9 @@ public class Contenido {
     private float precio;
     private Time duracion;
     private Time comienzo;
+    @Column(columnDefinition = "boolean default false")
     private boolean destacado;
+    @Column(columnDefinition = "boolean default false")
     private boolean bloqueado;
     @Column(columnDefinition = "boolean default false")
     private boolean activo;

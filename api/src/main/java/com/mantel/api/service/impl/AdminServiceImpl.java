@@ -59,6 +59,7 @@ public class AdminServiceImpl implements AdminService {
         Contenido c = this.em.find(Contenido.class,id);
         if(c!=null){
             c.setBloqueado(true);
+            c.setActivo(false);
             this.em.merge(c);
             return true;
         }
@@ -73,6 +74,7 @@ public class AdminServiceImpl implements AdminService {
         Contenido c = this.em.find(Contenido.class,id);
         if(c!=null){
             c.setBloqueado(false);
+            c.setActivo(true);
             this.em.merge(c);
             return true;
         }

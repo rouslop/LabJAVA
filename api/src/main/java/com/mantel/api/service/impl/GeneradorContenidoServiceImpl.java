@@ -112,7 +112,7 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
             GeneradorContenido gc = (GeneradorContenido) q.getResultList().get(0);
             for(int i=0; i< contenidos.size(); i++){
                 c = contenidos.get(i);
-                if(c.getGeneradorContenidoid()==gc){
+                if((c.getGeneradorContenidoid()==gc)&&(c.isActivo())){
                     res.add(c);
                 }
             }
