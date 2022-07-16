@@ -17,6 +17,10 @@ public interface ContenidoService {
 
     public boolean agregarCategoria(long idContenido, long idCategoria);
 
+    public boolean eliminarCategoria(long idContenido, long idCategoria);
+
+    public List<Categoria> listarCategorias(long idContenido);
+
     public void agregarComentario(Contenido contenido, Comentario comentario);
 
     public List<Contenido> listarRelacionados(long idContenido);

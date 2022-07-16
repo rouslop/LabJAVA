@@ -111,6 +111,46 @@ public class ContenidoServiceImpl implements ContenidoService {
 
     }
 
+    @Override
+    public boolean eliminarCategoria(long idContenido, long idCategoria) {
+        Contenido cont = this.em.find(Contenido.class,idContenido);
+        if(cont!=null){
+            Categoria cat = this.em.find(Categoria.class,idCategoria);
+            if(cat!=null){
+                List<Categoria> cats = cont.getCategorias();
+                if(!cats.contains(cat)){
+                    return false;
+                }
+                cats.remove(cat);
+                cont.setCategorias(cats);
+                this.em.merge(cont);
+                if(!this.em.find(Contenido.class,idContenido).getCategorias().contains(cat)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Categoria> listarCategorias(long idContenido) {
+        Contenido c = this.em.find(Contenido.class,idContenido);
+        if((c!=null)&&(c.isActivo())){
+            return c.getCategorias();
+        }
+        else {
+            return null;
+        }
+    }
+
     public void agregarComentario(Contenido contenido, Comentario comentario){
         List<Comentario> comentarios = contenido.getComentario();
         comentarios.add(comentario);

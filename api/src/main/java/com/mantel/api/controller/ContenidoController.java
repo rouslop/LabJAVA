@@ -83,6 +83,31 @@ public class ContenidoController {
         }
     }
 
+    @DeleteMapping("/eliminarCategoria/{idCont}/{idCat}")
+    public ResponseEntity<String> eliminarCategoria(@PathVariable("idCont")Integer idCont, @PathVariable("idCat") Integer idCat){
+        Long icont, icat;
+        icont = Long.parseLong(idCont.toString());
+        icat = Long.parseLong(idCat.toString());
+        if(this.contenidoService.eliminarCategoria(icont,icat)){
+            return new ResponseEntity<String>("Todo ok",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No se pudo eliminar la categoria",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/listarCategorias/{idCont}")
+    public ResponseEntity<List<Categoria>> listarCategorias(@PathVariable("idCont") Integer idCont){
+        Long icont = Long.parseLong(idCont.toString());
+        List<Categoria> res = this.contenidoService.listarCategorias(icont);
+        if(res!=null){
+            return new ResponseEntity<List<Categoria>>(res,HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<List<Categoria>>(res,HttpStatus.INTERNAL_SERVER_ERROR); //no se encontro el contenido o no esta activo
+        }
+    }
+
     @DeleteMapping("/eliminarContenido/{id}")
     public ResponseEntity<String> eliminarContenido(@PathVariable("id") long id){
         Contenido c = contenidoService.obtenerContenido(id);
