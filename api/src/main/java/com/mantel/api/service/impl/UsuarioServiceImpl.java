@@ -146,8 +146,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public boolean rankearContenido(String email, Long idContenido) {
-        return false;
+    public List<Contenido> listarFavoritos(long idU) {
+        Usuario u = this.em.find(Usuario.class, idU);
+        if((u!=null)&&(u.isActivo())){
+            return u.getFavoritos();
+        }
+        else {
+            return null;
+        }
     }
 
     @Override

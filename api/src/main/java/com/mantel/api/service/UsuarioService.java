@@ -18,8 +18,7 @@ public interface UsuarioService {
     public boolean desbloquearUsuario(String email);
     public boolean eliminadoLogico(String email);
     public boolean checkCredenciales(long id, String email, String contrasenia);
-    public boolean rankearContenido(String email, Long idContenido);
-
+    public List<Contenido> listarFavoritos(long idU);
     public void agregarContenidoAfavoritos(Contenido c , long id);
     public void eliminarContenidoDeFavoritos(Contenido c, long id);
     public List<Contenido> listarRecomendados(long idUsu);
