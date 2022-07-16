@@ -10,6 +10,7 @@ GET http://localhost:8080/contenidos/listarPorTipoCat/{idCat}/{tipo}
 GET http://localhost:8080/contenidos/listarmarcados/{idGC}
 GET http://localhost:8080/contenidos/listarsinmarcar/{idGC}
 GET http://localhost:8080/contenidos/obtenerPuntaje/{idC}
+GET http://localhost:8080/contenidos/listarCategorias/{idCont}
 
 
 POST http://localhost:8080/contenidos/agregarContenido/{idgc} (Pasarle el contenido en el body)
@@ -20,5 +21,6 @@ PUT http://localhost:8080/contenidos/editarContenido (Pasarle el contenido en el
 PUT http://localhost:8080/contenidos/agregarCategoria/{idCont}/{idCat}
 
 DELETE http://localhost:8080/contenidos/eliminarContenido/{id}
+DELETE http://localhost:8080/contenidos/eliminarCategoria/{idCont}/{idCat}
 
 
