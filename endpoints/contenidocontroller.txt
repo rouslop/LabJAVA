@@ -17,6 +17,7 @@ POST http://localhost:8080/contenidos/comentarContenido/{idContenido}/{idUsuario
 POST http://localhost:8080/contenidos/marcarContenidoDestacado/{id}
 
 PUT http://localhost:8080/contenidos/editarContenido (Pasarle el contenido en el body)
+PUT http://localhost:8080/contenidos/agregarCategoria/{idCont}/{idCat}
 
 DELETE http://localhost:8080/contenidos/eliminarContenido/{id}
 

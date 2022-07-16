@@ -15,7 +15,7 @@ public interface ContenidoService {
 
     public Contenido editarContenido(Contenido usuario);
 
-    public void agregarCategoria(long idContenido, long idCategoria);
+    public boolean agregarCategoria(long idContenido, long idCategoria);
 
     public void agregarComentario(Contenido contenido, Comentario comentario);
 

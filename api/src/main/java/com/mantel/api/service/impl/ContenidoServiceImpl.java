@@ -82,8 +82,32 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
-    public void agregarCategoria (long idContenido, long idCategoria){
-        //Query query = em.createQuery("INSERT INTO contenidos_categoria (contenido_id, categoria_i) VALUES (idContenido, idCategoria)");
+    public boolean agregarCategoria (long idContenido, long idCategoria){
+        Contenido cont = this.em.find(Contenido.class,idContenido);
+        if(cont!=null){
+            Categoria cat = this.em.find(Categoria.class,idCategoria);
+            if(cat!=null){
+                List<Categoria> cats = cont.getCategorias();
+                if(cats.contains(cat)){
+                    return false;
+                }
+                cats.add(cat);
+                cont.setCategorias(cats);
+                this.em.merge(cont);
+                if(this.em.find(Contenido.class,idContenido).getCategorias().contains(cat)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
 
     }
 

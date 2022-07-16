@@ -70,6 +70,19 @@ public class ContenidoController {
         return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
     }
 
+    @PutMapping("/agregarCategoria/{idCont}/{idCat}")
+    public ResponseEntity<String> agregarCategoria(@PathVariable("idCont")Integer idCont, @PathVariable("idCat")Integer idCat){
+        Long icont, icat;
+        icont = Long.parseLong(idCont.toString());
+        icat = Long.parseLong(idCat.toString());
+        if(this.contenidoService.agregarCategoria(icont,icat)){
+            return new ResponseEntity<String>("Todo ok",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No se pudo agregar la categoria",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @DeleteMapping("/eliminarContenido/{id}")
     public ResponseEntity<String> eliminarContenido(@PathVariable("id") long id){
         Contenido c = contenidoService.obtenerContenido(id);
