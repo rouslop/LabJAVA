@@ -21,6 +21,8 @@ public interface ContenidoService {
 
     public List<Categoria> listarCategorias(long idContenido);
 
+    public List<Contenido> buscarContenidos(String nombre);
+
     public void agregarComentario(Contenido contenido, Comentario comentario);
 
     public List<Contenido> listarRelacionados(long idContenido);

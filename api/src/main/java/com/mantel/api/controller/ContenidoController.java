@@ -70,6 +70,11 @@ public class ContenidoController {
         return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
     }
 
+    @GetMapping("/buscarPorNombre/{nombre}")
+    public ResponseEntity<List<Contenido>> buscarContenidosPorNombre(@PathVariable("nombre") String nombre){
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.buscarContenidos(nombre),HttpStatus.OK);
+    }
+
     @PutMapping("/agregarCategoria/{idCont}/{idCat}")
     public ResponseEntity<String> agregarCategoria(@PathVariable("idCont")Integer idCont, @PathVariable("idCat")Integer idCat){
         Long icont, icat;
