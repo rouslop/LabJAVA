@@ -232,7 +232,7 @@ public class ContenidoServiceImpl implements ContenidoService {
                 return -1;
             }
 //            Query q = this.em.createQuery("SELECT s FROM Suscripcion s WHERE s.usuarioId=:user AND s.generadorContenidoid=:gc");
-            Query q = this.em.createNativeQuery("SELECT * FROM `suscripciones` WHERE fecha_vencimiento < NOW() AND gc_id=:gc AND usuario_id=:user");
+            Query q = this.em.createNativeQuery("SELECT * FROM `suscripciones` WHERE fecha_vencimiento > NOW() AND gc_id=:gc AND usuario_id=:user");
             q.setParameter("user",u.getId());
             q.setParameter("gc",c.getGeneradorContenidoid().getId());
             if(!q.getResultList().isEmpty()) {
@@ -262,7 +262,7 @@ public class ContenidoServiceImpl implements ContenidoService {
                 }
             }
             else {
-                return 0;
+                return -2;
             }
         }
         else {
@@ -271,23 +271,12 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
-    public boolean estaPago(long idCont, long idUser) {
+    public Integer estaPago(long idCont, long idUser) {
         if(this.esPayPerView(idCont)){
-            if(this.estaPagoPV(idCont,idUser)==1){
-                return true;
-            }
-            else{
-                System.out.println(this.estaPagoPV(idCont,idUser));
-                return false;
-            }
+            return this.estaPagoPV(idCont,idUser);
         }
         else{
-            if(this.estaPagoGc(idCont,idUser)==1){
-                return true;
-            }
-            else {
-                return false;
-            }
+            return this.estaPagoGc(idCont,idUser);
 
         }
     }

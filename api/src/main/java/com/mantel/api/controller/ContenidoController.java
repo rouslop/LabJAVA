@@ -153,11 +153,11 @@ public class ContenidoController {
     public ResponseEntity<String> estaPago(@PathVariable("idC") Integer idC, @PathVariable("idU") Integer idU){
         long ic = Long.parseLong(idC.toString());
         long iu = Long.parseLong(idU.toString());
-        if(this.contenidoService.estaPago(ic,iu)){
+        if(this.contenidoService.estaPago(ic,iu)==1){
             return new ResponseEntity<String>("Está pago",HttpStatus.OK);
         }
         else{
-            return new ResponseEntity<String>("Error, no puede ver este contenido",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<String>("No puede acceder a este contenido",HttpStatus.NOT_FOUND);
         }
     }
 
