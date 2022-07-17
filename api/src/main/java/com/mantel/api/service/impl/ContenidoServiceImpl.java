@@ -88,7 +88,7 @@ public class ContenidoServiceImpl implements ContenidoService {
             Categoria cat = this.em.find(Categoria.class,idCategoria);
             if(cat!=null){
                 List<Categoria> cats = cont.getCategorias();
-                if(cats.contains(cat)){
+                if(cats.contains(cat)){//chequea que la categoria no se repita
                     return false;
                 }
                 cats.add(cat);
