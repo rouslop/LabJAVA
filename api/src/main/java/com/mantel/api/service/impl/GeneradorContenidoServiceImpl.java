@@ -1,10 +1,9 @@
 package com.mantel.api.service.impl;
 
 
-import com.mantel.api.model.Contenido;
-import com.mantel.api.model.GeneradorContenido;
-import com.mantel.api.model.Usuario;
+import com.mantel.api.model.*;
 import com.mantel.api.service.GeneradorContenidoService;
+import com.mantel.api.service.RankService;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
@@ -99,6 +98,41 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
         else{
             return false;
         }
+    }
+
+    public double obtenerRank(long idC) {
+        Query q = this.em.createQuery("SELECT r FROM Rank r WHERE r.idContenido =:idc");
+        q.setParameter("idc",idC);
+        List<Rank> valoraciones = q.getResultList();
+        if(valoraciones.isEmpty()){
+            return 0;
+        }
+        int total = 0;
+        for (Rank r: valoraciones){
+            total = total+r.getPuntaje();
+        }
+        double res = total/valoraciones.size();
+        return res;
+    }
+
+    @Override
+    public List<DtReporte> obtenerReportes(long id) {
+        GeneradorContenido gc = this.obtenerGeneradorContenido(id);
+        if(gc!=null){
+           List<Contenido> contenidos = this.listarContenidos(gc.getEmail());
+           List<DtReporte> res = new ArrayList<>();
+           for(Contenido c: contenidos){
+               Query q = this.em.createQuery("SELECT v FROM Visualizacion v WHERE v.contenidoId=:cont");
+               q.setParameter("cont",c);
+               DtReporte aux = new DtReporte();
+               aux.setContenido(c);
+               aux.setVisualizaciones(q.getResultList().size());
+               aux.setPuntaje(this.obtenerRank(c.getId()));
+               res.add(aux);
+           }
+           return res;
+        }
+        return null;
     }
 
     @Override

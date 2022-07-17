@@ -1,6 +1,7 @@
 package com.mantel.api.controller;
 
 import com.mantel.api.model.Contenido;
+import com.mantel.api.model.DtReporte;
 import com.mantel.api.model.GeneradorContenido;
 
 import com.mantel.api.service.GeneradorContenidoService;
@@ -71,6 +72,17 @@ public class GeneradorContenidoController {
     @GetMapping("/listarContenidos/{email}")
     public ResponseEntity<List<Contenido>> listarContenidos(@PathVariable("email") String email){
         return new ResponseEntity<List<Contenido>>(this.generadorContenidoService.listarContenidos(email),HttpStatus.OK);
+    }
+
+    @GetMapping("/obtenerReportes/{idGC}")
+    public ResponseEntity<List<DtReporte>> obtenerResportes(@PathVariable("idGC") Integer idGC){
+        List<DtReporte> res = this.generadorContenidoService.obtenerReportes(Long.parseLong(idGC.toString()));
+        if(res!=null){
+            return new ResponseEntity<List<DtReporte>>(res,HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<List<DtReporte>>(res,HttpStatus.BAD_REQUEST);//el gc es null
+        }
     }
 
 }

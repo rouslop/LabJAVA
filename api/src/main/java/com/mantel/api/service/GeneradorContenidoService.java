@@ -2,6 +2,7 @@ package com.mantel.api.service;
 
 
 import com.mantel.api.model.Contenido;
+import com.mantel.api.model.DtReporte;
 import com.mantel.api.model.GeneradorContenido;
 
 
@@ -16,7 +17,7 @@ public interface GeneradorContenidoService {
     public GeneradorContenido editarGC(GeneradorContenido gc);
     public List<GeneradorContenido> obtenerGeneradores();
     public boolean eliminarGenerador(String email);
-
+    public List<DtReporte> obtenerReportes(long id);
     public List<Contenido> listarContenidos(String email);
 //    public boolean eliminarContenidoDeLista(Long idC);
 }
