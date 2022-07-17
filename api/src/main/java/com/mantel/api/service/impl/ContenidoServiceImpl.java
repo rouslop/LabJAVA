@@ -153,9 +153,9 @@ public class ContenidoServiceImpl implements ContenidoService {
 
     @Override
     public List<Contenido> buscarContenidos(String nombre) {
-        Query q = this.em.createQuery("SELECT c FROM Contenido c WHERE c.nombre LIKE :nombre");
-        q.setParameter("nombre","'%'"+nombre+"'%'");
-        return q.getResultList();
+        Query q = this.em.createQuery("SELECT c FROM Contenido c WHERE c.nombre LIKE '%"+nombre+"%'");
+        List<Contenido> res = q.getResultList();
+        return res;
     }
 
     public void agregarComentario(Contenido contenido, Comentario comentario){
