@@ -37,6 +37,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public List<Usuario> listarUsuariosBloqueados(){
+        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.bloqueado=true", Usuario.class);
+        return (List<Usuario>) query.getResultList();
+    }
+
+    @Override
     public Usuario obtenerUsuario(long id) {
         Usuario usuario = em.find(Usuario.class, id);
         return usuario;

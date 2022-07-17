@@ -65,6 +65,17 @@ public class UsuarioController {
         return new ResponseEntity<List<Usuario>>(usuarioService.obtenerUsuarios(), HttpStatus.OK);
     }
 
+    @GetMapping("/listarBloqueados")
+    public ResponseEntity<List<Usuario>> listarBloqueados(){
+        List<Usuario> res = this.usuarioService.listarUsuariosBloqueados();
+        if(res!=null) {
+            return new ResponseEntity<List<Usuario>>(res,HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<List<Usuario>>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/{id}")
     public Usuario obtenerUsuario(@PathVariable("id") long usuarioId){
         Usuario u = usuarioService.obtenerUsuario(usuarioId);

@@ -9,6 +9,7 @@ GET http://localhost:8080/usuarios/{id} (Obtiene un usuario por su id)
 GET http://localhost:8080/usuarios/listarRecomendados/{idUsu}
 GET http://localhost:8080/usuarios/listarFavoritos/{idU}
 GET http://localhost:8080/usuarios/listarRelacionadosFavoritos/{idU}
+GET https://localhost:8080/usuarios/listarBloqueados
 
 
 DELETE http://localhost:8080/usuarios/eliminarUsuario/{id}
