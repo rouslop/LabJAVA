@@ -5,6 +5,16 @@ INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `no
 INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'1', b'0', '123', '123@gmail.com', 'Cintia', b'0', 'ADMIN');
 INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'1', b'0', '123', 'cliente1@gmail.com', 'Cintia', b'0', 'CLIENTE');
 INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'1', b'0', '123', 'cliente2@gmail.com', 'Cintia', b'0', 'CLIENTE');
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'0', b'0', '123', 'cliente3@gmail.com', 'Ana', b'0', 'CLIENTE');
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'0', b'0', '123', 'cliente4@gmail.com', 'Juan', b'0', 'CLIENTE');
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'0', b'0', '123', 'cliente5@gmail.com', 'Miguel', b'0', 'CLIENTE');
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'0', b'0', '123', 'cliente6@gmail.com', 'Lolo', b'0', 'CLIENTE');
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'0', b'0', '123', 'cliente7@gmail.com', 'Lola', b'0', 'CLIENTE');
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'0', b'1', '123', 'cliente8@gmail.com', 'Juli', b'0', 'CLIENTE');
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'1', b'1', '123', 'cliente9@gmail.com', 'Julia', b'0', 'CLIENTE');
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'1', b'1', '123', 'cliente10@gmail.com', 'Maria', b'0', 'CLIENTE');
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'1', b'1', '123', 'cliente11@gmail.com', 'Mariana', b'0', 'CLIENTE');
+INSERT INTO `usuarios` (`id`, `activo`, `bloqueado`, `contrasenia`, `email`, `nombre`, `pago`, `tipo_usuario`) VALUES (NULL, b'1', b'1', '123', 'cliente12@gmail.com', 'Sofia', b'0', 'CLIENTE');
 
 -- GENERADOR CONTENIDO
 INSERT INTO `generadores_contenidos` (`id`, `contrasenia`,`precio`, `email`, `ganancia`, `metodo_pago`, `nombre`) VALUES (NULL, '123', 0,'generadorContenido@gmail.com', '0', 'Tarjeta ', 'generadorContenido1');
