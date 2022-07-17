@@ -50,8 +50,7 @@ public class Contenido {
     @ManyToOne()
     @JoinColumn(name="gc_id")
     private GeneradorContenido generadorContenidoid;
-
-
+    
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     List<Persona> persona = new ArrayList<>();
 
