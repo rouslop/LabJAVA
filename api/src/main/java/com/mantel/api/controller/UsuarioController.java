@@ -131,6 +131,18 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/listarRelacionadosFavoritos/{idU}")
+    public ResponseEntity<List<Contenido>> listarRelacionadosFavoritos(@PathVariable("idU") Integer idU){
+        Long i = Long.parseLong(idU.toString());
+        List<Contenido> res = this.usuarioService.listarRelacionadosFavoritos(i);
+        if(res!=null){
+            return new ResponseEntity<List<Contenido>>(res,HttpStatus.OK);
+        }
+        else{ //si retorna null es porque el id de usuario se paso mal o el usuario no esta activo
+            return new ResponseEntity<List<Contenido>>(res,HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping("/valorarContenido/{idC}/{idU}/{puntaje}")
     public ResponseEntity<String> valorarContenido(@PathVariable("idC") Integer idC, @PathVariable("idU") Integer idU, @PathVariable("puntaje") Integer puntaje){
         Long iU,iC;

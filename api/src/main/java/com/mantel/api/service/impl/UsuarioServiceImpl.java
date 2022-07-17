@@ -157,6 +157,34 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public List<Contenido> listarRelacionadosFavoritos(long idU) {
+        Usuario u = this.em.find(Usuario.class,idU);
+        if((u!=null)&&(u.isActivo())){
+            List<Contenido> favs = u.getFavoritos();//lista de favoritos
+            List<Contenido> res = new ArrayList<>();
+            List<Categoria> categorias = new ArrayList<>();//categorias de todos los favoritos
+            for(Contenido con: favs){ //para cada contenido fav se trae las categorias y las filtra para que no se repitan
+                for(Categoria cat: con.getCategorias()){
+                    if(!categorias.contains(cat)){
+                        categorias.add(cat);
+                    }
+                }
+            }
+            //me tengo que traer todos los contenidos de cada categoria
+            List<Contenido> cont = this.em.createQuery("SELECT c FROM Contenido c").getResultList();//todos los contenidos del sistema
+            for(Categoria cat: categorias){
+                for(Contenido con: cont){
+                    if((con.getCategorias().contains(cat))&&(!favs.contains(con))){//si en la lista de categorias del contenido tengo esa categoria y no esta en mis favoritos, lo agrego
+                        res.add(con);
+                    }
+                }
+            }
+            return res;
+        }
+        return null;
+    }
+
+    @Override
     public void agregarContenidoAfavoritos(Contenido c, long id) {
         Usuario usuario = em.find(Usuario.class, id);
         List<Contenido> favoritos = usuario.getFavoritos();
