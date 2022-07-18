@@ -41,7 +41,7 @@ public interface ContenidoService {
 
     public boolean marcarContenido(long i);
     public boolean DesmarcarContenido(long i);
-
+    public boolean esFavorito(long idC, long idU);
     public Integer estaPagoGc(long idCont, long idUser);
     public Integer estaPagoPV(long idCont, long idUser);
     public Integer estaPago(long idCont, long idUser);

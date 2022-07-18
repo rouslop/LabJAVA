@@ -82,6 +82,23 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
+    public boolean esFavorito(long idC, long idU) {
+        Contenido c = this.em.find(Contenido.class,idC);
+        Usuario u = this.em.find(Usuario.class,idU);
+        if((c!=null)&&(u!=null)&&(u.isActivo())&&(!c.isBloqueado())){ //verifica que exista el contenido y no este bloqueado, tambien que el usuario exista y no este bloqueado
+            if(u.getFavoritos().contains(c)){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
     public boolean agregarCategoria (long idContenido, long idCategoria){
         Contenido cont = this.em.find(Contenido.class,idContenido);
         if(cont!=null){

@@ -89,6 +89,9 @@ INSERT INTO `rankings` (`id`, `id_contenido`, `id_usuario`, `puntaje`) VALUES
 -- VISUALIZACIONES
 INSERT INTO `visualizaciones` (`id`, `terminado`, `time`, `contenido_id`, `usuario_id`) VALUES ('1', b'1', '20', '1', '1'), ('2', b'1', '20', '1', '2');
 
+-- FAVORITOS
+INSERT INTO `usuarios_favoritos` (`usuario_id`, `favoritos_id`) VALUES ('1', '1');
+
 -- CONTENIDO PERSONA
 INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('1', '9');
 INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('1', '8');

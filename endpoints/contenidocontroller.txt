@@ -12,6 +12,7 @@ GET http://localhost:8080/contenidos/listarsinmarcar/{idGC}
 GET http://localhost:8080/contenidos/obtenerPuntaje/{idC}
 GET http://localhost:8080/contenidos/listarCategorias/{idCont}
 GET http://localhost:8080/contenidos/buscarPorNombre/{nombre}
+GET http://localhost:8080/contenidos/esFavorito/{idContenido}/{idUsuario}
 
 
 POST http://localhost:8080/contenidos/agregarContenido/{idgc} (Pasarle el contenido en el body)

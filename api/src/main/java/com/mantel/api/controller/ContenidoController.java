@@ -75,6 +75,16 @@ public class ContenidoController {
         return new ResponseEntity<List<Contenido>>(this.contenidoService.buscarContenidos(nombre),HttpStatus.OK);
     }
 
+    @GetMapping("/esFavorito/{idC}/{idU}")
+    public ResponseEntity<String> esFavorito(@PathVariable("idC") Integer idC, @PathVariable("idU") Integer idU){
+        if(this.contenidoService.esFavorito(Long.parseLong(idC.toString()),Long.parseLong(idU.toString()))){
+            return new ResponseEntity<String>("Es favorito",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No es favorito",HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PutMapping("/agregarCategoria/{idCont}/{idCat}")
     public ResponseEntity<String> agregarCategoria(@PathVariable("idCont")Integer idCont, @PathVariable("idCat")Integer idCat){
         Long icont, icat;
