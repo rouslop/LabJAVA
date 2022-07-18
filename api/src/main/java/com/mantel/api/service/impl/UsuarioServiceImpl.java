@@ -106,8 +106,14 @@ public class UsuarioServiceImpl implements UsuarioService {
               u.setBloqueado(true);
               u.setActivo(false);
               this.em.merge(u);
+              if(this.em.find(Usuario.class,u.getId()).isBloqueado()){
+                  return true;
+              }
+              else{
+                  return false;
+              }
           }
-          return true;
+          return false;
       }
       else{
           return false;
@@ -125,6 +131,12 @@ public class UsuarioServiceImpl implements UsuarioService {
             u.setBloqueado(false);
             u.setActivo(true);
             this.em.merge(u);
+            if(!this.em.find(Usuario.class,u.getId()).isBloqueado()){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
         return false;
     }
