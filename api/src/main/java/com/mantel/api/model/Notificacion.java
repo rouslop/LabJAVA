@@ -16,6 +16,6 @@ public class Notificacion {
     private String emailReceptor;
     private Long idEmisor;
     private Long idContenido;
-
+    private String texto;
 
 }
