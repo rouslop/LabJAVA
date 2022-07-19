@@ -70,6 +70,16 @@ public class ContenidoController {
         return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
     }
 
+    @PostMapping("/agregarPersona{idC}{idP}")
+    public ResponseEntity<String> agregarPersona(@PathVariable("idC") Integer idC, @PathVariable("idP") Integer idP){
+        if(this.contenidoService.agregarPersona(Long.parseLong(idC.toString()),Long.parseLong(idP.toString()))){
+            return new ResponseEntity<String>("Agregada con éxito",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No se pudo agregar",HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/buscarPorNombre/{nombre}")
     public ResponseEntity<List<Contenido>> buscarContenidosPorNombre(@PathVariable("nombre") String nombre){
         return new ResponseEntity<List<Contenido>>(this.contenidoService.buscarContenidos(nombre),HttpStatus.OK);

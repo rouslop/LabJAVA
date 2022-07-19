@@ -345,7 +345,9 @@ public class ContenidoServiceImpl implements ContenidoService {
                 return false;
             }
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
     @Override
