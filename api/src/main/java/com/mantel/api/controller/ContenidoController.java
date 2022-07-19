@@ -70,7 +70,7 @@ public class ContenidoController {
         return new ResponseEntity<String>("creado y tranquilo", HttpStatus.CREATED);
     }
 
-    @PostMapping("/agregarPersona{idC}{idP}")
+    @PostMapping("/agregarPersona/{idC}/{idP}")
     public ResponseEntity<String> agregarPersona(@PathVariable("idC") Integer idC, @PathVariable("idP") Integer idP){
         if(this.contenidoService.agregarPersona(Long.parseLong(idC.toString()),Long.parseLong(idP.toString()))){
             return new ResponseEntity<String>("Agregada con éxito",HttpStatus.OK);
