@@ -99,6 +99,19 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
+    public boolean estaValorado(long idC, long idU) {
+        Query q = this.em.createQuery("SELECT r FROM Rank r WHERE r.idUsuario=:user AND r.idContenido=:cont");
+        q.setParameter("user",idU);
+        q.setParameter("cont",idC);
+        if(q.getResultList().isEmpty()){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    @Override
     public boolean agregarCategoria (long idContenido, long idCategoria){
         Contenido cont = this.em.find(Contenido.class,idContenido);
         if(cont!=null){

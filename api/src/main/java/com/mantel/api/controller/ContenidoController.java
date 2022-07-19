@@ -85,6 +85,16 @@ public class ContenidoController {
         }
     }
 
+    @GetMapping("/estaValorado/{idC}/{idU}")
+    public ResponseEntity<String> estaValorado(@PathVariable("idC") Integer idC, @PathVariable("idU") Integer idU){
+        if(this.contenidoService.estaValorado(Long.parseLong(idC.toString()),Long.parseLong(idU.toString()))){
+            return new ResponseEntity<String>("Ya fue valorado",HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<String>("No ha sido valorado",HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PutMapping("/agregarCategoria/{idCont}/{idCat}")
     public ResponseEntity<String> agregarCategoria(@PathVariable("idCont")Integer idCont, @PathVariable("idCat")Integer idCat){
         Long icont, icat;
