@@ -93,17 +93,17 @@ INSERT INTO `visualizaciones` (`id`, `terminado`, `time`, `contenido_id`, `usuar
 INSERT INTO `usuarios_favoritos` (`usuario_id`, `favoritos_id`) VALUES ('1', '1');
 
 -- CONTENIDO PERSONA
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('1', '9');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('1', '8');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('2', '1');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('2', '7');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('3', '7');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('3', '1');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('3', '5');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('4', '5');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('4', '9');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('5', '9');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('5', '1');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('5', '6');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('6', '3');
-INSERT INTO `contenidos_persona` (`contenido_id`, `persona_id`) VALUES ('6', '9');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('1', '9');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('1', '8');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('2', '1');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('2', '7');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('3', '7');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('3', '1');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('3', '5');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('4', '5');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('4', '9');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('5', '9');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('5', '1');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('5', '6');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('6', '3');
+INSERT INTO `contenido_personas` (`contenido_id`, `persona_id`) VALUES ('6', '9');
