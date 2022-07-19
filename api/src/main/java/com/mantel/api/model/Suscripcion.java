@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -18,6 +19,7 @@ public class Suscripcion {
     private long id;
 
     private String fechaVencimiento;
+    private LocalDate fechaSuscripcion;
     private float monto;
 
     @Enumerated(EnumType.STRING)

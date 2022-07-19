@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -35,11 +36,18 @@ public class SuscripcionController {
     @PostMapping("/agregarSuscripcion/{idgc}/{idUsu}")
     public ResponseEntity<String> agregarSuscripcion(@RequestBody Suscripcion suscripcion, @PathVariable("idgc") long gcId, @PathVariable("idUsu") long idUsu){
 
+
         GeneradorContenido gc = generadorContenidoService.obtenerGeneradorContenido(gcId);
+
+        LocalDate fechaActual = LocalDate.now();
+        suscripcion.setFechaSuscripcion(fechaActual);
+        suscripcion.setMonto(gc.getPrecio());
+
         gc.agregarSuscripcion(suscripcion);
 
         Usuario usuario = usuarioService.obtenerUsuario(idUsu);
         usuario.agregarSuscripcion(suscripcion);
+
 
         suscripcionService.agregarSuscripcion(suscripcion);
         return new ResponseEntity<String>("Nueva suscripción agregada!", HttpStatus.CREATED);
@@ -47,13 +55,22 @@ public class SuscripcionController {
     }
 
     @PostMapping("/agrearSuscripcionPPV/{idContenido}/{idUsu}")
-    public ResponseEntity<String> agrearSuscripcionPPV(@RequestBody SuscripcionPerPayView suscripcionPerPayView, @PathVariable("idContenido") long idContenido, @PathVariable("idUsu") long idUsu) {
+    public ResponseEntity<String> agrearSuscripcionPPV(@PathVariable("idContenido") long idContenido, @PathVariable("idUsu") long idUsu) {
+
+        SuscripcionPerPayView suscripcionPerPayView = new SuscripcionPerPayView();
 
         Contenido contenido = contenidoService.obtenerContenido(idContenido);
-        contenido.agregarSuscripcionPPV(suscripcionPerPayView);
-
         Usuario usuario = usuarioService.obtenerUsuario(idUsu);
+
+        suscripcionPerPayView.setMonto(contenido.getPrecio());
+        suscripcionPerPayView.setUsuarioId(usuario);
+        suscripcionPerPayView.setContenidoId(contenido);
+        LocalDate fechaActual = LocalDate.now();
+        suscripcionPerPayView.setFechaSuscripcion(fechaActual);
+
+        contenido.agregarSuscripcionPPV(suscripcionPerPayView);
         usuario.agregarSuscripcionPPV(suscripcionPerPayView);
+
 
         suscripcionPPVService.agregarSuscripcionPPV(suscripcionPerPayView);
         return new ResponseEntity<String>("Nueva suscripción PAY PER VIEW agregada!", HttpStatus.CREATED);

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Entity
@@ -15,6 +17,7 @@ public class SuscripcionPerPayView {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private LocalDate fechaSuscripcion;
     private float monto;
 
 
