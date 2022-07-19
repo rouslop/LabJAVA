@@ -24,7 +24,6 @@ public class GeneradorContenido {
         private String email;
         private  String contrasenia;
         private String metodoPago;
-        private float ganancia;
 
         @JsonIgnore
         @ToString.Exclude

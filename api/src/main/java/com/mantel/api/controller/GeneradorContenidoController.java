@@ -28,7 +28,7 @@ public class GeneradorContenidoController {
     public ResponseEntity<String> agregarGeneradorContenido(@RequestBody GeneradorContenido g){
         boolean existeGC = generadorContenidoService.existeGCPorEmail(g.getEmail());
         if(existeGC == false) {
-            g.setGanancia(0);
+
             generadorContenidoService.agregarGeneradorContenido(g);
             return new ResponseEntity<String>("Generador de contenido creado", HttpStatus.CREATED);
         }else{
