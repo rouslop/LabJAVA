@@ -18,6 +18,7 @@ GET http://localhost:8080/contenidos/esFavorito/{idContenido}/{idUsuario}
 POST http://localhost:8080/contenidos/agregarContenido/{idgc} (Pasarle el contenido en el body)
 POST http://localhost:8080/contenidos/comentarContenido/{idContenido}/{idUsuario}
 POST http://localhost:8080/contenidos/marcarContenidoDestacado/{id}
+POST http://localhost:8080/contenidos/agregarPersona/{idC}/{idP}
 
 PUT http://localhost:8080/contenidos/editarContenido (Pasarle el contenido en el body)
 PUT http://localhost:8080/contenidos/agregarCategoria/{idCont}/{idCat}

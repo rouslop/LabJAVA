@@ -51,7 +51,10 @@ public class Contenido {
     @JoinColumn(name="gc_id")
     private GeneradorContenido generadorContenidoid;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany
+    @JoinTable(name = "contenido_personas",
+            joinColumns = { @JoinColumn(name = "contenido_id")},
+            inverseJoinColumns = { @JoinColumn(name = "persona_id")})
     List<Persona> persona = new ArrayList<>();
 
     @JsonIgnore
