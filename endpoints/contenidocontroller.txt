@@ -13,6 +13,7 @@ GET http://localhost:8080/contenidos/obtenerPuntaje/{idC}
 GET http://localhost:8080/contenidos/listarCategorias/{idCont}
 GET http://localhost:8080/contenidos/buscarPorNombre/{nombre}
 GET http://localhost:8080/contenidos/esFavorito/{idContenido}/{idUsuario}
+GET http://localhost:8080/contenidos/listarPersonas/{idCont}
 
 
 POST http://localhost:8080/contenidos/agregarContenido/{idgc} (Pasarle el contenido en el body)
@@ -25,5 +26,5 @@ PUT http://localhost:8080/contenidos/agregarCategoria/{idCont}/{idCat}
 
 DELETE http://localhost:8080/contenidos/eliminarContenido/{id}
 DELETE http://localhost:8080/contenidos/eliminarCategoria/{idCont}/{idCat}
-
+DELETE http://localhost:8080/contenidos/eliminarPersona/{idCont}/{idPersona}
 

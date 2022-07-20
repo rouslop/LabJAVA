@@ -39,6 +39,8 @@ public interface ContenidoService {
     public TipoContenido devolverTipo(long id);
     public boolean esPayPerView(long id);
     public boolean agregarPersona(long idC, long idP);
+    public boolean eliminarPersona(long idC, long idP);
+    public List<Persona> listarPersonas(long idC);
     public boolean marcarContenido(long i);
     public boolean DesmarcarContenido(long i);
     public boolean esFavorito(long idC, long idU);

@@ -265,4 +265,30 @@ public class ContenidoController {
         res.setPuntaje(Math.round(p * 100) / 100d);
         return new ResponseEntity<DtPuntaje>(res,HttpStatus.OK);
     }
+
+    @GetMapping("/listarPersonas/{idC}")
+    public ResponseEntity<List<Persona>> listarPersonas(@PathVariable("idC") Integer idC){
+        List<Persona> res = this.contenidoService.listarPersonas(Long.parseLong(idC.toString()));
+        if(res!=null) {
+            return new ResponseEntity<List<Persona>>(res, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<List<Persona>>(res, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/eliminarPersona/{idC}/{idP}")
+    public ResponseEntity<String> eliminarPersona(@PathVariable("idC") Integer idC, @PathVariable("idP") Integer idP){
+        if(this.contenidoService.eliminarPersona(Long.parseLong(idC.toString()),Long.parseLong(idP.toString()))){
+            return new ResponseEntity<>("Eliminada correctamente",HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>("No se pudo eliminar",HttpStatus.INTERNAL_SERVER_ERROR);
+            //POSIBLES ERRORES:
+            //1-No encontró la persona en el contenido
+            //2-No encontró la persona en el sistema
+            //3-No encontró el contenido en el sistema
+            //4-El contenido se encuentra bloqueado
+        }
+    }
 }
