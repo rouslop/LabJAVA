@@ -351,6 +351,43 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
+    public boolean eliminarPersona(long idC, long idP) {
+        Persona p = this.em.find(Persona.class,idP);
+        Contenido c = this.em.find(Contenido.class,idC);
+        if((p!=null)&&(c!=null)&&(!c.isBloqueado())){
+            List<Persona> personas = c.getPersona();
+            if(personas.contains(p)){
+                personas.remove(p);
+                c.setPersona(personas);
+                this.em.merge(c);
+                if(!this.em.find(Contenido.class,idC).getPersona().contains(p)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    public List<Persona> listarPersonas(long idC) {
+        Contenido c = this.em.find(Contenido.class,idC);
+        if((c!=null)){
+            return c.getPersona();
+        }
+        else {
+            return null;
+        }
+    }
+
+    @Override
     public Integer estaPagoGc(long idCont, long idUser){
         Contenido c = this.em.find(Contenido.class,idCont);
         Usuario u = this.em.find(Usuario.class,idUser);

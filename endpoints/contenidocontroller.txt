@@ -1,8 +1,8 @@
 GET http://localhost:8080/contenidos/listarPorCategoria/{id} --> el id de la categoria
-GET http://localhost:8080/contenidos  --> lista todos los contenidos
+GET http://localhost:8080/contenidos  --> lista todos los contenidos activos
 GET http://localhost:8080/contenidos/listarRelacionados/{idContenido}
 GET http://localhost:8080/contenidos/{id} --> obtener contenido por id
-GET http://localhost:8080/contenidos/{limit}/{offset} --> contenidos paginados
+GET http://localhost:8080/contenidos/{limit}/{offset} --> contenidos paginados activos
 GET http://localhost:8080/contenidos/listarContenidosGenerador/{idGC}
 GET http://localhost:8080/contenidos/estaPago/{idC}/{idU}
 GET http://localhost:8080/contenidos/listarPorTipo/{tipo}
@@ -13,6 +13,8 @@ GET http://localhost:8080/contenidos/obtenerPuntaje/{idC}
 GET http://localhost:8080/contenidos/listarCategorias/{idCont}
 GET http://localhost:8080/contenidos/buscarPorNombre/{nombre}
 GET http://localhost:8080/contenidos/esFavorito/{idContenido}/{idUsuario}
+GET http://localhost:8080/contenidos/listarPersonas/{idCont}
+GET http://localhost:8080/contenidos/listarTotales (lista todos)
 
 
 POST http://localhost:8080/contenidos/agregarContenido/{idgc} (Pasarle el contenido en el body)
@@ -25,5 +27,5 @@ PUT http://localhost:8080/contenidos/agregarCategoria/{idCont}/{idCat}
 
 DELETE http://localhost:8080/contenidos/eliminarContenido/{id}
 DELETE http://localhost:8080/contenidos/eliminarCategoria/{idCont}/{idCat}
-
+DELETE http://localhost:8080/contenidos/eliminarPersona/{idCont}/{idPersona}
 
