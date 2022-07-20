@@ -2,6 +2,7 @@ package com.mantel.api.service.impl;
 
 
 import com.mantel.api.model.*;
+import com.mantel.api.service.GananciaService;
 import com.mantel.api.service.GeneradorContenidoService;
 import com.mantel.api.service.RankService;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,13 @@ import java.util.List;
 public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
     @PersistenceContext
     private EntityManager em;
+
+    private GananciaService gananciaService;
+
+    public GeneradorContenidoServiceImpl (GananciaService gananciaService){
+        super();
+        this.gananciaService = gananciaService;
+    }
 
     @Override
     public void agregarGeneradorContenido(GeneradorContenido g){
@@ -85,7 +93,6 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
     public GeneradorContenido editarGC(GeneradorContenido gc) {
         return em.merge(gc);
     }
-
 
     public boolean eliminarGenerador(String email){
         Query q = this.em.createQuery("SELECT gc FROM GeneradorContenido gc WHERE gc.email=:email");
@@ -164,5 +171,6 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
         List<GeneradorContenido> lista = query.getResultList();
         return lista;
     }
+
 
 }

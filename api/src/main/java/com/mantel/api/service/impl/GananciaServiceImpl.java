@@ -57,4 +57,14 @@ public class GananciaServiceImpl implements GananciaService {
         return null;
     }
 
+    @Override
+    public List<Ganancia> obtenerGananciasGC(long idGC) {
+
+        Query q = em.createQuery("SELECT g FROM Ganancia g WHERE g.idGC= :idGC", Ganancia.class);
+        List<Ganancia> gananciasGC = q.setParameter("idGC", idGC).getResultList();
+
+        return gananciasGC;
+    }
+
+
 }

@@ -2,8 +2,10 @@ package com.mantel.api.controller;
 
 import com.mantel.api.model.Contenido;
 import com.mantel.api.model.DtReporte;
+import com.mantel.api.model.Ganancia;
 import com.mantel.api.model.GeneradorContenido;
 
+import com.mantel.api.service.GananciaService;
 import com.mantel.api.service.GeneradorContenidoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +20,12 @@ import java.util.List;
 
 public class GeneradorContenidoController {
     private GeneradorContenidoService generadorContenidoService;
+    private GananciaService gananciaService;
 
-    public GeneradorContenidoController(GeneradorContenidoService generadorContenidoService){
+    public GeneradorContenidoController(GeneradorContenidoService generadorContenidoService,GananciaService gananciaService){
         super();
         this.generadorContenidoService = generadorContenidoService;
+        this.gananciaService = gananciaService;
     }
 
     @PostMapping("/agregarGeneradorContenido")
@@ -83,6 +87,12 @@ public class GeneradorContenidoController {
         else {
             return new ResponseEntity<List<DtReporte>>(res,HttpStatus.BAD_REQUEST);//el gc es null
         }
+    }
+
+    @GetMapping("/obtenerGanancias/{idGC}")
+    public ResponseEntity<List<Ganancia>> obtenerGanancias(@PathVariable("idGC") long idGC){
+        List<Ganancia> gananciasGC = gananciaService.obtenerGananciasGC(idGC);
+        return new ResponseEntity<List<Ganancia>>(gananciasGC, HttpStatus.OK);
     }
 
 }
