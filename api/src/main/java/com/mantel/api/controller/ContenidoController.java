@@ -105,6 +105,16 @@ public class ContenidoController {
         }
     }
 
+    @GetMapping("/listarDestacados")
+    public ResponseEntity<List<Contenido>> listarDestacados(){
+        return new ResponseEntity<>(this.contenidoService.listarDestacados(),HttpStatus.OK);
+    }
+
+    @GetMapping("/listarEnVivo")
+    public ResponseEntity<List<Contenido>> listarEnVivo(){
+        return new ResponseEntity<>(this.contenidoService.listarEnVivo(),HttpStatus.OK);
+    }
+
     @PutMapping("/agregarCategoria/{idCont}/{idCat}")
     public ResponseEntity<String> agregarCategoria(@PathVariable("idCont")Integer idCont, @PathVariable("idCat")Integer idCat){
         Long icont, icat;

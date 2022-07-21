@@ -183,7 +183,7 @@ public class ContenidoServiceImpl implements ContenidoService {
 
     @Override
     public List<Contenido> buscarContenidos(String nombre) {
-        Query q = this.em.createQuery("SELECT c FROM Contenido c WHERE c.nombre LIKE '%"+nombre+"%'");
+        Query q = this.em.createQuery("SELECT c FROM Contenido c WHERE c.nombre LIKE '%"+nombre+"%' AND c.activo=true");
         List<Contenido> res = q.getResultList();
         return res;
     }
@@ -448,6 +448,18 @@ public class ContenidoServiceImpl implements ContenidoService {
             return this.estaPagoGc(idCont,idUser);
 
         }
+    }
+
+    @Override
+    public List<Contenido> listarDestacados() {
+        return this.em.createQuery("SELECT c FROM Contenido c WHERE c.destacado=true").getResultList();
+    }
+
+    @Override
+    public List<Contenido> listarEnVivo() {
+        List<Contenido> res = (List<Contenido>) this.em.createNativeQuery("SELECT * FROM contenidos c WHERE c.tipo_contenido = 'EVENTO_DEPORTIVO' " +
+                "OR c.tipo_contenido = 'EVENTO_ESPECTACULO' AND c.fecha_comienzo <= NOW()").getResultList();
+        return res;
     }
 
     public List<Contenido> listarmarcados(GeneradorContenido i){
