@@ -388,6 +388,11 @@ public class ContenidoServiceImpl implements ContenidoService {
     }
 
     @Override
+    public List<Contenido> listarContenidosTotales() {
+        return this.em.createQuery("SELECT c FROM Contenido c").getResultList();
+    }
+
+    @Override
     public Integer estaPagoGc(long idCont, long idUser){
         Contenido c = this.em.find(Contenido.class,idCont);
         Usuario u = this.em.find(Usuario.class,idUser);

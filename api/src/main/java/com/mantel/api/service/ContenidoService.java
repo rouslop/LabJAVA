@@ -41,6 +41,7 @@ public interface ContenidoService {
     public boolean agregarPersona(long idC, long idP);
     public boolean eliminarPersona(long idC, long idP);
     public List<Persona> listarPersonas(long idC);
+    public List<Contenido> listarContenidosTotales();
     public boolean marcarContenido(long i);
     public boolean DesmarcarContenido(long i);
     public boolean esFavorito(long idC, long idU);

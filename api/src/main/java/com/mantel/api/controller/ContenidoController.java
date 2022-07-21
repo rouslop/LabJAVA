@@ -210,6 +210,11 @@ public class ContenidoController {
         return new ResponseEntity<List<Contenido>>(contenidoService.listaContenidos(), HttpStatus.OK);
     }
 
+    @GetMapping("/listarTotales")
+    public ResponseEntity<List<Contenido>> listaContenidosTotales(){
+        return new ResponseEntity<List<Contenido>>(contenidoService.listarContenidosTotales(), HttpStatus.OK);
+    }
+
     @GetMapping("/listarPorCategoria/{id}")
     public ResponseEntity<List<Contenido>> listarPorCategoria(@PathVariable("id") Integer id){
         Long i = Long.parseLong(id.toString());

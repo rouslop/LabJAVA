@@ -19,5 +19,6 @@ public interface GeneradorContenidoService {
     public boolean eliminarGenerador(String email);
     public List<DtReporte> obtenerReportes(long id);
     public List<Contenido> listarContenidos(String email);
+    public List<Contenido> listarContenidosTotales(String email);
 //    public boolean eliminarContenidoDeLista(Long idC);
 }

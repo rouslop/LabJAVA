@@ -5,7 +5,26 @@ public class DtReporte {
     private double puntaje;
     private int visualizaciones;
 
+    private int comentarios;
+    private int compartidos;
+
     public DtReporte() {
+    }
+
+    public int getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(int comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public int getCompartidos() {
+        return compartidos;
+    }
+
+    public void setCompartidos(int compartidos) {
+        this.compartidos = compartidos;
     }
 
     public Contenido getContenido() {

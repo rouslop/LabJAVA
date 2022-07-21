@@ -126,15 +126,21 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
     public List<DtReporte> obtenerReportes(long id) {
         GeneradorContenido gc = this.obtenerGeneradorContenido(id);
         if(gc!=null){
-           List<Contenido> contenidos = this.listarContenidos(gc.getEmail());
+           List<Contenido> contenidos = this.listarContenidosTotales(gc.getEmail());
            List<DtReporte> res = new ArrayList<>();
            for(Contenido c: contenidos){
                Query q = this.em.createQuery("SELECT v FROM Visualizacion v WHERE v.contenidoId=:cont");
                q.setParameter("cont",c);
+               Query q1 = this.em.createQuery("SELECT n FROM Notificacion n WHERE n.idContenido=:con");
+               q1.setParameter("con",c.getId());
+               Query q2 = this.em.createQuery("SELECT c FROM Comentario c WHERE c.contenidoid=:co");
+               q2.setParameter("co",c);
                DtReporte aux = new DtReporte();
                aux.setContenido(c);
                aux.setVisualizaciones(q.getResultList().size());
                aux.setPuntaje(this.obtenerRank(c.getId()));
+               aux.setComentarios(q2.getResultList().size());
+               aux.setCompartidos(q1.getResultList().size());
                res.add(aux);
            }
            return res;
@@ -164,6 +170,28 @@ public class GeneradorContenidoServiceImpl implements GeneradorContenidoService{
         }
 
 
+    }
+
+    @Override
+    public List<Contenido> listarContenidosTotales(String email) {
+        List<Contenido> contenidos = this.em.createQuery("SELECT c FROM Contenido c").getResultList();
+        if(!contenidos.isEmpty()){
+            List<Contenido> res = new ArrayList<>();
+            Contenido c;
+            Query q = this.em.createQuery("SELECT gc FROM GeneradorContenido gc WHERE gc.email=:em");
+            q.setParameter("em",email);
+            GeneradorContenido gc = (GeneradorContenido) q.getResultList().get(0);
+            for(int i=0; i< contenidos.size(); i++){
+                c = contenidos.get(i);
+                if(c.getGeneradorContenidoid()==gc){
+                    res.add(c);
+                }
+            }
+            return res;
+        }
+        else{
+            return null;
+        }
     }
 
     public List<GeneradorContenido> obtenerGeneradores(){
