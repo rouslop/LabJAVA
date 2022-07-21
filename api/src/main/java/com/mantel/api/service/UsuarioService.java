@@ -13,6 +13,7 @@ public interface UsuarioService {
     public Usuario obtenerUsuario(long id);
     public Usuario obtenerUsuarioPorEmail(String email);
     public List<Usuario> listarUsuariosBloqueados();
+    public List<Contenido> listarVisualizados(long id);
     public boolean existeUsuarioPorEmail(String email);
     public Usuario editarUsuario(Usuario usuario);
     public boolean bloquearUsuario(String email);

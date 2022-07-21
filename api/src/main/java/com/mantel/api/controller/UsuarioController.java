@@ -167,4 +167,14 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/listarContenidosVistos/{idU}")
+    public ResponseEntity<List<Contenido>> listarVistos(@PathVariable("idU") Integer idU){
+        List<Contenido> res = this.usuarioService.listarVisualizados(Long.parseLong(idU.toString()));
+        if(res!=null){
+            return new ResponseEntity<>(res,HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -43,6 +43,26 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public List<Contenido> listarVisualizados(long id) {
+        Usuario u = this.em.find(Usuario.class,id);
+        if(u!=null) {
+            List<Contenido> res = new ArrayList<>();
+            Query q = this.em.createQuery("SELECT v FROM Visualizacion v WHERE v.usuarioId=:user");
+            q.setParameter("user",u);
+            List<Visualizacion> vi = q.getResultList();
+            if((vi!=null)&&(!vi.isEmpty())){
+                for(Visualizacion v: vi){
+                    if(!res.contains(v.getContenidoId())){
+                        res.add(v.getContenidoId());
+                    }
+                }
+            }
+            return res;
+        }
+        return null;
+    }
+
+    @Override
     public Usuario obtenerUsuario(long id) {
         Usuario usuario = em.find(Usuario.class, id);
         return usuario;
