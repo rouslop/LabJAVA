@@ -1,6 +1,7 @@
 package com.mantel.api.service;
 
 import com.mantel.api.model.Contenido;
+import com.mantel.api.model.DtSub;
 import com.mantel.api.model.Usuario;
 
 import java.util.List;
@@ -25,4 +26,5 @@ public interface UsuarioService {
     public void agregarContenidoAfavoritos(Contenido c , long id);
     public void eliminarContenidoDeFavoritos(Contenido c, long id);
     public List<Contenido> listarRecomendados(long idUsu);
+    public DtSub listarSuscripciones(long id);
 }

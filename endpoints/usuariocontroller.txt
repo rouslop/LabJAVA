@@ -11,6 +11,7 @@ GET http://localhost:8080/usuarios/listarFavoritos/{idU}
 GET http://localhost:8080/usuarios/listarRelacionadosFavoritos/{idU}
 GET https://localhost:8080/usuarios/listarBloqueados
 GET https://localhost:8080/usuarios/listarContenidosVistos/{idU}
+GET http://localhost:8080/usuarios/listarSuscripciones/{idU}
 
 
 DELETE http://localhost:8080/usuarios/eliminarUsuario/{id}

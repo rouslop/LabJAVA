@@ -1,6 +1,7 @@
 package com.mantel.api.controller;
 
 import com.mantel.api.model.Contenido;
+import com.mantel.api.model.DtSub;
 import com.mantel.api.model.TipoUsuario;
 import com.mantel.api.model.Usuario;
 import com.mantel.api.service.ContenidoService;
@@ -170,6 +171,17 @@ public class UsuarioController {
     @GetMapping("/listarContenidosVistos/{idU}")
     public ResponseEntity<List<Contenido>> listarVistos(@PathVariable("idU") Integer idU){
         List<Contenido> res = this.usuarioService.listarVisualizados(Long.parseLong(idU.toString()));
+        if(res!=null){
+            return new ResponseEntity<>(res,HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(res,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/listarSuscripciones/{id}")
+    public ResponseEntity<DtSub> listarsuscripciones(@PathVariable("id") Integer id){
+        DtSub res = this.usuarioService.listarSuscripciones(Long.parseLong(id.toString()));
         if(res!=null){
             return new ResponseEntity<>(res,HttpStatus.OK);
         }

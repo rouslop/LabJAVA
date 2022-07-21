@@ -301,5 +301,29 @@ public class UsuarioServiceImpl implements UsuarioService {
         return listaResultado;
     }
 
+    @Override
+    public DtSub listarSuscripciones(long id) {
+        Usuario u = this.em.find(Usuario.class,id);
+        if((u!=null)&&(u.isActivo())){
+            Query q = this.em.createQuery("SELECT s FROM Suscripcion s WHERE s.usuarioId=:user");
+            q.setParameter("user",u);
+            List<Suscripcion> subs = q.getResultList();
+            Query q1 = this.em.createQuery("SELECT ss FROM SuscripcionPerPayView ss WHERE ss.usuarioId=:user");
+            q1.setParameter("user",u);
+            List<SuscripcionPerPayView> ppv = q1.getResultList();
+            DtSub res = new DtSub();
+            if(subs!=null){
+                res.setSuscripciones(subs);
+            }
+            if(ppv!=null){
+                res.setPayperview(ppv);
+            }
+            return res;
+        }
+        else{
+            return null;
+        }
+    }
+
 
 }
