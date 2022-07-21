@@ -107,12 +107,12 @@ public class ContenidoController {
 
     @GetMapping("/listarDestacados")
     public ResponseEntity<List<Contenido>> listarDestacados(){
-        return new ResponseEntity<>(this.contenidoService.listarDestacados(),HttpStatus.OK);
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarDestacados(),HttpStatus.OK);
     }
 
     @GetMapping("/listarEnVivo")
     public ResponseEntity<List<Contenido>> listarEnVivo(){
-        return new ResponseEntity<>(this.contenidoService.listarEnVivo(),HttpStatus.OK);
+        return new ResponseEntity<List<Contenido>>(this.contenidoService.listarEnVivo(),HttpStatus.OK);
     }
 
     @PutMapping("/agregarCategoria/{idCont}/{idCat}")
