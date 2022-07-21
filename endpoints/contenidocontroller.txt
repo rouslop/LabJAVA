@@ -16,6 +16,8 @@ GET http://localhost:8080/contenidos/esFavorito/{idContenido}/{idUsuario}
 GET http://localhost:8080/contenidos/listarPersonas/{idCont}
 GET http://localhost:8080/contenidos/listarTotales (lista todos)
 GET http://localhost:8080/contenidos/estaValorado/{idC}/{idU}
+GET http://localhost:8080/contenidos/listarDestacados
+GET http://localhost:8080/contenidos/listarEnVivo
 
 
 POST http://localhost:8080/contenidos/agregarContenido/{idgc} (Pasarle el contenido en el body)
