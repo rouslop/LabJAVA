@@ -46,8 +46,10 @@ public class VisualizacionServiceImpl implements VisualizacionService {
     public void agregarTiempoVisualizacion(long idUsu, long idContenido,float tiempoVisualizacion){
 
         Visualizacion vi = this.obtenerVisualizacion(idUsu,idContenido);
-        vi.setTime(tiempoVisualizacion);
-        em.merge(vi);
+        if(vi!=null) {
+            vi.setTime(tiempoVisualizacion);
+            em.merge(vi);
+        }
 //        Query query = em.createQuery("SELECT c FROM Contenido c WHERE c.id= :idCon", Contenido.class);
 //        Contenido contenido = (Contenido) query.setParameter("idCon", idContenido).getSingleResult();
 
